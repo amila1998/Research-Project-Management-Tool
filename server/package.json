@@ -8,12 +8,24 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
-  "author": "",
+  "author": "2022S1_REG_31",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "cloudinary": "^1.29.0",
+    "consola": "^2.15.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mongoose": "^6.2.9"
+    "googleapis": "^100.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.2.9",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.3",
+    "passport": "^0.5.2",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
