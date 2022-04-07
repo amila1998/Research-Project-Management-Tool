@@ -28,15 +28,13 @@ route.post("/register-coSupervisor", async (req, res) => {
 
 // PanelMember Registration Route
 // TO DO : Add Permission to only Admin
-route.post("/register-panelMember", async (req, res) => {
-    await userController.register(req, "panelMember", res);
+route.post("/register-panelMember",admin, async (req, res) => {
+    await userController.panalMemberRegister(req, "panelMember", res);
   });
 
 // Activation  Route
 route.post("/api/auth/activation", userController.activate);
 
-// TO DO : create the panal member activation route including the extended token expire hour
-//route.post("/api/auth/panalMemberactivation", userController.activatePanalmember);
 
 //User Registration
 route.post("/api/auth/signing", userController.signing);

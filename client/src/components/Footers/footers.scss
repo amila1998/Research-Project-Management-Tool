@@ -1,3 +1,4 @@
+@import "../variables/variables.scss";
 .container{
 	max-width: 100%;
 	margin:auto;
@@ -12,9 +13,10 @@ ul{
 }
 .footer{
 	background-color: #24262b;
-    padding: 70px 0;
+    padding: 50px 0;
     width: 100%;
     bottom: 0;
+	
 }
 .footer-col{
    width: 25%;
@@ -60,7 +62,7 @@ ul{
 	transition: all 0.3s ease;
 }
 .footer-col ul li a:hover{
-	color: #ffffff;
+	color: #ff7300;
 	padding-left: 8px;
 }
 .footer-col .social-links a{
@@ -76,12 +78,36 @@ ul{
 	transition: all 0.5s ease;
 }
 .footer-col .social-links a:hover{
-	color: #24262b;
-	background-color: #ffffff;
+	color: #0048ff;
+	background-color: #ff7b00;
 }
 
 hr {
-  border: 1px solid red;
+  border: 1px solid rgb(255, 102, 0);
+}
+.feedbackbutton{
+	display: flex;
+  flex-direction: column;
+  background-color: #ff7300;
+  margin: 1em 0;
+    padding: 2rem 1rem 2rem 1rem;
+    border-radius: 5px;
+    border: none;
+    width: 370px;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(to right, $orange, $gray-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      font-size: 1.1rem;
+      margin-left: 10px;
+    }
+
 }
 
 /*responsive*/

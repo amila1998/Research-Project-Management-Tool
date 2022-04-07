@@ -1,6 +1,6 @@
 import React from "react";
 import "./footers.css";
-import MyClock from "../clock/clock";
+import MyClock from "../clock/Myclock";
 import MyCalander from "../calander/calander";
 export default function Footer() {
   return (
@@ -20,12 +20,17 @@ export default function Footer() {
   	 				<li><a href="#">affiliate program</a></li>
   	 			</ul>
   	 		</div>
+			   <div class="footer-col">
+  	 		<button className="feedbackbutton">Give a Feedback</button>
+  	 		</div>
   	 		<div class="footer-col">
-  	 		<MyClock/>
+  	 		<MyCalander/>
   	 		</div>
   	 	
   	 		<div class="footer-col">
-  	 		<MyCalander/>
+			   
+  	 		
+			   <MyClock/>
   	 		</div>
   	 	</div>
        <hr/>
@@ -38,10 +43,10 @@ export default function Footer() {
   	 		<div class="footer-col">
   	 			<h4>follow us</h4>
   	 			<div class="social-links">
-  	 				<a href="#"><i class="fab fa-facebook-f"></i></a>
-  	 				<a href="#"><i class="fab fa-twitter"></i></a>
-  	 				<a href="#"><i class="fab fa-instagram"></i></a>
-  	 				<a href="#"><i class="fab fa-linkedin-in"></i></a>
+  	 				<a href="https://www.facebook.com/sliit.lk/"><i class="fab fa-facebook-f"></i></a>
+  	 				<a href="https://twitter.com/sliitinfo?lang=en"><i class="fab fa-twitter"></i></a>
+  	 				<a href="https://www.instagram.com/sliit.life/?hl=en"><i class="fab fa-instagram"></i></a>
+  	 				<a href="https://www.linkedin.com/school/sliit/?originalSubdomain=lk"><i class="fab fa-linkedin-in"></i></a>
   	 			</div>
   	 		</div>
   	 	</div>
