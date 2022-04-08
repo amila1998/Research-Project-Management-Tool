@@ -2,6 +2,7 @@
 
 .input {
   margin: 1.5em 0;
+  
   label {
     position: relative;
     font-size: 1rem;
@@ -14,6 +15,7 @@
       outline: none;
       font-size: 1rem;
       border: 2px solid transparent;
+      color: rgb(252, 252, 252);
     }
     span {
       position: absolute;

@@ -17,21 +17,19 @@ export default function Footer() {
   	 				<li><a href="#">about us</a></li>
   	 				<li><a href="#">our services</a></li>
   	 				<li><a href="#">privacy policy</a></li>
-  	 				<li><a href="#">affiliate program</a></li>
+  	 				<li><a href="#">Give a Feedback</a></li>
   	 			</ul>
   	 		</div>
+
 			   <div class="footer-col">
-  	 		<button className="feedbackbutton">Give a Feedback</button>
+			    <MyClock/>
   	 		</div>
+			 
   	 		<div class="footer-col">
   	 		<MyCalander/>
   	 		</div>
   	 	
-  	 		<div class="footer-col">
-			   
   	 		
-			   <MyClock/>
-  	 		</div>
   	 	</div>
        <hr/>
        <div class="row justify-content-around">

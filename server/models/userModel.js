@@ -22,9 +22,22 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     role: {
         type: String,
+        required: true,
         default: "student",
         enum: ["student", "admin", "supervisor","coSupervisor","panelMember"]
       },
+    student:{
+      faculty:String,
+      batch:String,
+      degree:String,
+      specialization:String,
+
+    },
+    staff:{
+      description:String,
+      interestedTopics:[{topic:String}]
+
+    }
      
     
   },
