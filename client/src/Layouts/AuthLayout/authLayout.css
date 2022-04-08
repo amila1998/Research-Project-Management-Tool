@@ -1,0 +1,125 @@
+.authlayout {
+  height: 100%;
+  width: 30%;
+  background: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: auto;
+  padding: 10px 10px 10px 10px;
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.authlayout_logo {
+  padding: 2em;
+  margin-bottom: 1em;
+}
+
+.authlayout_logo img {
+  max-width: 100px;
+}
+
+.authlayout_actions {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  max-width: 370px;
+  width: 100%;
+  margin-top: 2em;
+  padding: 0 2px;
+}
+
+.authlayout_actions p {
+  text-transform: capitalize;
+  cursor: pointer;
+  font-weight: 300;
+}
+
+.authlayout_actions-l {
+  color: #ff6a06;
+}
+
+.authlayout_actions-r {
+  color: #2c2c2c;
+}
+
+@-webkit-keyframes float {
+  0% {
+    -webkit-box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+            box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  50% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+  75% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  100% {
+    -webkit-box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+            box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% {
+    -webkit-box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+            box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  25% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  50% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateY(-5px);
+            transform: translateY(-5px);
+  }
+  75% {
+    -webkit-box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+            box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
+    -webkit-transform: translateX(5px);
+            transform: translateX(5px);
+  }
+  100% {
+    -webkit-box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+            box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+}
+/*# sourceMappingURL=authLayout.css.map */

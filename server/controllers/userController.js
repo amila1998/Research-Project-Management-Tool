@@ -59,6 +59,58 @@ const userRegister = {
         success: false });
      }
     },
+    panalMemberRegister: async (req, role, res) => {
+      try {
+        // get info
+        const { name, email, password, username } = req.body;
+  
+        // check fields
+        if (!name || !email || !password ||!username)
+          return res.status(400).json({ message: "Please fill in all fields." });
+  
+        // check email
+        if (!validateEmail(email))
+          return res
+            .status(400)
+            .json({ message: "Please enter a valid email address." });
+  
+        // check user
+        const user = await User.findOne({ email });
+        if (user)
+          return res
+            .status(400)
+            .json({ message: "This email is already registered in our system." });
+  
+        // check password
+        if (password.length < 6)
+          return res
+            .status(400)
+            .json({ message: "Password must be at least 6 characters." });
+  
+        // hash password
+        const salt = await bcrypt.genSalt();
+        const hashPassword = await bcrypt.hash(password, salt);
+  
+        
+        const newUser = new User ({ name, email, password: hashPassword, role , username }) ;
+        await newUser.save();
+             
+
+        // send email
+        //  const url = `http://localhost:5000/api/auth/activate/${activation_token}`;
+        //  sendMail.sendEmailRegister(email, url, "Verify your email");
+  
+
+      res.status(200).json({ 
+        message: "Welcome! Please check your email.",
+        success: true,  
+      });
+       } catch (err) {
+       res.status(500).json({
+        message: err.message,
+        success: false });
+     }
+    },
     activate: async (req, res) => {
       try {
         // get token
