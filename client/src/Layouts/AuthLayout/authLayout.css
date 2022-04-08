@@ -1,7 +1,7 @@
 .authlayout {
   height: 100%;
   width: 30%;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.7);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

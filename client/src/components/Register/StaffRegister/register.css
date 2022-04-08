@@ -1,0 +1,29 @@
+.radioselection {
+  display: inline-table;
+  width: 100%;
+  font-size: 20px;
+  text-align: center;
+}
+
+.radiobtn {
+  margin-right: 0.5rem;
+}
+
+.radiobtn:hover,
+.radioLable:hover {
+  cursor: pointer;
+}
+
+.radiobox {
+  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+  background-color: #544f5f;
+  padding: 1em;
+  border-radius: 5px;
+  width: 370px;
+  outline: none;
+  font-size: 1rem;
+  border: 2px solid transparent;
+  color: #fcfcfc;
+}
+/*# sourceMappingURL=register.css.map */
