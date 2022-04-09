@@ -4,6 +4,7 @@ import "./register.css";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useEffect, useState } from "react";
+import * as React from 'react';
 
 
 import { useTheme } from '@mui/material/styles';
@@ -20,8 +21,60 @@ const Register = () => {
   const [visible2, setVisible2] = useState(false);
   const [supervisor, setSupervisor] = useState(false);
   const [cosupervisor, setCoSupervisor] = useState(false);
-  const [degree, setDegree] = useState(null);
   const [checkedComputing, setCheckedComputing] = useState(false);
+  const theme = useTheme();
+  const [ComputerTopics, setComputerTopics] = React.useState([]);
+
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setComputerTopics(
+      // On autofill we get a stringified value.
+      typeof value === 'string' ? value.split(',') : value,
+    );
+  };
+
+  //chip
+
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+  
+  const computingTopics = [
+    'Information Security',
+    'Artificial Intelligence and Machine Learning',
+    'ICT for Development',
+    'Distributed & Parallel Computing',
+    'Software Engineering',
+    'Data Communication & Networking',
+    'Visual Computing',
+    'Robotics & Intelligent Systems',
+    'Data Science',
+    'Design Lab',
+    'Assitive Technology',
+    'Elearning and Education',
+    'Computational Linguistics',
+    'Business Intelligence and Analytics',
+    'Human Computer Interaction',
+
+  ];
+  
+  function getStyles(name, ComputerTopics, theme) {
+    return {
+      fontWeight:
+        ComputerTopics.indexOf(name) === -1
+          ? theme.typography.fontWeightRegular
+          : theme.typography.fontWeightMedium,
+    };
+  }
   
 
 
@@ -29,6 +82,9 @@ const Register = () => {
 
   const handleOnChangeComputing = () => {
     setCheckedComputing(!checkedComputing);
+    if(checkedComputing==false){
+      setComputerTopics([]);
+    }
   };
 
   const handleClick = () => {
@@ -108,24 +164,37 @@ const Register = () => {
   </label>
   <div className="column">{checkedComputing &&  <> 
   
-  <div className="form-check">
-  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-  <label className="form-check-label" for="flexCheckDefault">
-  Information Security
-  </label>
-  </div>
-  <div className="form-check">
-  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-  <label className="form-check-label" for="flexCheckDefault">
-  Artificial Intelligence and Machine Learning
-  </label>
-  </div>
-  <div className="form-check">
-  <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
-  <label className="form-check-label" for="flexCheckDefault">
-  ICT for Development
-  </label>
-  </div>
+    <div>
+      
+        <InputLabel id="demo-multiple-chip-label">Select your Computing topics</InputLabel>
+        <Select
+          labelId="demo-multiple-chip-label"
+          id="demo-multiple-chip"
+          multiple
+          value={ComputerTopics}
+          onChange={handleChange}
+          input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+          renderValue={(selected) => (
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              {selected.map((value) => (
+                <Chip key={value} label={value} />
+              ))}
+            </Box>
+          )}
+          MenuProps={MenuProps}
+        >
+          {computingTopics.map((name) => (
+            <MenuItem
+              key={name}
+              value={name}
+              style={getStyles(name, ComputerTopics, theme)}
+            >
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      
+    </div>
   
    </>}
   
@@ -135,10 +204,6 @@ const Register = () => {
   
 </div>
 
-<div className="form-check">
- 
-  
-</div>
 
   
 
@@ -158,7 +223,10 @@ const Register = () => {
 </div>
     
   </div>
-
+  <div className="column">
+ 
+  
+  </div>
 
   
  
