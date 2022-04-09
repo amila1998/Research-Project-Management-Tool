@@ -1,5 +1,9 @@
 @import "../variables/variables.scss";
 
+.loginbody{
+  width: 100%;
+ 
+}
 .login_btn {
   display: flex;
   flex-direction: column;
@@ -38,3 +42,4 @@
     background: linear-gradient(to right, $orange, $gray-dark);
   }
 }
+

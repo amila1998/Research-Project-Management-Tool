@@ -1,3 +1,7 @@
+.loginbody {
+  width: 100%;
+}
+
 .login_btn {
   display: -webkit-box;
   display: -ms-flexbox;
