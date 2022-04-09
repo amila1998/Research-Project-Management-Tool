@@ -1,3 +1,6 @@
+.body{
+    width: 100%;
+}
 main{
     padding: 10px;
     background-image: url("./assets/img/bg.gif");

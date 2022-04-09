@@ -8,6 +8,7 @@ const Register = () => {
   const [visible2, setVisible2] = useState(false);
   const [faculty, setFaculty] = useState(null);
   const [degree, setDegree] = useState(null);
+  const [specializion, setSpecializion] = useState(null);
 
   function handleFucultyChange(e) {
     setFaculty(e.target.value);
@@ -15,6 +16,10 @@ const Register = () => {
 
   function handleDegreeChange(e) {
     setDegree(e.target.value);
+  }
+
+  function handleSpecializionChange(e) {
+    setSpecializion(e.target.value);
   }
 
  
@@ -35,30 +40,30 @@ const Register = () => {
         Student Registration
     </h1>
    
-    <form class="g-3" novalidate>
-  <div class="column">
-    <label for="validationCustom01" class="form-label">Name with Inisials</label>
-    <input type="text" class="form-control" id="validationCustom01"  required/>
+    <form className="" novalidate>
+  <div className="column">
+    <label htmlFor="validationCustom01" className="form-label">Name with Inisials</label>
+    <input type="text" className="form-control" id="validationCustom01"  required/>
     
   </div>
-  <div class="column">
-    <label for="validationCustom04" class="form-label">Gender</label>
-    <select class="form-select" id="validationCustom04" required>
+  <div className="column">
+    <label htmlFor="validationCustom04" className="form-label">Gender</label>
+    <select className="form-select" id="validationCustom04" required>
       <option selected disabled value="">Choose Your Gender...</option>
       <option>Male</option>
       <option>Female</option>
     </select>
     
   </div>
-  <div class="column">
-    <label for="validationCustom02" class="form-label">Student ID </label>
-    <input type="text" class="form-control" id="validationCustomUsername" required/>
+  <div className="column">
+    <label htmlFor="validationCustom02" className="form-label">Student ID </label>
+    <input type="text" className="form-control" id="validationCustomUsername" required/>
    
   </div>
   
-  <div class="column">
-    <label for="validationCustom04" class="form-label" >Faculty</label>
-    <select class="form-select" onChange={handleFucultyChange} id="validationCustom04" required>
+  <div className="column">
+    <label htmlFor="validationCustom04" className="form-label" >Faculty</label>
+    <select className="form-select" onChange={handleFucultyChange} id="validationCustom04" required>
       <option selected disabled value="">Choose Your Faculty...</option>
       <option value="Faculty of Computing">Faculty of Computing</option>
       <option value="Faculty of Business">Faculty of Business</option>
@@ -68,10 +73,10 @@ const Register = () => {
   </div>
 
   {/** Business Degrees */}
-  <div class="column2"> {faculty=="Faculty of Business"&&
+  <div className="column2"> {faculty=="Faculty of Business"&&
   <>
-    <label for="validationCustom04" class="form-label" >Degree Programe</label>
-    <select class="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
+    <label htmlFor="validationCustom04" className="form-label" >Degree Programe</label>
+    <select className="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
       <option selected disabled value="">Choose Your Degree...</option>
       <option value="BBA (Hons) Business Management (SLIIT)">BBA (Hons) Business Management (SLIIT)</option>
       <option value="BBA (Hons) Business Management (LJMU)">BBA (Hons) Business Management (LJMU)</option>
@@ -81,10 +86,10 @@ const Register = () => {
   }
   </div>
   {/** Computing Degrees */}
-  <div class="column2"> {faculty=="Faculty of Computing"&&
+  <div className="column2"> {faculty=="Faculty of Computing"&&
   <>
-    <label for="validationCustom04" class="form-label" >Degree Programe</label>
-    <select class="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
+    <label htmlFor="validationCustom04" className="form-label" >Degree Programe</label>
+    <select className="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
       <option selected disabled value="">Choose Your Degree...</option>
       <option value="B.Sc (Hons) Information Technology (SLIIT)">B.Sc (Hons) Information Technology (SLIIT)</option>
       <option value="B.Sc Computer System Networks (Curtin)">B.Sc Computer System Networks (Curtin)</option>
@@ -92,18 +97,34 @@ const Register = () => {
       <option value="B.Eng (Hons) Software Engineering (SHU)">B.Eng (Hons) Software Engineering (SHU)</option>
     </select>
 
-    <div class="column2">{degree== "B.Sc (Hons) Information Technology (SLIIT)"&&
+    <div className="column2">{degree== "B.Sc (Hons) Information Technology (SLIIT)"&&
     <>
-    <label for="validationCustom04" class="form-label" >Specializing in</label>
-    <select class="form-select" id="validationCustom04" required>
+    <label htmlFor="validationCustom04" className="form-label" >Specializing in</label>
+    <select className="form-select" onChange={handleSpecializionChange} id="validationCustom04" required>
       <option selected disabled value="">Choose Your Specializion...</option>
+      
       <option value="Information Technology">Information Technology</option>
       <option value="Software Engineering">Software Engineering</option>
       <option value="Computer Systems and Network Engineering">Computer Systems and Network Engineering</option>
       <option value="Information Systems Engineering">Information Systems Engineering</option>
       <option value="Cyber Security">Cyber Security</option>
       <option value="Interactive Media">Interactive Media</option>
+      
     </select>
+    <div className="column2">{specializion &&
+    <>
+    <label htmlFor="validationCustom04" className="form-label" >Batch </label>
+    <select className="form-select"  id="validationCustom04" required>
+      <option selected disabled value="">Choose Your Batch...</option>
+      <option value="2022 February">2022 February</option>
+      <option value="2021 July">2021 July</option>
+      <option value="2021 February">2021 February</option>
+      <option value="2020 July">2020 July</option>
+      <option value="2020 February">2020 February</option>
+    </select>
+    </>
+    
+    }</div>
     </>
     
     }</div>
@@ -113,10 +134,10 @@ const Register = () => {
   </div>
 
  {/** Engineering Degrees */}
-  <div class="column2"> {faculty=="Faculty of Engineering"&&
+  <div className="column2"> {faculty=="Faculty of Engineering"&&
   <>
-    <label for="validationCustom04" class="form-label" >Degree Programe</label>
-    <select class="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
+    <label htmlFor="validationCustom04" className="form-label" >Degree Programe</label>
+    <select className="form-select" onChange={handleDegreeChange} id="validationCustom04" required>
       <option selected disabled value="">Choose Your Degree...</option>
       <option value="B.Sc. (Hons) Engineering (SLIIT)">B.Sc. (Hons) Engineering (SLIIT)</option>
       <option value="B.Eng (Hons) Engineering (Curtin)">B.Eng (Hons) Engineering (Curtin)</option>
@@ -134,45 +155,45 @@ const Register = () => {
 
   
   
-  <div class="column">
-    <label for="validationCustom03" class="form-label">Email</label>
-    <input type="email" class="form-control" id="validationCustom03" required/>
+  <div className="column">
+    <label htmlFor="validationCustom03" className="form-label"> Student Email</label>
+    <input type="email" className="form-control" id="validationCustom03" placeholder="itxxxxxxxx@my.sliit.lk" required/>
     
   </div>
  
-  <div class="column">
-  <label for="validationCustom05" class="form-label">Password</label>
-  <div class="input-group has-validation">
-      <input class="form-control" id="validationCustom05" type={visible ? "text" : "password"}
+  <div className="column">
+  <label htmlFor="validationCustom05" className="form-label">Password</label>
+  <div className="input-group has-validation">
+      <input className="form-control" id="validationCustom05" type={visible ? "text" : "password"}
         text="Password"
         required/>
-        <span class="input-group-text" id="validationTooltipUsernamePrepend">
+        <span className="input-group-text" id="validationTooltipUsernamePrepend">
           <div onClick={handleClick}>{visible ? <MdVisibility /> : <MdVisibilityOff />}</div></span>
     </div>
   </div>
 
-  <div class="column">
-  <label for="validationCustom05" class="form-label">Confirm Password</label>
-  <div class="input-group has-validation">
-      <input class="form-control" id="validationCustom05" type={visible2 ? "text" : "password"}
+  <div className="column">
+  <label htmlFor="validationCustom05" className="form-label">Confirm Password</label>
+  <div className="input-group has-validation">
+      <input className="form-control" id="validationCustom05" type={visible2 ? "text" : "password"}
         text="Password"
         required/>
-        <span class="input-group-text" id="validationTooltipUsernamePrepend">
+        <span className="input-group-text" id="validationTooltipUsernamePrepend">
           <div onClick={handleClick2}>{visible2 ? <MdVisibility /> : <MdVisibilityOff />}</div></span>
     </div>
   </div>
 
-  <div class="column">
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
-      <label class="form-check-label" for="invalidCheck">
+  <div className="column">
+    <div className="form-check">
+      <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
+      <label className="form-check-label" htmlFor="invalidCheck">
         Agree to terms and conditions
       </label>
       
     </div>
   </div>
-  <div class="column">
-  <div class="login_btn">
+  <div className="column">
+  <div className="login_btn">
     <button type="submit">register</button>
   </div>
   </div>

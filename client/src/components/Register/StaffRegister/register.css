@@ -1,29 +1,28 @@
-.radioselection {
-  display: inline-table;
-  width: 100%;
-  font-size: 20px;
+h1 {
   text-align: center;
 }
 
-.radiobtn {
-  margin-right: 0.5rem;
+.reg {
+  width: 100%;
 }
 
-.radiobtn:hover,
-.radioLable:hover {
-  cursor: pointer;
+.column {
+  width: 100%;
+  margin-top: 1rem;
 }
 
-.radiobox {
-  -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  background-color: #544f5f;
-  padding: 1em;
-  border-radius: 5px;
-  width: 370px;
-  outline: none;
-  font-size: 1rem;
-  border: 2px solid transparent;
-  color: #fcfcfc;
+.column input:hover,
+.column select:hover {
+  border-color: #00ccff;
+}
+
+.column2 {
+  margin-top: 1rem;
+}
+
+.column2 input:hover,
+.column2 select:hover,
+.column2 textarea:hover {
+  border-color: #00ccff;
 }
 /*# sourceMappingURL=register.css.map */

@@ -35,9 +35,13 @@ const userSchema = new mongoose.Schema({
     },
     staff:{
       description:String,
-      interestedTopics:[{topic:String}]
+      interestedTopics:[{topic:{
+        mainTopic:String,
+        subTopics:[String]
+      }}]
 
-    }
+    },
+    isverify:{type: Boolean, default: false},
      
     
   },

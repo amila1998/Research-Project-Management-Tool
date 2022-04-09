@@ -1,28 +1,29 @@
 @import "../../variables/variables.scss";
-.radioselection{
-    display: inline-table;
-    width: 100%;
-    font-size: 20px;
+h1{
     text-align: center;
+}
+.reg{
+    width: 100%;
+}
+.column{
+    width: 100%;
+    margin-top: 1rem;
+    input:hover,
+    select:hover{
+        border-color: rgb(0, 204, 255);
+    }
+};
+
+
+
+.column2{
+    
+    margin-top: 1rem;
+    //display: inline-block;
    
-}
-.radiobtn{
-    margin-right: 0.5rem;
-}
-
-.radiobtn:hover,
-.radioLable:hover{
-    cursor: pointer;
-}
-
-.radiobox{
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-      background-color: $purple-light;
-      padding: 1em;
-      border-radius: 5px;
-      width: 370px;
-      outline: none;
-      font-size: 1rem;
-      border: 2px solid transparent;
-      color: rgb(252, 252, 252);
-}
+    input:hover,
+    select:hover,
+    textarea:hover{
+        border-color: rgb(0, 204, 255);
+    }
+};

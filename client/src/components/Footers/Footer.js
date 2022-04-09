@@ -5,13 +5,13 @@ import MyCalander from "../calander/calander";
 export default function Footer() {
   return (
     <>
- <footer class="footer shadow-lg">
+ <footer className="footer shadow-lg">
 
 
-  	 <div class="container">
+  	 <div className="container">
        
-  	 	<div class="row justify-content-around">
-  	 		<div class="footer-col">
+  	 	<div className="row justify-content-around">
+  	 		<div className="footer-col">
   	 			<h4>Sections</h4>
   	 			<ul>
   	 				<li><a href="#">about us</a></li>
@@ -21,19 +21,19 @@ export default function Footer() {
   	 			</ul>
   	 		</div>
 
-			   <div class="footer-col">
+			   <div className="footer-col">
 			    <MyClock/>
   	 		</div>
 			 
-  	 		<div class="footer-col">
+  	 		<div className="footer-col">
   	 		<MyCalander/>
   	 		</div>
   	 	
   	 		
   	 	</div>
        <hr/>
-       <div class="row justify-content-around">
-  	 		<div class="footer-col">
+       <div className="row justify-content-around">
+  	 		<div className="footer-col">
          <h5>Copyright 222 © SLIIT-AF. All Rights Reserved.</h5>
   	 		</div>
   	 	

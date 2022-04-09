@@ -14,7 +14,7 @@ import ProfileLayout from "./Layouts/ProfileLayout/ProfileLayout";
 function App() {
   const isLoggedIn = false;
   return (
-    <div>
+    <div className='body'>
       
        <Router>
 
