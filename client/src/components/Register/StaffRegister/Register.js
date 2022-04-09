@@ -21,6 +21,7 @@ const Register = () => {
   const [visible2, setVisible2] = useState(false);
   const [supervisor, setSupervisor] = useState(false);
   const [cosupervisor, setCoSupervisor] = useState(false);
+  const [degree, setDegree] = useState(null);
   const [checkedComputing, setCheckedComputing] = useState(false);
   const theme = useTheme();
   const [ComputerTopics, setComputerTopics] = React.useState([]);
