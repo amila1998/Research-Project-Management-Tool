@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import './clock.css';
-import Clock from './Clock';
+import Clock from './clock.js';
 
 class Myclock extends Component {
 
