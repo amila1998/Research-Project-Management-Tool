@@ -2,7 +2,7 @@ h1 {
   text-align: center;
 }
 
-.reg {
+.reset {
   width: 100%;
 }
 
@@ -16,18 +16,6 @@ h1 {
   border-color: #00ccff;
 }
 
-.chip {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
-.chipmenue {
-  width: -webkit-fit-content;
-  width: -moz-fit-content;
-  width: fit-content;
-}
-
 .column2 {
   margin-top: 1rem;
 }
@@ -37,4 +25,4 @@ h1 {
 .column2 textarea:hover {
   border-color: #00ccff;
 }
-/*# sourceMappingURL=register.css.map */
+/*# sourceMappingURL=reset.css.map */

@@ -8,6 +8,8 @@ import './App.css';
 
 import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
 import ProfileLayout from "./Layouts/ProfileLayout/ProfileLayout";
+import ResetLayout from './Layouts/ResetPasswordLayout/ResetLayout';
+import ActivateLayout from "./Layouts/ActivateLayout/ActivateLayout";
 
 
 
@@ -29,6 +31,16 @@ function App() {
               path="/"
               element={isLoggedIn?<ProfileLayout/>:<AuthLayout/>}
               />
+
+          <Route
+          path="/auth/reset-password/:token"
+          element={<ResetLayout/>}
+          />
+
+          <Route
+          path="/api/auth/activate/:activate_token"
+          element={<ActivateLayout/>}
+        />
 
             </Routes>
         
