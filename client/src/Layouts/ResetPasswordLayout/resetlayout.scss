@@ -1,0 +1,11 @@
+@import "../../components/variables/variables.scss";
+
+
+.reset_p {
+  text-align: center;
+  color: $orange;
+  font-weight: 300;
+  margin-top: 3em;
+  text-transform: capitalize;
+  cursor: pointer;
+}
