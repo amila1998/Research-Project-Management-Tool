@@ -94,7 +94,7 @@ const Register = () => {
       },
     },
   };
-  
+
   const computingTopics = [
     'Information Security',
     'Artificial Intelligence and Machine Learning',
@@ -139,10 +139,9 @@ const Register = () => {
           : theme.typography.fontWeightMedium,
     };
   }
-  
 
 
-  
+
 
 
 
