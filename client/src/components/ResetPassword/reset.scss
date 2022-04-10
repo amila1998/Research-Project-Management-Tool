@@ -1,8 +1,8 @@
-@import "../../variables/variables.scss";
+@import "../variables/variables.scss";
 h1{
     text-align: center;
 }
-.reg{
+.reset{
     width: 100%;
 }
 .column{
@@ -13,15 +13,6 @@ h1{
         border-color: rgb(0, 204, 255);
     }
 };
-
-.chip{
-    width: fit-content;
-}
-
-.chipmenue{
-    width: fit-content;
-}
-
 
 .column2{
     

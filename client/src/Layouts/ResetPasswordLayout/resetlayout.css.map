@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAGA,AAAA,QAAQ,CAAC;EACP,UAAU,EAAE,MAAM;EAClB,KAAK,ECCE,OAAO;EDAd,WAAW,EAAE,GAAG;EAChB,UAAU,EAAE,GAAG;EACf,cAAc,EAAE,UAAU;EAC1B,MAAM,EAAE,OAAO;CAChB",
+    "sources": [
+        "resetlayout.scss",
+        "../../components/variables/variables.scss"
+    ],
+    "names": [],
+    "file": "resetlayout.css"
+}
