@@ -30,7 +30,7 @@ export default function Footer() {
 						</div>
 
 
-					</div>
+					</div> 
 					<hr />
 					<div className="row justify-content-around">
 						<div className="footer-col">
@@ -40,7 +40,7 @@ export default function Footer() {
 
 						<div class="footer-col">
 							<h4>follow us</h4>
-							<div class="social-links">
+							<div class="social-links"> 
 								<a href="https://www.facebook.com/sliit.lk/"><i class="fab fa-facebook-f"></i></a>
 								<a href="https://twitter.com/sliitinfo?lang=en"><i class="fab fa-twitter"></i></a>
 								<a href="https://www.instagram.com/sliit.life/?hl=en"><i class="fab fa-instagram"></i></a>
