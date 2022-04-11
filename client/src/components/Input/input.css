@@ -10,14 +10,18 @@
 .input label input {
   -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
           box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-  background-color: #544f5f;
+  background-color: white;
   padding: 1em;
   border-radius: 5px;
   width: 370px;
   outline: none;
   font-size: 1rem;
   border: 2px solid transparent;
-  color: #fcfcfc;
+  color: black;
+}
+
+.input label input:hover {
+  border: 1px solid #059bff;
 }
 
 .input label span {
@@ -40,17 +44,15 @@
 }
 
 .input label input:focus {
-  border: 2px solid #2c2c2c;
+  border: 2px solid #00ccff;
 }
 
 .input label input:focus + span {
   top: -15px;
   font-size: 10px;
-  background: -webkit-gradient(linear, left top, right top, from(#ff6a06), to(#2c2c2c));
-  background: linear-gradient(to right, #ff6a06, #2c2c2c);
   border-radius: 4px;
   padding: 0 5px;
-  color: #fff;
+  color: black;
 }
 
 .input label .input_icon {

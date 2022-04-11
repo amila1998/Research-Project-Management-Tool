@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { ACC_TOKEN } = require("../config");
+
 
 const admin = (req, res, next) => {
     const ad = "admin";
@@ -11,7 +11,7 @@ const admin = (req, res, next) => {
       });
   
       // validate
-      jwt.verify(token, ACC_TOKEN, (err, user) => {
+      jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
         if (err) return res.status(400).json({ 
             msg: "Authentication failed." 
           });

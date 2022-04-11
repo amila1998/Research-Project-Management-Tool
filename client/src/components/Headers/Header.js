@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 import "./header.css"
 
 export default function Header() {
+  const { user } = useContext(AuthContext);
   return (
     <>
       {/* Header */}
@@ -16,8 +18,16 @@ export default function Header() {
     <a className="navbar-brand" href="#"></a><br/>
     
       <form className="d-flex">
-        <a className="nav-link active" aria-current="page" href="#">Name</a>
-        <img src={require("../../assets/img/Default_Avatar.png")} className="rounded"  width="40" height="40" alt="..."></img>
+        {!user.name?<>
+        
+        <button>Login</button>
+        
+        </>:<>
+        
+        <a className="nav-link active" aria-current="page" href="#">{user.name}</a>
+        <img src={user.logo} className="rounded"  width="40" height="40" alt="..."></img>
+        </>}
+    
       </form>
     </div>
  

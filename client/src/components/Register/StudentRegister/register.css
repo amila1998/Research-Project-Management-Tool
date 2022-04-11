@@ -8,7 +8,8 @@ h1 {
 
 .column {
   width: 100%;
-  margin-top: 1rem;
+  -ms-flex-line-pack: center;
+      align-content: center;
 }
 
 .column input:hover,

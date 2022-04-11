@@ -1,7 +1,8 @@
 require("dotenv").config();
 
 module.exports = {
-  DB: process.env.APP_DB,
+  ORIGING_URL:"http://localhost:3000",
+  DB: process.env.MONGODB_URL,
   PORT: process.env.APP_PORT,
   SECRET: process.env.APP_SECRET,
   ACC_TOKEN: process.env.ACCESS_TOKEN,
