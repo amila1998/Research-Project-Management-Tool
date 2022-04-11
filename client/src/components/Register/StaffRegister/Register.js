@@ -20,7 +20,9 @@ const Register = () => {
   const [visible2, setVisible2] = useState(false);
   const [supervisor, setSupervisor] = useState(false);
   const [cosupervisor, setCoSupervisor] = useState(false);
+
   const [role, setRole] = useState(false);
+
   const [checkedComputing, setCheckedComputing] = useState(false);
   const [checkedBussines, setCheckedBussines] = useState(false);
   const [checkedEngineering, setCheckedEngineering] = useState(false);
