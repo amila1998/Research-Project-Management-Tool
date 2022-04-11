@@ -8,14 +8,17 @@
     font-size: 1rem;
     input {
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
-      background-color: $purple-light;
+      background-color: white;
       padding: 1em;
       border-radius: 5px;
       width: 370px;
       outline: none;
       font-size: 1rem;
       border: 2px solid transparent;
-      color: rgb(252, 252, 252);
+      color: rgb(0, 0, 0);
+    }
+    input:hover{
+      border: 1px solid $hoverColor;
     }
     span {
       position: absolute;
@@ -32,15 +35,15 @@
       transform: translate3d(0, -6px, 0) scale(0.75);
     }
     input:focus {
-      border: 2px solid $gray-dark;
+      border: 2px solid $selectColor;
     }
     input:focus + span {
       top: -15px;
       font-size: 10px;
-      background: linear-gradient(to right, $orange, $gray-dark);
+      //background: linear-gradient(to right, $orange, $gray-dark);
       border-radius: 4px;
       padding: 0 5px;
-      color: #fff;
+      color: rgb(0, 0, 0);
     }
     .input_icon {
       color: $purple-dark;
