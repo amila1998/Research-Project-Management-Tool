@@ -12,7 +12,7 @@ export default function Footer() {
 
 					<div className="row justify-content-around">
 						<div className="footer-col">
-							<h4>Sections</h4>
+							<h4>Sections</h4> 
 							<ul>
 								<li><a href="#">about us</a></li>
 								<li><a href="#">our services</a></li>
