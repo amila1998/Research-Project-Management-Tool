@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
 
 import Header from './components/Headers/Header';
 import Navbar from './components/Headers/navbar';
@@ -14,11 +14,16 @@ import ActivateLayout from "./Layouts/ActivateLayout/ActivateLayout";
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
+import ProfileUpdate from './components/Profile/ProfileUpdate';
+import AuthRoutes from './components/Routes/AuthRoute';
+import StudentDashboard from './Layouts/StudentDashBoard/StudentDashboard';
+import AdminRoutes from './components/Routes/AdminRoute';
+import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
 
 
 
 function App() {
-  const { dispatch, token, isLoggedIn } = useContext(AuthContext);
+  const { user, dispatch, token, isLoggedIn } = useContext(AuthContext);
 
   // get ac token
   useEffect(() => {
@@ -63,8 +68,10 @@ function App() {
 
               <Route
               path="/"
-              element={isLoggedIn?<ProfileLayout/>:<AuthLayout/>}
+              element={isLoggedIn? user.role=='student'?<StudentDashboard/>:user.role=='admin'&&<AdminDashboard/>:<AuthLayout/>}
               />
+
+    
 
           <Route
           path="/auth/reset-password/:token"
@@ -76,7 +83,31 @@ function App() {
           element={<ActivateLayout/>}
         />
 
-            </Routes>
+
+        <Route element={<AuthRoutes isAllowed={isLoggedIn}/>}> 
+        <Route
+          path="/updateProfile"
+          element={<ProfileUpdate/>}
+        />
+         <Route
+          path="/profile"
+          element={<ProfileLayout/>}
+        />
+        </Route> 
+
+        <Route element={<AdminRoutes />}>
+          
+        <Route
+          path="/updateProfile"
+          element={<ProfileUpdate/>}
+        />
+         <Route
+          path="/profile"
+          element={<ProfileLayout/>}
+        />
+        </Route>
+
+        </Routes>
         
         </main>
         <Footer/>
