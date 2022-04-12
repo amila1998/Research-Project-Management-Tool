@@ -1,9 +1,12 @@
+import Avatar from "../Avatar/Avatar";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import "./header.css"
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       {/* Header */}
@@ -24,8 +27,9 @@ export default function Header() {
         
         </>:<>
         
-        <a className="nav-link active" aria-current="page" href="#">{user.name}</a>
-        <img src={user.logo} className="rounded"  width="40" height="40" alt="..."></img>
+        <h3 className="nav-link active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>
+        <Avatar />
+        
         </>}
     
       </form>

@@ -2,9 +2,13 @@ import axios from 'axios';
 import "./profilelayout.css";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
+import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const ProfileLayout = () => {
+  const navigate = useNavigate();
 const {dispatch} =  useContext(AuthContext);
 
 const logoutHadleClick =  async (e) =>{
@@ -19,10 +23,14 @@ const logoutHadleClick =  async (e) =>{
   }
 }
 
+const updateHadleClick =  () =>{
+  <Navigate to="/updateProfile"/>
+}
+
   return (
     <div className="profilelayout">
       <p>ProfileLayout</p><br/>
-      <button >update</button> <button onClick={logoutHadleClick}>Logout</button>
+      <button  onClick={() => navigate('/updateProfile')}>update</button> <button onClick={logoutHadleClick}>Logout</button>
     </div>
   );
 };

@@ -307,7 +307,7 @@ const userController = {
       const { name, avatar } = req.body;
 
       // update
-      await User.findOneAndUpdate({ _id: req.user.id }, { name, avatar });
+      await User.findOneAndUpdate({ _id: req.user.id }, { name, logo:avatar });
       // success
       res.status(200).json({ msg: "Update success." });
     } catch (err) {
