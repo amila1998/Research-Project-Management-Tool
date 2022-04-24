@@ -2,7 +2,6 @@ import axios from 'axios';
 import "./profilelayout.css";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
-import { Navigate } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -16,15 +15,12 @@ const logoutHadleClick =  async (e) =>{
   try {
     await axios.get("/api/auth/signout")
     localStorage.removeItem("_appSignging")
+    sessionStorage.clear();
     dispatch({type:"SIGNOUT"})
       
   } catch (error) {
     console.log(error);
   }
-}
-
-const updateHadleClick =  () =>{
-  <Navigate to="/updateProfile"/>
 }
 
   return (

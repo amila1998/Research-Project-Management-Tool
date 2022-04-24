@@ -38,7 +38,7 @@ route.post("/register-student", async (req, res) => {
 
 route.post("/api/auth/activation", userController.activate);
 route.post("/api/auth/signing", userController.signing);
-route.post("/api/auth/access", userController.access);
+route.post("/api/auth/refresh", auth, userController.refresh);
 route.post("/api/auth/forgot_pass", userController.forgot);
 route.post("/api/auth/reset_pass", auth, userController.reset);
 route.get("/api/auth/user", auth, userController.info);
