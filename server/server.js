@@ -16,6 +16,7 @@ const app = express();
 
 // Middlewares
 app.use(cors({
+  credentials:true,
   origin:ORIGING_URL,
 }));
 app.use(express.json());
@@ -25,7 +26,8 @@ app.use(cookieParser());
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
-
+const uploadRoutes = require("./routes/uploadRoutes");
+app.use(uploadRoutes);
 
 
 

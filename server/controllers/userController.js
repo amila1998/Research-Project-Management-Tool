@@ -210,12 +210,13 @@ const userController = {
       if (!isMatch)
         return res.status(400).json({ msg: "This password is incorrect." });
 
-      // refresh token
-      const rf_token = createToken.refresh({ id: user._id });
+      // create a cookie
+      const rf_token = createToken.access({ id: user._id });
       res.cookie("_apprftoken", rf_token, {
         httpOnly: true,
-        path: "/api/auth/access",
-        maxAage: 24 * 60 * 60 * 1000, // 24h
+        path: "/",
+        sameSite:"lax",
+        expires: new Date(Date.now()+1000*30), //30 seconds
       });
 
       // signing success
@@ -224,19 +225,31 @@ const userController = {
       res.status(500).json({ msg: err.message });
     }
   },
-  access: async (req, res) => {
+  refresh: async (req, res) => {
     try {
       // rf token
       const rf_token = req.cookies._apprftoken;
       if (!rf_token) return res.status(400).json({ msg: "Please sign in." });
 
       // validate
-      jwt.verify(rf_token, process.env.REFRESH_TOKEN, (err, user) => {
+      jwt.verify(rf_token, process.env.ACCESS_TOKEN, (err, user) => {
         if (err) return res.status(400).json({ msg: "Please sign in again." });
+        
+        //clear cookie
+        res.clearCookie("_apprftoken", { path: "/" });
+        
         // create access token
         const ac_token = createToken.access({ id: user.id });
+        //create new cookie
+        res.cookie("_apprftoken", ac_token, {
+          httpOnly: true,
+          path: "/",
+          sameSite:"lax",
+          expires: new Date(Date.now()+1000*30), //30 seconds
+        });
+        
         // access success
-        return res.status(200).json({ ac_token });
+        return res.status(200).json({ msg: "Token Refreshed" });
       });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
@@ -307,7 +320,7 @@ const userController = {
       const { name, avatar } = req.body;
 
       // update
-      await User.findOneAndUpdate({ _id: req.user.id }, { name, avatar });
+      await User.findOneAndUpdate({ _id: req.user.id }, { name, logo:avatar });
       // success
       res.status(200).json({ msg: "Update success." });
     } catch (err) {
@@ -317,7 +330,7 @@ const userController = {
   signout: async (req, res) => {
     try {
       // clear cookie
-      res.clearCookie("_apprftoken", { path: "/api/auth/access" });
+      res.clearCookie("_apprftoken", { path: "/" });
       // success
       return res.status(200).json({ msg: "Signout success." });
     } catch (err) {

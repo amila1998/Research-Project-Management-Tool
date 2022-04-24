@@ -2,9 +2,12 @@ import axios from 'axios';
 import "./profilelayout.css";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
+import { useNavigate } from 'react-router-dom';
+
 
 
 const ProfileLayout = () => {
+  const navigate = useNavigate();
 const {dispatch} =  useContext(AuthContext);
 
 const logoutHadleClick =  async (e) =>{
@@ -12,6 +15,7 @@ const logoutHadleClick =  async (e) =>{
   try {
     await axios.get("/api/auth/signout")
     localStorage.removeItem("_appSignging")
+    sessionStorage.clear();
     dispatch({type:"SIGNOUT"})
       
   } catch (error) {
@@ -22,7 +26,7 @@ const logoutHadleClick =  async (e) =>{
   return (
     <div className="profilelayout">
       <p>ProfileLayout</p><br/>
-      <button >update</button> <button onClick={logoutHadleClick}>Logout</button>
+      <button  onClick={() => navigate('/updateProfile')}>update</button> <button onClick={logoutHadleClick}>Logout</button>
     </div>
   );
 };
