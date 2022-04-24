@@ -38,7 +38,8 @@
 
 
 
-
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [contributors-url]: https://github.com/amila1998/Research-Project-Management-Tool/graphs/contributors
