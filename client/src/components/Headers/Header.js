@@ -18,7 +18,7 @@ export default function Header() {
       Research Project Management Tool
     </a>
 
-    <a className="navbar-brand" href="#"></a><br/>
+    <a className="navbar-brand" href="/"></a><br/>
     
       <form className="d-flex">
         {!user.name?<>

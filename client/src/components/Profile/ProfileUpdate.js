@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+axios.defaults.withCredentials = true;
 const initialState = {
   name: "",
   password: "",
@@ -47,9 +47,9 @@ const Profile = () => {
 
       // upload to cloudinary
       const res = await axios.post("/api/upload", formData, {
+        withCredentials:true,
         headers: {
           "content-type": "multipart/form-data",
-          Authorization: token,
         },
         onUploadProgress: (x) => {
           if (x.total < 1024000)
@@ -78,7 +78,7 @@ const Profile = () => {
           avatar: avatar ? avatar : user.avatar,
         },
         {
-          headers: { Authorization: token },
+          withCredentials:true
         }
       );
       const updatedUser = await axios.get("/api/auth/user", {

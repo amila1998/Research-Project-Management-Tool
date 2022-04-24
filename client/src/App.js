@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Header from './components/Headers/Header';
 import Navbar from './components/Headers/navbar';
@@ -19,99 +19,114 @@ import AuthRoutes from './components/Routes/AuthRoute';
 import StudentDashboard from './Layouts/StudentDashBoard/StudentDashboard';
 import AdminRoutes from './components/Routes/AdminRoute';
 import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
+axios.defaults.withCredentials = true;
 
-
-
+let fRender = true;
 function App() {
-  const { user, dispatch, token, isLoggedIn } = useContext(AuthContext);
+  const { user, dispatch, isLoggedIn } = useContext(AuthContext);
 
-  // get ac token
+ 
+ 
+   // get user data
   useEffect(() => {
     const _appSignging = localStorage.getItem("_appSignging");
     if (_appSignging) {
-      const getToken = async () => {
-        const res = await axios.post("/api/auth/access", null);
-        dispatch({ type: "GET_TOKEN", payload: res.data.ac_token });
+      const getUser = async () => {
+        
+        try {
+          dispatch({ type: "SIGNING" });
+          const res = await axios.get("http://localhost:8000/api/auth/user",{
+            withCredentials:true
+          });
+          dispatch({ type: "GET_USER", payload: res.data });
+          window.sessionStorage.setItem("_user", res.data.role);
+          
+        } catch (error) {
+          console.log(error);
+          try {
+            await axios.get("http://localhost:8000/api/auth/signout")
+            localStorage.removeItem("_appSignging")
+            sessionStorage.clear();
+            dispatch({type:"SIGNOUT"})
+            
+          } catch (error) {
+            console.log(error);
+          }
+        }
+       
       };
-      getToken();
+   
+      if(fRender){
+        fRender = false;
+        getUser();
+      }
+      if(!fRender){
+        const refreshToken = async ()=>{
+          await axios.post("http://localhost:8000/api/auth/refresh",{
+            withCredentials:true
+          }).catch(err => console.log(err))
+        }
+        let interval = setInterval(()=>{
+          refreshToken().then(getUser())
+        },1000*28)
+        return ()=>clearInterval(interval)
+      }
+      
+      
+      
     }
   }, [dispatch, isLoggedIn]);
 
-  // get user data
-  useEffect(() => {
-    if (token) {
-      const getUser = async () => {
-        dispatch({ type: "SIGNING" });
-        const res = await axios.get("/api/auth/user", {
-          headers: { Authorization: token },
-        });
-        dispatch({ type: "GET_USER", payload: res.data });
-      };
-      getUser();
-    }
-  }, [dispatch, token]);
-
-
-
-
   return (
     <div className='body'>
-      
-       <Router>
-
-        <Header/>
-        <Navbar/>
-       
-        <main>
-           
-            <Routes>
-
-              <Route
-              path="/"
-              element={isLoggedIn? user.role=='student'?<StudentDashboard/>:user.role=='admin'&&<AdminDashboard/>:<AuthLayout/>}
-              />
-
-    
-
-          <Route
-          path="/auth/reset-password/:token"
-          element={<ResetLayout/>}
-          />
-
-          <Route
-          path="/api/auth/activate/:activation_token"
-          element={<ActivateLayout/>}
-        />
-
-
-        <Route element={<AuthRoutes isAllowed={isLoggedIn}/>}> 
-        <Route
-          path="/updateProfile"
-          element={<ProfileUpdate/>}
-        />
-         <Route
-          path="/profile"
-          element={<ProfileLayout/>}
-        />
-        </Route> 
-
-        <Route element={<AdminRoutes />}>
+      <React.Fragment>
+        <Router>
+          <header><Header/></header>
+            
+            <Navbar/>
           
-        <Route
-          path="/updateProfile"
-          element={<ProfileUpdate/>}
-        />
-         <Route
-          path="/profile"
-          element={<ProfileLayout/>}
-        />
-        </Route>
+            <main>
+              
+              <Routes>
 
-        </Routes>
+                <Route
+                  path="/"
+                  element={isLoggedIn? user.role=='student'?<StudentDashboard/>:user.role=='admin'&&<AdminDashboard/>:<AuthLayout/>}
+                />
+
+                <Route
+                  path="/auth/reset-password/:token"
+                  element={<ResetLayout/>}
+                />
+
+                <Route
+                  path="/api/auth/activate/:activation_token"
+                  element={<ActivateLayout/>}
+                />
+
+                {/* Auth Protected Routes */}
+                <Route element={<AuthRoutes />}> 
+                  <Route
+                    path="/updateProfile"
+                    element={<ProfileUpdate/>}
+                  />
+                  <Route
+                    path="/profile"
+                    element={<ProfileLayout/>}
+                  />
+                </Route> 
+
         
-        </main>
-        <Footer/>
-       </Router>
+              </Routes>
+            
+          </main>
+
+          <footer>
+            <Footer/>
+          </footer>
+            
+          </Router>
+        </React.Fragment>
     </div>
   );
 }
