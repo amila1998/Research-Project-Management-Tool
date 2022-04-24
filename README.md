@@ -42,14 +42,13 @@
 
 [contributors-shield]: https://img.shields.io/github/contributors/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [contributors-url]: https://github.com/amila1998/Research-Project-Management-Tool/graphs/contributors
-[forks-shield]: https://github.com/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [forks-url]: https://github.com/amila1998/Research-Project-Management-Tool/network/members
-[stars-shield]: https://github.com/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [stars-url]: https://github.com/amila1998/Research-Project-Management-Tool/stargazers
 [issues-shield]: https://img.shields.io/github/issues/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [issues-url]: https://github.com/amila1998/Research-Project-Management-Tool/issues
-[license-shield]: https://github.com/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/amila1998/Research-Project-Management-Tool.svg?style=for-the-badge
 [license-url]: https://github.com/amila1998/Research-Project-Management-Tool/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-
 [product-screenshot]: images/screenshot.png
