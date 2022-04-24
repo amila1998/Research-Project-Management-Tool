@@ -55,10 +55,12 @@ function App() {
         }
        
       };
-   
+      getUser();
+
       if(fRender){
+        
         fRender = false;
-        getUser();
+        
       }
       if(!fRender){
         const refreshToken = async ()=>{
