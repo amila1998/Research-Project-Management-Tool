@@ -12,10 +12,10 @@ return _appSignging;
 }
 
 const AdminRoutes = ({
-    isAllowed=useAdmin(),
+    
     redirectPath="/"
 }) => {
-    console.log(isAllowed);
+  const isAllowed=useAdmin();
     return isAllowed ? <Outlet /> : <Navigate to={redirectPath} />;
   };
   

@@ -15,13 +15,9 @@ const useAuth = ()=>{
 };
 
 const AuthRoutes = ({
-    isAllowed = useAuth(),
-    redirectPath="/"
+     redirectPath="/"
 }) => {
-
-   
-
-    
+    const isAllowed = useAuth();
     return isAllowed? <Outlet /> : <Navigate to={redirectPath} />;
   };
   
