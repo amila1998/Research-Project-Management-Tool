@@ -5,7 +5,7 @@ import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { AiFillCamera } from "react-icons/ai";
 import { useContext, useRef, useState } from "react";
-import "./profileupdate.css";
+import "./profileupdate.scss";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -46,8 +46,7 @@ const Profile = () => {
       formData.append("avatar", file);
 
       // upload to cloudinary
-      const res = await axios.post("/api/upload", formData, {
-        withCredentials:true,
+      const res = await axios.post("http://localhost:8000/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -72,7 +71,7 @@ const Profile = () => {
   const updateInfo = async () => {
     try {
       const res = await axios.patch(
-        "/api/auth/user_update",
+        "http://localhost:8000/api/auth/user_update",
         {
           name: name ? name : user.name,
           avatar: avatar ? avatar : user.avatar,
@@ -81,7 +80,7 @@ const Profile = () => {
           withCredentials:true
         }
       );
-      const updatedUser = await axios.get("/api/auth/user", {
+      const updatedUser = await axios.get("http://localhost:8000/api/auth/user", {
         headers: { Authorization: token },
       });
       dispatch({ type: "GET_USER", payload: updatedUser.data });
@@ -113,7 +112,7 @@ const Profile = () => {
       });
     try {
       const res = await axios.post(
-        "/api/auth/reset_pass",
+        "http://localhost:8000/api/auth/reset_pass",
         { password },
         {
           headers: { Authorization: token },

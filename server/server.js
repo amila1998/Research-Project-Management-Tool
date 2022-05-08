@@ -17,7 +17,7 @@ const app = express();
 // Middlewares
 app.use(cors({
   credentials:true,
-  origin:ORIGING_URL,
+  origin:true,
 }));
 app.use(express.json());
 express.urlencoded({ extended: true });

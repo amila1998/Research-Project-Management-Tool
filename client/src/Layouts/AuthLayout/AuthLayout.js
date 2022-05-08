@@ -1,4 +1,4 @@
-import "./authLayout.css";
+import "./authLayout.scss";
 import Forgot from "../../components/ForgotPassword/Forgot";
 import Register from "../RegisterLayout/RegisterLayout";
 import Login from "../../components/Login/Login";

@@ -1,9 +1,13 @@
+
 import { isEmpty, isLength, isMatch } from "../helper/validate";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Input from "../Input/Input";
+
+import "./reset.scss";
+
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useState } from "react";

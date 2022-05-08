@@ -1,4 +1,4 @@
-import "./resetlayout.css";
+import "./resetlayout.scss";
 import Reset from "../../components/ResetPassword/Reset";
 import { useNavigate } from "react-router-dom";
 const ResetLayout = () => {

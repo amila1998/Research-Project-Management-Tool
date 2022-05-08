@@ -1,0 +1,40 @@
+h1 {
+  text-align: center;
+}
+
+.reg {
+  width: 100%;
+}
+
+.column {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.column input:hover,
+.column select:hover {
+  border-color: #00ccff;
+}
+
+.chip {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.chipmenue {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.column2 {
+  margin-top: 1rem;
+}
+
+.column2 input:hover,
+.column2 select:hover,
+.column2 textarea:hover {
+  border-color: #00ccff;
+}
+/*# sourceMappingURL=register.css.map */

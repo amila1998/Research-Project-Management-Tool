@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './clock.css';
+import './clock.scss';
 import Clock from './clock.js';
 
 class Myclock extends Component {
