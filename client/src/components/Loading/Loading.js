@@ -1,4 +1,4 @@
-import "./loading.css";
+import "./loading.scss";
 const Loading = () => {
 return(
     <div class="dots">

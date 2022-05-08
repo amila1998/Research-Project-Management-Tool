@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import "./registerLayout.css";
+import "./registerLayout.scss";
 import StudentRegister from "../../components/Register/StudentRegister/Register";
 import StaffRegister from "../../components/Register/StaffRegister/Register";
 

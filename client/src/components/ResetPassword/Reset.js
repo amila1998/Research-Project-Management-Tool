@@ -1,4 +1,4 @@
-import "./reset.css";
+import "./reset.scss";
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useState } from "react";

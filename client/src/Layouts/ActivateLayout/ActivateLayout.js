@@ -1,5 +1,5 @@
 import { Link, useParams } from "react-router-dom";
-import "./activatelayout.css";
+import "./activatelayout.scss";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
