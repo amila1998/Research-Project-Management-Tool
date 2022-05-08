@@ -3,6 +3,7 @@ const route = Router();
 const userController = require("../controllers/userController");
 const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
+const verifyToken = require("../middlewares/verifyToken");
 
 // route.post("/register-student", userController.register);
 // route.post("/register-admin", userController.register);
@@ -40,7 +41,7 @@ route.post("/api/auth/activation", userController.activate);
 route.post("/api/auth/signing", userController.signing);
 route.post("/api/auth/refresh", auth, userController.refresh);
 route.post("/api/auth/forgot_pass", userController.forgot);
-route.post("/api/auth/reset_pass", auth, userController.reset);
+route.post("/api/auth/reset_pass", verifyToken, userController.reset);
 route.get("/api/auth/user", auth, userController.info);
 route.patch("/api/auth/user_update", auth, userController.update);
 route.get("/api/auth/signout", userController.signout);

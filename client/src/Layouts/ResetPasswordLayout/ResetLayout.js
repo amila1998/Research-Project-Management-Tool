@@ -1,8 +1,10 @@
 import "./resetlayout.scss";
 import Reset from "../../components/ResetPassword/Reset";
-const ResetLayout = ({ history }) => {
+import { useNavigate } from "react-router-dom";
+const ResetLayout = () => {
+  const history = useNavigate();
   const handleClick = () => {
-    history.push("/");
+    history("/");
   };
 
   return (
