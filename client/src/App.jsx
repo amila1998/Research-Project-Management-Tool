@@ -105,7 +105,7 @@ function App() {
                 />
 
                 <Route
-                  path="/api/auth/activate/:activation_token"
+                  path="/auth/activate/:activation_token"
                   element={<ActivateLayout/>}
                 />
 

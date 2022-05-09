@@ -42,8 +42,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env AUTOPREFIXER_GRID=autoplace webpack-dev-server --mode development --port 3000 --open --hot",
-    "build": "cross-env AUTOPREFIXER_GRID=autoplace  webpack --mode production"
+    "start": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
   },
   "keywords": [],
   "author": "",
