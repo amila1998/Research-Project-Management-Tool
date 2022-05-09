@@ -60,7 +60,7 @@ const Reset = () => {
       });
     try {
       await axios.post(
-        "/api/auth/reset_pass",
+        "http://localhost:8000/api/auth/reset_pass",
         { password },
         {
           headers: { Authorization: token },

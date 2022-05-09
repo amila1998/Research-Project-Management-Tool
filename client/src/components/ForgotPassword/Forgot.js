@@ -34,7 +34,7 @@ const Forgot = () => {
         bodyClassName: "toast-failed",
       });
     try {
-      await axios.post("/api/auth/forgot_pass", { email });
+      await axios.post("http://localhost:8000/api/auth/forgot_pass", { email });
       handleReset();
       return toast("Please check your email 📧", {
         className: "toast-success",

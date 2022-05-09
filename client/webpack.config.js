@@ -14,6 +14,7 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.js',
         assetModuleFilename: "assets/img/[hash][ext][query]",
+        publicPath: '/',
     },
 
     plugins: [
@@ -71,7 +72,7 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env', ['@babel/preset-react',{runtime:"automatic"}]]
+                        presets: [['@babel/preset-env',{ targets: "defaults" }], ['@babel/preset-react',{runtime:"automatic"}]]
                         }
                 }
             }
@@ -80,5 +81,21 @@ module.exports = {
     resolve: {
         extensions: [".js", ".jsx"],
       },
+
+      devServer: {
+        hot: true,
+        port: 3000,
+        historyApiFallback: true, 
+        historyApiFallback: {
+          disableDotRule: true
+      },
+      proxy: {
+        '/api': 'http://localhost:8000',
+          changeOrigin:true,
+            
+     },
+     open:true,
+
+ },
 
 }
