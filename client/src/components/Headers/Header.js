@@ -1,7 +1,7 @@
 import Avatar from "../Avatar/Avatar";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
-import "./header.css"
+import "./header.scss"
 import { useNavigate } from 'react-router-dom';
 
 export default function Header() {

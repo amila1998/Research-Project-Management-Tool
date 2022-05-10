@@ -13,14 +13,6 @@ const userController = {
       // get info
       const { name, email, gender, password, username, faculty, degree, specialization , batch , description, interestedTopics} = req.body;
 
-      // if (role=="student") {
-      //   const {  } = req.body;
-      // }
-
-      // if (role=="supervisor" || role=="coSupervisor") {
-      //   const {  } = req.body;
-      // }
-
       // check fields
       if (!name || !email || !password ||!username)
         return res.status(400).json({ message: "Please fill in all fields." });

@@ -1,68 +1,109 @@
-import "./reset.css";
+
+import { isEmpty, isLength, isMatch } from "../helper/validate";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Input from "../Input/Input";
+
+import "./reset.scss";
+
 import { MdVisibility } from "react-icons/md";
 import { MdVisibilityOff } from "react-icons/md";
 import { useState } from "react";
 
+const initialState = {
+  password: "",
+  cf_password: "",
+};
+
 const Reset = () => {
   const [visible, setVisible] = useState(false);
-  const [visible2, setVisible2] = useState(false);
+  const [data, setData] = useState(initialState);
+  const { password, cf_password } = data;
+  const { token } = useParams();
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
 
   const handleClick = () => {
     setVisible(!visible);
   };
-  const handleClick2 = () => {
-    setVisible2(!visible2);
+
+  const handleReset = () => {
+    Array.from(document.querySelectorAll("input")).forEach(
+      (input) => (input.value = "")
+    );
+    setData({ ...data, password: "", cf_password: "" });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // check fields
+    if (isEmpty(password) || isEmpty(cf_password))
+      return toast("Please fill in all fields.", {
+        className: "toast-failed",
+        bodyClassName: "toast-failed",
+      });
+    //check password length
+    if (isLength(password))
+      return toast("Password must be at least 6 characters.", {
+        className: "toast-failed",
+        bodyClassName: "toast-failed",
+      });
+    // password match
+    if (!isMatch(password, cf_password))
+      return toast("Password did not match", {
+        className: "toast-failed",
+        bodyClassName: "toast-failed",
+      });
+    try {
+      await axios.post(
+        "http://localhost:8000/api/auth/reset_pass",
+        { password },
+        {
+          headers: { Authorization: token },
+        }
+      );
+      handleReset();
+      return toast("Password was successfully changed 🤗", {
+        className: "toast-success",
+        bodyClassName: "toast-success",
+      });
+    } catch (err) {
+      toast(err.response.data.msg, {
+        className: "toast-failed",
+        bodyClassName: "toast-failed",
+      });
+    }
   };
 
   return (
-      <>
-      <div className="reset">
-            <h1>
-                Staff Registration
-            </h1>
-
-            <form className="" novalidate>
-            <div className="column">
-                <label htmlFor="validationCustom05" className="form-label">Password</label>
-                <div className="input-group has-validation">
-                    <input className="form-control" id="validationCustom05" type={visible ? "text" : "password"}
-                        text="Password"
-                        required/>
-                        <span className="input-group-text" id="validationTooltipUsernamePrepend">
-                        <div onClick={handleClick}>{visible ? <MdVisibility /> : <MdVisibilityOff />}</div></span>
-                    </div>
-                </div>
-                <div className="column">
-                <label htmlFor="validationCustom05" className="form-label">Confirm Password</label>
-                <div className="input-group has-validation">
-                    <input className="form-control" id="validationCustom05" type={visible2 ? "text" : "password"}
-                        text="Password"
-                        required/>
-                        <span className="input-group-text" id="validationTooltipUsernamePrepend">
-                        <div onClick={handleClick2}>{visible2 ? <MdVisibility /> : <MdVisibilityOff />}</div></span>
-                    </div>
-                </div>
-
-                <div className="column">
-                    <div className="form-check">
-                    <input className="form-check-input" type="checkbox" value="" id="invalidCheck" required/>
-                    <label className="form-check-label" for="invalidCheck">
-                        Agree to terms and conditions
-                    </label>
-                    
-                    </div>
-                </div>
-                <div className="column">
-                <div className="login_btn">
-                    <button type="submit">Reset Password</button>
-                </div>
-                </div>
-
-            </form>
-
-    </div>
-      </>
-
+    <>
+      <ToastContainer />
+      <form onSubmit={handleSubmit}>
+        <Input
+          name="password"
+          type={visible ? "text" : "password"}
+          icon={visible ? <MdVisibility /> : <MdVisibilityOff />}
+          text="Password"
+          handleClick={handleClick}
+          handleChange={handleChange}
+        />
+        <Input
+          handleChange={handleChange}
+          name="cf_password"
+          type={visible ? "text" : "password"}
+          icon={visible ? <MdVisibility /> : <MdVisibilityOff />}
+          text="Confirm Password"
+          handleClick={handleClick}
+        />
+        <div className="login_btn">
+          <button type="submit">reset</button>
+        </div>
+      </form>
+    </>
   );
 };
 

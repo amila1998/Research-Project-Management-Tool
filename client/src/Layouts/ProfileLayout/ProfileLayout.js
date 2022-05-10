@@ -1,5 +1,5 @@
 import axios from 'axios';
-import "./profilelayout.css";
+import "./profilelayout.scss";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ const {dispatch} =  useContext(AuthContext);
 const logoutHadleClick =  async (e) =>{
   e.preventDefault();
   try {
-    await axios.get("/api/auth/signout")
+    await axios.get("http://localhost:8000/api/auth/signout")
     localStorage.removeItem("_appSignging")
     sessionStorage.clear();
     dispatch({type:"SIGNOUT"})
