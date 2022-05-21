@@ -209,50 +209,6 @@ const Register = () => {
     }
   };
 
-  const handleChangecomputing = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setComputerTopics(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-  const handleChangebussines = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setBusinessTopics(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-
-  const handleChangeengineer = (event) => {
-    const {
-      target: { value },
-    } = event;
-    setEngineerTopics(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-
-  //chip
-
-  const ITEM_HEIGHT = 48;
-  const ITEM_PADDING_TOP = 8;
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-        width: 'fit-content',
-      },
-    },
-  };
-
   const computingTopics = [
     { value: 'Information Security', label: 'Information Security' },
     { value: 'Artificial Intelligence and Machine Learning', label: 'Artificial Intelligence and Machine Learning' },
