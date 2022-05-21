@@ -13,7 +13,7 @@ const {dispatch} =  useContext(AuthContext);
 const logoutHadleClick =  async (e) =>{
   e.preventDefault();
   try {
-    await axios.get("http://localhost:8000/api/auth/signout")
+    await axios.get("/api/auth/signout")
     localStorage.removeItem("_appSignging")
     sessionStorage.clear();
     dispatch({type:"SIGNOUT"})
