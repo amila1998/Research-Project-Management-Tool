@@ -14,7 +14,7 @@ const userController = {
       const { name, email, gender, password, username, faculty, degree, specialization, role, batch , description, interestedTopics} = req.body;
 
       // check fields
-      if (!name || !email || !password ||!username)
+      if (!name || !email || !password ||!username ||!gender ||!role)
         return res.status(400).json({ message: "Please fill in all fields." });
 
       // check email
