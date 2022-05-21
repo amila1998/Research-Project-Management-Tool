@@ -46,7 +46,7 @@ const Profile = () => {
       formData.append("avatar", file);
 
       // upload to cloudinary
-      const res = await axios.post("http://localhost:8000/api/upload", formData, {
+      const res = await axios.post("/api/upload", formData, {
         headers: {
           "content-type": "multipart/form-data",
         },
@@ -71,7 +71,7 @@ const Profile = () => {
   const updateInfo = async () => {
     try {
       const res = await axios.patch(
-        "http://localhost:8000/api/auth/user_update",
+        "/api/auth/user_update",
         {
           name: name ? name : user.name,
           avatar: avatar ? avatar : user.avatar,
@@ -80,7 +80,7 @@ const Profile = () => {
           withCredentials:true
         }
       );
-      const updatedUser = await axios.get("http://localhost:8000/api/auth/user", {
+      const updatedUser = await axios.get("/api/auth/user", {
         headers: { Authorization: token },
       });
       dispatch({ type: "GET_USER", payload: updatedUser.data });
@@ -112,7 +112,7 @@ const Profile = () => {
       });
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/reset_pass",
+        "/api/auth/reset_pass",
         { password },
         {
           headers: { Authorization: token },

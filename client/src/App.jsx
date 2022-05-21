@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 
 
 
@@ -7,29 +7,25 @@ import Header from './components/Headers/Header';
 import Navbar from './components/Headers/navbar';
 import Footer from './components/Footers/Footer';
 import './App.css';
-
 import AuthLayout from "./Layouts/AuthLayout/AuthLayout";
 import ProfileLayout from "./Layouts/ProfileLayout/ProfileLayout";
 import ResetLayout from './Layouts/ResetPasswordLayout/ResetLayout';
 import ActivateLayout from "./Layouts/ActivateLayout/ActivateLayout";
-
 import { AuthContext } from "./context/AuthContext";
 import { useContext, useEffect } from "react";
 import axios from "axios";
 import ProfileUpdate from './components/Profile/ProfileUpdate';
-import AuthRoutes from './components/Routes/AuthRoute';
 import StudentDashboard from './Layouts/StudentDashBoard/StudentDashboard';
-import AdminRoutes from './components/Routes/AdminRoute';
 import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
-import Login from './components/Login/Login';
+import StaffDashBoard from './Layouts/StaffDashBoard/StaffDashBoard';
 
 axios.defaults.withCredentials = true;
 
 let fRender = true;
 function App() {
-  const { user, dispatch, isLoggedIn } = useContext(AuthContext);
+  const { dispatch, isLoggedIn,isAdmin,isCoSuprevisor,isPanelMember,isSupervisor } = useContext(AuthContext);
 
- 
+ //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSuprevisor,isPanelMember,isSupervisor);
  
    // get user data
   useEffect(() => {
@@ -39,16 +35,26 @@ function App() {
         
         try {
           dispatch({ type: "SIGNING" });
-          const res = await axios.get("http://localhost:8000/api/auth/user",{
+          const res = await axios.get("/api/auth/user",{
             withCredentials:true
           });
           dispatch({ type: "GET_USER", payload: res.data });
-          window.sessionStorage.setItem("_user", res.data.role);
+          //window.sessionStorage.setItem("_user", res.data.role);
+          //console.log(res.data.role);
+          if (res.data.role=="admin") {
+            dispatch({ type: "IS_ADMIN" });
+          }else if (res.data.role=="supervisor") {
+            dispatch({ type: "IS_SUPERVISOR" });
+          }else if (res.data.role=="coSupervisor") {
+            dispatch({ type: "IS_CO_SUPERVISOR" });
+          }else if (res.data.role=="panelMember") {
+            dispatch({ type: "IS_PANEL_MEMBER" });
+          };
           
         } catch (error) {
           console.log(error);
           try {
-            await axios.get("http://localhost:8000/api/auth/signout")
+            await axios.get("/api/auth/signout")
             localStorage.removeItem("_appSignging")
             sessionStorage.clear();
             dispatch({type:"SIGNOUT"})
@@ -68,7 +74,7 @@ function App() {
       }
       if(!fRender){
         const refreshToken = async ()=>{
-          await axios.post("http://localhost:8000/api/auth/refresh",{
+          await axios.post("/api/auth/refresh",{
             withCredentials:true
           }).catch(err => console.log(err))
         }
@@ -96,8 +102,13 @@ function App() {
               <Routes>
               <Route
                   path="/"
-                  element={isLoggedIn? user.role=='student'?<StudentDashboard/>:user.role=='admin'&&<AdminDashboard/>:<AuthLayout/>}
+                  element={
+                    isLoggedIn?
+                      isAdmin?<AdminDashboard/>:
+                      isPanelMember||isSupervisor||isCoSuprevisor?<StaffDashBoard/>:<StudentDashboard/>
+                      :<AuthLayout/>}
                 />
+
 
                 <Route
                   path="/auth/reset-password/:token"
@@ -109,17 +120,17 @@ function App() {
                   element={<ActivateLayout/>}
                 />
 
-                {/* Auth Protected Routes */}
-                <Route element={<AuthRoutes />}> 
+
+           
                   <Route
                     path="/updateProfile"
-                    element={<ProfileUpdate/>}
+                    element={isLoggedIn?<ProfileUpdate/>:<Navigate to={"/"}/>}
                   />
                   <Route
                     path="/profile"
-                    element={<ProfileLayout/>}
+                    element={isLoggedIn?<ProfileLayout/>:<Navigate to={"/"}/>}
                   />
-                </Route> 
+         
               </Routes>
             
           </main>

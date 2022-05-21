@@ -15,6 +15,27 @@ const AuthReducer = (state, action) => {
           ...state,
           user: action.payload,
         };
+      case "IS_ADMIN":
+          return {
+            ...state,
+            isAdmin: true,
+      };
+      case "IS_PANEL_MEMBER":
+          return {
+            ...state,
+            isPanelMember: true,
+      };
+      case "IS_SUPERVISOR":
+        return {
+          ...state,
+          isSupervisor: true,
+    };
+    case "IS_CO_SUPERVISOR":
+      return {
+        ...state,
+        isCoSupervisor: true,
+  };
+
       case "UPDATE_AVATAR":
         return {
           ...state,
@@ -24,6 +45,9 @@ const AuthReducer = (state, action) => {
         return {
           ...state,
           isLoggedIn: false,
+          isPanelMember:false,
+          isSupervisor:false,
+          isCoSuprevisor:false,
           token: "",
           user: [],
         };

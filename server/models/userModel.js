@@ -41,11 +41,9 @@ const userSchema = new Schema(
   staff:{
     description:String,
     interestedTopics:[String]
-
   },
   isverify:{type: Boolean, default: false},
-   
-  
+
 },
 { timestamps: true }
 );
