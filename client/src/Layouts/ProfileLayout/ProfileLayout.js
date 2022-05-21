@@ -3,6 +3,7 @@ import "./profilelayout.scss";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import Profile from '../../components/Profile/Profile';
 
 
 
@@ -25,8 +26,15 @@ const logoutHadleClick =  async (e) =>{
 
   return (
     <div className="profilelayout">
-      <p>ProfileLayout</p><br/>
-      <button  onClick={() => navigate('/updateProfile')}>update</button> <button onClick={logoutHadleClick}>Logout</button>
+      <h1>Profile</h1><br/>
+      <Profile/>
+      <div className='row'>
+        <div className='col'><div className="login_btn"><button  onClick={() => navigate('/updateProfile')}>update</button> </div></div>
+        <div className='col'><div className="logout_btn"><button onClick={logoutHadleClick}>Logout</button></div></div>
+      </div>
+      
+      
+      
     </div>
   );
 };
