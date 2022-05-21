@@ -35,6 +35,26 @@ const Profile = () => {
           <div className='col1'>{user.gender}</div>
         </div>
         {user.role=="student"&&<>
+        <div className='row1'>
+          <div className='col1   '><h5>Faculty</h5></div>
+          <div className='col1'>:</div>
+          <div className='col1'>{user.student.faculty}</div>
+        </div>
+        <div className='row1'>
+          <div className='col1'><h5>Degree</h5></div>
+          <div className='col1'>:</div>
+          <div className='col1'>{user.student.degree}</div>
+        </div>
+        <div className='row1'>
+          <div className='col1   '><h5>Specialization</h5></div>
+          <div className='col1'>:</div>
+          <div className='col1'>{user.student.specialization}</div>
+        </div>
+        <div className='row1'>
+          <div className='col1   '><h5>Batch</h5></div>
+          <div className='col1'>:</div>
+          <div className='col1'>{user.student.batch}</div>
+        </div>
         
         </>}
         {user.role=="supervisor"&&<>
