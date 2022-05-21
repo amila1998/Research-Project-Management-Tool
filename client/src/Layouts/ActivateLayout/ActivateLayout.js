@@ -19,11 +19,11 @@ const ActivateLayout = ({ history }) => {
       const activateUser = async () => {
         try {
           setisLoading(true);
-          const res = await axios.post("http://localhost:8000/api/auth/activation", {
+          const res = await axios.post("/api/auth/activation", {
             activation_token,
           });
           
-          toast.success(res.data.message, {
+          toast.success(res.data.msg, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -36,7 +36,7 @@ const ActivateLayout = ({ history }) => {
         } catch (err) {
           setisLoading(false);
           console.log(err);
-          toast.error(err.response.data.message, {
+          toast.error(err.response.data.msg, {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,

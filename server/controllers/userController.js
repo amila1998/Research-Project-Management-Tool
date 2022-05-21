@@ -126,7 +126,7 @@ const userController = {
         return res
           .status(400)
           .json({
-             message: "This email is already registered.",
+             msg: "This email is already registered.",
              success: false
          });
 
@@ -174,13 +174,13 @@ const userController = {
       res
         .status(200)
         .json({ 
-          message: "Your account has been activated, you can now sign in.",
+          msg: "Your account has been activated, you can now sign in.",
           success: true
         
         });
     } catch (err) {
       res.status(500).json({ 
-        message: err.message ,
+        msg: err.message ,
         success: false
     });
     }
