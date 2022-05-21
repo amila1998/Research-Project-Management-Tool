@@ -80,12 +80,9 @@ function App() {
         }
         let interval = setInterval(()=>{
           refreshToken().then(getUser())
-        },1000*28)
+        },1000*60*55)//55m
         return ()=>clearInterval(interval)
       }
-      
-      
-      
     }
   }, [dispatch, isLoggedIn]);
 

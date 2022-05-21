@@ -3,10 +3,6 @@ import "./footers.scss";
 import MyClock from "../clock/Myclock";
 import MyCalander from "../calander/calander";
 
-import linkedin from "./icons/linkedin.png";
-import Facebook from "./icons/Facebook.png";
-
-
 
 export default function Footer() {
 	return (

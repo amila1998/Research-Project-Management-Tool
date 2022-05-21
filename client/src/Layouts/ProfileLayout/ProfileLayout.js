@@ -4,12 +4,14 @@ import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import Profile from '../../components/Profile/Profile';
+import unverify from "../../assets/img/unverify.png"
+import verify from "../../assets/img/verify.png"
 
 
 
 const ProfileLayout = () => {
   const navigate = useNavigate();
-const {dispatch} =  useContext(AuthContext);
+const {user, dispatch} =  useContext(AuthContext);
 
 const logoutHadleClick =  async (e) =>{
   e.preventDefault();
@@ -24,9 +26,13 @@ const logoutHadleClick =  async (e) =>{
   }
 }
 
+
   return (
     <div className="profilelayout">
-      <h1>Profile</h1><br/>
+      <h1>Profile{user.isverify?<><img type="button" src={verify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
+</>:<>
+<img type="button" src={unverify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
+</>}</h1><br/>
       <Profile/>
       <div className='row'>
         <div className='col'><div className="login_btn"><button  onClick={() => navigate('/updateProfile')}>update</button> </div></div>
