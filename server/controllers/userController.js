@@ -46,7 +46,7 @@ const userController = {
            
 
       // send email
-       const url = `http://localhost:3000/api/auth/activate/${activation_token}`;
+       const url = `http://localhost:3000/auth/activate/${activation_token}`;
        sendMail.sendEmailRegister(email, url, "Verify your email");
 
 
@@ -208,11 +208,11 @@ const userController = {
         httpOnly: true,
         path: "/",
         sameSite:"lax",
-        expires: new Date(Date.now()+1000*30), //30 seconds
+        expires: new Date(Date.now()+1000*60*60), //1h
       });
 
       // signing success
-      res.status(200).json({ msg: "Signing success" });
+      res.status(200).json({ msg: "Signing success"});
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
@@ -237,7 +237,7 @@ const userController = {
           httpOnly: true,
           path: "/",
           sameSite:"lax",
-          expires: new Date(Date.now()+1000*30), //30 seconds
+          expires: new Date(Date.now()+1000*60*60), //1h
         });
         
         // access success
