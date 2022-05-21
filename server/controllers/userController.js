@@ -14,7 +14,7 @@ const userController = {
       const { name, email, gender, password, username, faculty, degree, specialization, role, batch , description, interestedTopics} = req.body;
 
       // check fields
-      if (!name || !email || !password ||!username)
+      if (!name || !email || !password ||!username ||!gender ||!role)
         return res.status(400).json({ message: "Please fill in all fields." });
 
       // check email
@@ -46,7 +46,7 @@ const userController = {
            
 
       // send email
-       const url = `http://localhost:3000/api/auth/activate/${activation_token}`;
+       const url = `http://localhost:3000/auth/activate/${activation_token}`;
        sendMail.sendEmailRegister(email, url, "Verify your email");
 
 
