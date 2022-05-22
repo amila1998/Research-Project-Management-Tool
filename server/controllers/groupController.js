@@ -47,6 +47,14 @@ const groupController ={
 
                   const savedGroup = await newGroup.save();
                   
+                  for (const member of savedGroup.members) {
+                    console.log(member);
+                    await User.findOneAndUpdate(
+                      { _id: member.user_id },
+                      { 'student.haveAGroup': true }
+                    );
+
+                  }
                 // send email
                 // const url = `http://localhost:3000/group/groupDashBoard/${savedGroup._id}`;
                 // sendMail.sendEmailGroupRegister(members, url, "You Have a successfully Completed Group Registration");
@@ -60,9 +68,19 @@ const groupController ={
              } catch (err) {
              res.status(500).json({ message: err.message,
               success: false });
+              
            }
           },
-    
+  getMutualStudents: async (req, res) => {
+    const { degree, faculty } = req.body;
+    try {
+      // const users = await User.find({ student: { degree: degree, faculty: faculty } });
+      const users = await User.find({ degree: degree, faculty: faculty  });
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  }
 
 }
 

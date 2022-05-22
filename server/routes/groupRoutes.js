@@ -4,6 +4,7 @@ const groupController = require("../controllers/groupController");
 const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 
-route.post("/api/group/groupRegister", auth,groupController.groupRegister);
+route.post("/api/group/groupRegister",groupController.groupRegister);
+route.post("/api/group/getMutualStudents", auth,groupController.getMutualStudents);
 
 module.exports = route;
