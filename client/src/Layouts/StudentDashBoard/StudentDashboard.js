@@ -1,8 +1,11 @@
+import CreateGroup from "../../components/StudentGroup/CreateGroup";
+import "./studentDashboard.scss"
+
 const StudentDashboard = () => {
 return(
-  
-    <h1>Student</h1>
-
+    <>
+        <div className="student-dashboard"><CreateGroup /></div>
+    </>
 );
 }
 

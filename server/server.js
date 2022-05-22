@@ -26,6 +26,9 @@ app.use(cookieParser());
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
 
+const groupRoutes = require("./routes/groupRoutes");
+app.use(groupRoutes);
+
 const uploadRoutes = require("./routes/uploadRoutes");
 app.use(uploadRoutes);
 
