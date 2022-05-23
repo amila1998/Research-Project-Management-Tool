@@ -14,7 +14,7 @@ export default function Footer() {
 
 					<div className="row justify-content-around">
 						<div className="footer-col">
-							<h4>Sections</h4>
+							<h4 className="h4class">Sections</h4>
 							<ul>
 								<li><a href="#">about us</a></li>
 								<li><a href="#">our services</a></li>
@@ -36,12 +36,12 @@ export default function Footer() {
 					<hr />
 					<div className="row justify-content-around">
 						<div className="footer-col">
-							<h5>Copyright 222 © SLIIT-AF. All Rights Reserved.</h5>
+							<h5 className="h5class">Copyright 222 © SLIIT-AF. All Rights Reserved.</h5>
 						</div>
 
 
 						<div class="footer-col">
-							<h4>follow us</h4>
+							<h4 className="h4class">follow us</h4>
 							<div class="social-links"> 
 							<a href="https://www.facebook.com/sliit.lk/"><i class="fab fa-facebook-f"></i></a>
 								<a href="https://twitter.com/sliitinfo?lang=en"><i class="fab fa-twitter"></i></a>
