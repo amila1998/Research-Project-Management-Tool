@@ -6,7 +6,7 @@ import unverify from "../../assets/img/unverify.png"
 import verify from "../../assets/img/verify.png"
 
 const Profile = () => {
-    const { user, isCoSuprevisor,isPanelMember,isSupervisor } = useContext(AuthContext);
+    const { user, isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
     console.log(user);
   return (
     <div className='myprofile'>
