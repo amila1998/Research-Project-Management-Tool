@@ -31,7 +31,7 @@ route.post("/api/auth/reset_pass", verifyToken, userController.reset);
 route.get("/api/auth/user", auth, userController.info);
 route.patch("/api/auth/user_update", auth, userController.update);
 route.get("/api/auth/signout", userController.signout);
-route.get("/api/admin/getallUsers", userController.getAllUsers);
+route.get("/api/admin/getallUsers",auth,admin, userController.getAllUsers);
 
 
 
