@@ -342,14 +342,18 @@ const userController = {
    if(req.query.isVerify){
     query.isverify=req.query.isVerify;
    }
+   if(req.query.role){
+    query.role=req.query.role;
+   }
    if(req.query.createdAt){
+     //desc
+     //aces
     const str = req.query.createdAt.split('=')
-    sort[str[0]] = str[1] === 'createdAt' ? -1:1
-}
+    sort['createdAt'] = str=='desc'?-1:1
+    }
 
    
     try {
- console.log(sort);
       const users =await User.find(query)
       .select("-password")
       .sort(sort);
