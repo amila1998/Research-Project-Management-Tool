@@ -1,0 +1,143 @@
+@import "../../components/variables/variables.scss";
+.dashboard{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+
+}
+.left{
+    width: 25%;
+    background-color: $gray-dark;
+    min-width: 25%;
+}
+.right{
+    width: 70%;
+}
+
+.nav1{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+}
+
+.nav1logout{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 0;
+    
+    
+}
+.nav1logout:hover,
+.nav1Select:hover{
+    background-color: red;
+    cursor: pointer;
+    color: aliceblue;
+}
+.nav1:hover,
+.nav1Select:hover{
+    background-color: $orange;
+    cursor: pointer;
+}
+
+.nav1Select{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    background-color: aliceblue;
+
+}
+
+.subnav1{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    margin-left: 40px;
+}
+.subnav1:hover,
+.subnav1Select:hover{
+    background-color: $orange;
+    cursor: pointer;
+}
+
+.subnav1Select{
+    overflow: hidden;
+    padding: 10px;
+    display: flex;
+    background-color: aliceblue;
+    margin-left: 40px;
+
+}
+
+
+.navText{
+    color: aliceblue;
+ 
+}
+
+
+.navIcon{
+    color: aliceblue;
+    margin-right:20px ;
+   
+ 
+    
+}
+.navIconSelect{
+    color: rgb(0, 0, 0);
+    margin-right:20px ;
+}
+
+.navTextlogout{
+    color: rgb(255, 255, 255);
+ 
+}
+
+
+
+
+.navIconlogout{
+    color: aliceblue;
+    margin-right:20px ;
+   
+ 
+    
+}
+.navIconSelectlogout{
+    color: rgb(0, 0, 0);
+    margin-right:20px ;
+}
+
+.downSelect{
+    color: rgb(0, 0, 0);
+    margin-left: 5px;
+}
+.down{
+    color: rgb(255, 255, 255);
+    margin-left: 5px;
+}
+
+.navTextSelect{
+    color: rgb(0, 0, 0);
+}
+
+@media only screen and (max-width: 600px){
+    .navText{
+        display: none;
+    }
+    .navTextSelect{
+        display: none;
+    }
+    .nav1{
+        justify-content: center;
+    }
+    .nav1Select{
+        justify-content: center;
+    }
+    .subnav1{
+        margin-left: 0px;    }
+    .subnav1Select{
+        margin-left: 0px;
+    }
+}
