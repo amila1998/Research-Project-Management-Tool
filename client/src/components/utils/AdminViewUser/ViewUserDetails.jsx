@@ -48,7 +48,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   });
 
 const ViewUserDetails = ({data}) => {
-    console.log(data);
+
     const [open, setOpen] = useState(false);
 
         const handleClickOpen = () => {

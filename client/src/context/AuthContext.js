@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   isAdmin:false,
   isPanelMember:false,
   isSupervisor:false,
-  isCoSuprevisor:false,
+  isCoSupervisor:false,
   token: "",
 };
 
@@ -24,7 +24,7 @@ export const AuthContextProvider = ({ children }) => {
         isAdmin:state.isAdmin,
         isPanelMember:state.isPanelMember,
         isSupervisor:state.isSupervisor,
-        isCoSuprevisor:state.isCoSuprevisor,
+        isCoSupervisor:state.isCoSupervisor,
         token: state.token,
         dispatch,
       }}
