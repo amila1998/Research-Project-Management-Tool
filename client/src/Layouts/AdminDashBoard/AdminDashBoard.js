@@ -13,6 +13,7 @@ import { MdSupervisedUserCircle } from "react-icons/md";
 import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
+import UserManagement from "../../components/Admin/UserManagement/UserManagement";
 
 
 
@@ -35,8 +36,8 @@ const history = useNavigate()
   };
 
   const handleProfile = () => {
-    setDashboard(!dashboard);
-    setProfile(!profile);
+    setDashboard(false);
+    setProfile(true);
     setUpdateProfile(false);
     setUserManagement(false);
   }
@@ -48,9 +49,9 @@ const history = useNavigate()
   }
 
   const handleUserManagement = () => {
-    setDashboard(!dashboard);
+    setDashboard(false);
     setProfile(false);
-    setUserManagement(!userManagement);
+    setUserManagement(true);
     setUpdateProfile(false);
   }
 
@@ -118,7 +119,7 @@ const history = useNavigate()
            <div className="right">
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
-
+          {userManagement&&<UserManagement/>}
            
            </div>
        </div>
