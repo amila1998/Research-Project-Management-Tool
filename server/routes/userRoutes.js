@@ -11,30 +11,16 @@ const verifyToken = require("../middlewares/verifyToken");
 // route.post("/register-coSupervisor", userController.register);
 
 // Students Registeration Route
-route.post("/register-student", async (req, res) => {
-    await userController.register(req, "student", res);
+route.post("/api/register-student", async (req, res) => {
+    await userController.register(req, res);
   });
   
-  // Admin Registration Route
-  route.post("/register-admin", async (req, res) => {
-    await userController.register(req, "admin", res);
+ 
+  // Staff Registration Route
+  route.post("/api/register-staff", async (req, res) => {
+    await userController.register(req, res);
   });
-  
-  // Supervisor Registration Route
-  route.post("/register-supervisor", async (req, res) => {
-    await userController.register(req, "supervisor", res);
-  });
-  
-  // Co-Supervisor Registration Route
-  route.post("/register-coSupervisor", async (req, res) => {
-      await userController.register(req, "coSupervisor", res);
-    });
-  
-  // PanelMember Registration Route
-  // TO DO : Add Permission to only Admin
-  route.post("/register-panelMember",admin, async (req, res) => {
-      await userController.panalMemberRegister(req, "panelMember", res);
-    });
+
 
 
 route.post("/api/auth/activation", userController.activate);

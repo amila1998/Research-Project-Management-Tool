@@ -4,6 +4,10 @@ import AuthReducer from "./AuthReducer";
 const INITIAL_STATE = {
   user: [],
   isLoggedIn: false,
+  isAdmin:false,
+  isPanelMember:false,
+  isSupervisor:false,
+  isCoSuprevisor:false,
   token: "",
 };
 
@@ -17,6 +21,10 @@ export const AuthContextProvider = ({ children }) => {
       value={{
         user: state.user,
         isLoggedIn: state.isLoggedIn,
+        isAdmin:state.isAdmin,
+        isPanelMember:state.isPanelMember,
+        isSupervisor:state.isSupervisor,
+        isCoSuprevisor:state.isCoSuprevisor,
         token: state.token,
         dispatch,
       }}

@@ -36,16 +36,16 @@ const userSchema = new Schema(
     batch:String,
     degree:String,
     specialization:String,
+    haveAGroup:{type: Boolean, default: false},
 
   },
   staff:{
     description:String,
     interestedTopics:[String]
-
   },
+ 
   isverify:{type: Boolean, default: false},
-   
-  
+
 },
 { timestamps: true }
 );

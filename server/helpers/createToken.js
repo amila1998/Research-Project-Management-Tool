@@ -5,10 +5,10 @@ const createToken = {
     return jwt.sign(payload, process.env.ACTIVATION_TOKEN, { expiresIn: "5m" });
   },
   refresh: (payload) => {
-    return jwt.sign(payload, process.env.REFRESH_TOKEN, { expiresIn: "35s" });
+    return jwt.sign(payload, process.env.REFRESH_TOKEN, { expiresIn: "2h" });
   },
   access: (payload) => {
-    return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "35s" });
+    return jwt.sign(payload, process.env.ACCESS_TOKEN, { expiresIn: "2h" });
   },
 };
 

@@ -27,12 +27,15 @@
       font-size: 1.1rem;
       margin-left: 10px;
     }
+  
   }
+
   button:hover {
     transition: all 0.3s ease;
     box-shadow: none;
     background: linear-gradient(to left, $orange, $gray-dark);
   }
+
   .btn-alt {
     background: linear-gradient(to left, $orange, $gray-dark);
   }

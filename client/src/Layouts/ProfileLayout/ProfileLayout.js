@@ -3,17 +3,20 @@ import "./profilelayout.scss";
 import { useContext } from "react";
 import {AuthContext} from "../../context/AuthContext";
 import { useNavigate } from 'react-router-dom';
+import Profile from '../../components/Profile/Profile';
+import unverify from "../../assets/img/unverify.png"
+import verify from "../../assets/img/verify.png"
 
 
 
 const ProfileLayout = () => {
   const navigate = useNavigate();
-const {dispatch} =  useContext(AuthContext);
+const {user, dispatch} =  useContext(AuthContext);
 
 const logoutHadleClick =  async (e) =>{
   e.preventDefault();
   try {
-    await axios.get("http://localhost:8000/api/auth/signout")
+    await axios.get("/api/auth/signout")
     localStorage.removeItem("_appSignging")
     sessionStorage.clear();
     dispatch({type:"SIGNOUT"})
@@ -23,10 +26,21 @@ const logoutHadleClick =  async (e) =>{
   }
 }
 
+
   return (
     <div className="profilelayout">
-      <p>ProfileLayout</p><br/>
-      <button  onClick={() => navigate('/updateProfile')}>update</button> <button onClick={logoutHadleClick}>Logout</button>
+      <h1>Profile{user.isverify?<><img type="button" src={verify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
+</>:<>
+<img type="button" src={unverify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
+</>}</h1><br/>
+      <Profile/>
+      <div className='row'>
+        <div className='col'><div className="login_btn"><button  onClick={() => navigate('/updateProfile')}>update</button> </div></div>
+        <div className='col'><div className="logout_btn"><button onClick={logoutHadleClick}>Logout</button></div></div>
+      </div>
+      
+      
+      
     </div>
   );
 };

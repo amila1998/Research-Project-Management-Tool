@@ -1,11 +1,12 @@
 @import "../../components/variables/variables.scss";
 
 .profile {
-  background-color: rgba($color: $purple-light, $alpha: 0.8);
+ // background-color: rgba($color: $purple-light, $alpha: 0.8);
   border-radius: 5px;
   padding: 2em;
   width: 100%;
   margin: 0 0 2em 0;
+  overflow: hidden;
 }
 .profile_avatar-wrapper {
   position: relative;

@@ -8,13 +8,13 @@ const { google } = require("googleapis");
 const { OAuth2 } = google.auth;
 
 const userController = {
-  register: async (req,role, res) => {
+  register: async (req, res) => {
     try {
       // get info
-      const { name, email, gender, password, username, faculty, degree, specialization , batch , description, interestedTopics} = req.body;
+      const { name, email, gender, password, username, faculty, degree, specialization, role, batch , description, interestedTopics} = req.body;
 
       // check fields
-      if (!name || !email || !password ||!username)
+      if (!name || !email || !password ||!username ||!gender ||!role)
         return res.status(400).json({ message: "Please fill in all fields." });
 
       // check email
@@ -46,7 +46,7 @@ const userController = {
            
 
       // send email
-       const url = `http://localhost:3000/api/auth/activate/${activation_token}`;
+       const url = `http://localhost:3000/auth/activate/${activation_token}`;
        sendMail.sendEmailRegister(email, url, "Verify your email");
 
 
@@ -59,58 +59,58 @@ const userController = {
       success: false });
    }
   },
-  panalMemberRegister: async (req, role, res) => {
-    try {
-      // get info
-      const { name, email, password, username } = req.body;
+  // panalMemberRegister: async (req, role, res) => {
+  //   try {
+  //     // get info
+  //     const { name, email, password, username } = req.body;
 
-      // check fields
-      if (!name || !email || !password ||!username)
-        return res.status(400).json({ message: "Please fill in all fields." });
+  //     // check fields
+  //     if (!name || !email || !password ||!username)
+  //       return res.status(400).json({ message: "Please fill in all fields." });
 
-      // check email
-      if (!validateEmail(email))
-        return res
-          .status(400)
-          .json({ message: "Please enter a valid email address." });
+  //     // check email
+  //     if (!validateEmail(email))
+  //       return res
+  //         .status(400)
+  //         .json({ message: "Please enter a valid email address." });
 
-      // check user
-      const user = await User.findOne({ email });
-      if (user)
-        return res
-          .status(400)
-          .json({ message: "This email is already registered in our system." });
+  //     // check user
+  //     const user = await User.findOne({ email });
+  //     if (user)
+  //       return res
+  //         .status(400)
+  //         .json({ message: "This email is already registered in our system." });
 
-      // check password
-      if (password.length < 6)
-        return res
-          .status(400)
-          .json({ message: "Password must be at least 6 characters." });
+  //     // check password
+  //     if (password.length < 6)
+  //       return res
+  //         .status(400)
+  //         .json({ message: "Password must be at least 6 characters." });
 
-      // hash password
-      const salt = await bcrypt.genSalt();
-      const hashPassword = await bcrypt.hash(password, salt);
+  //     // hash password
+  //     const salt = await bcrypt.genSalt();
+  //     const hashPassword = await bcrypt.hash(password, salt);
 
       
-      const newUser = new User ({ name, email, password: hashPassword, role , username}) ;
-      await newUser.save();
+  //     const newUser = new User ({ name, email, password: hashPassword, role , username}) ;
+  //     await newUser.save();
            
 
-      // send email
-      //  const url = `http://localhost:5000/api/auth/activate/${activation_token}`;
-      //  sendMail.sendEmailRegister(email, url, "Verify your email");
+  //     // send email
+  //     //  const url = `http://localhost:5000/api/auth/activate/${activation_token}`;
+  //     //  sendMail.sendEmailRegister(email, url, "Verify your email");
 
 
-    res.status(200).json({ 
-      message: "Welcome! Please check your email.",
-      success: true,  
-    });
-     } catch (err) {
-     res.status(500).json({
-      message: err.message,
-      success: false });
-   }
-  },
+  //   res.status(200).json({ 
+  //     message: "Welcome! Please check your email.",
+  //     success: true,  
+  //   });
+  //    } catch (err) {
+  //    res.status(500).json({
+  //     message: err.message,
+  //     success: false });
+  //  }
+  // },
   activate: async (req, res) => {
     try {
       // get token
@@ -126,7 +126,7 @@ const userController = {
         return res
           .status(400)
           .json({
-             message: "This email is already registered.",
+             msg: "This email is already registered.",
              success: false
          });
 
@@ -174,13 +174,13 @@ const userController = {
       res
         .status(200)
         .json({ 
-          message: "Your account has been activated, you can now sign in.",
+          msg: "Your account has been activated, you can now sign in.",
           success: true
         
         });
     } catch (err) {
       res.status(500).json({ 
-        message: err.message ,
+        msg: err.message ,
         success: false
     });
     }
@@ -208,11 +208,11 @@ const userController = {
         httpOnly: true,
         path: "/",
         sameSite:"lax",
-        expires: new Date(Date.now()+1000*30), //30 seconds
+        expires: new Date(Date.now()+1000*60*60), //1h
       });
 
       // signing success
-      res.status(200).json({ msg: "Signing success" });
+      res.status(200).json({ msg: "Signing success"});
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }
@@ -237,7 +237,7 @@ const userController = {
           httpOnly: true,
           path: "/",
           sameSite:"lax",
-          expires: new Date(Date.now()+1000*30), //30 seconds
+          expires: new Date(Date.now()+1000*60*60), //1h
         });
         
         // access success

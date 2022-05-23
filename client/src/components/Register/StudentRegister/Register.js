@@ -93,7 +93,7 @@ const Register = () => {
      
     try {
       setisLoading(true);
-      const res = await axios.post("http://localhost:8000/register-student", {
+      const res = await axios.post("/api/register-student", {
         name,
         email,
         password,
@@ -102,9 +102,11 @@ const Register = () => {
         faculty,
         degree,
         specialization,
-        batch
+        batch,
+        role:"student"
       });
       setisLoading(false);
+      window.location.href = "/";
   
       toast.success(res.data.msg, {
         position: "top-right",
