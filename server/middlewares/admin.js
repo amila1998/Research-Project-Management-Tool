@@ -1,28 +1,23 @@
 const jwt = require("jsonwebtoken");
+const User = require("../models/userModel");
 
 
-const admin = (req, res, next) => {
-    const ad = "admin";
+const admin = async(req, res, next) => {
+    
     try {
-      // check ac token
-      const token = req.header("Authorization");
-      if (!token) return res.status(400).json({ 
-          msg: "Authentication failed." 
+     
+      const user = await User.findById(req.user.id);
+      if (!user) return res.status(400).json({ 
+          msg: "User Not Found." 
       });
-  
-      // validate
-      jwt.verify(token, process.env.ACCESS_TOKEN, (err, user) => {
-        if (err) return res.status(400).json({ 
-            msg: "Authentication failed." 
-          });
-          
-        // success
-        
-        if (user.role != ad) return res.status(400).json({ 
-            msg: "Admin Authentication failed." 
-          });
+
+      if(user.role!='admin') return res.status(400).json({ 
+        msg: "Admin Authentication Failed !!." 
+    });
+
+
         next();
-      });
+    
     } catch (err) {
       res.status(500).json({ 
           msg: err.message 

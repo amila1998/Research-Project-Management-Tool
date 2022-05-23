@@ -329,6 +329,36 @@ const userController = {
       res.status(500).json({ msg: err.message });
     }
   },
+  getAllUsers: async(req,res)=>{
+    const query={};
+    const sort={};
+
+   if(req.query.keyword){
+    query.$or=[
+      {"username":{$regex:req.query.keyword,$options:'i'}},
+      {"email":{$regex:req.query.keyword,$options:'i'}}
+    ];
+   }
+   if(req.query.isVerify){
+    query.isverify=req.query.isVerify;
+   }
+   if(req.query.createdAt){
+    const str = req.query.createdAt.split('=')
+    sort[str[0]] = str[1] === 'createdAt' ? -1:1
+}
+
+   
+    try {
+ console.log(sort);
+      const users =await User.find(query)
+      .select("-password")
+      .sort(sort);
+      
+      res.status(200).json({users});
+       } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  }
  
 };
 

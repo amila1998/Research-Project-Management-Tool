@@ -126,7 +126,7 @@ function App() {
                   <Route
                     path="/profile"
                     element={isLoggedIn?<ProfileLayout/>:<Navigate to={"/"}/>}
-                  />
+                  /> 
          
               </Routes>
             
