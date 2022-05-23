@@ -55,7 +55,7 @@ const UserManagement = () => {
                     <option value='' selected>All Users</option>
                     <option value='admin'>Admin</option>
                     <option value='supervisor'>Supervisor</option>
-                    <option value='cosupervisor'>Co Supervisor</option>
+                    <option value='coSupervisor'>Co Supervisor</option>
                     <option value='student'>Student</option>
                  
                     

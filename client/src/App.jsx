@@ -23,9 +23,9 @@ axios.defaults.withCredentials = true;
 
 let fRender = true;
 function App() {
-  const { dispatch, isLoggedIn,isAdmin,isCoSuprevisor,isPanelMember,isSupervisor } = useContext(AuthContext);
+  const { dispatch, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
 
- //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSuprevisor,isPanelMember,isSupervisor);
+ //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSupervisor,isPanelMember,isSupervisor);
  
    // get user data
   useEffect(() => {
@@ -102,7 +102,7 @@ function App() {
                   element={
                     isLoggedIn?
                       isAdmin?<AdminDashboard/>:
-                      isPanelMember||isSupervisor||isCoSuprevisor?<StaffDashBoard/>:<StudentDashboard/>
+                      isPanelMember||isSupervisor||isCoSupervisor?<StaffDashBoard/>:<StudentDashboard/>
                       :<AuthLayout/>}
                 />
 
