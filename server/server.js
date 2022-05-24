@@ -32,6 +32,9 @@ app.use(groupRoutes);
 const uploadRoutes = require("./routes/uploadRoutes");
 app.use(uploadRoutes);
 
+const fileUploadRoutes = require("./routes/fileUploadRouter");
+app.use(fileUploadRoutes);
+
 
 
 const startApp = async () => {
