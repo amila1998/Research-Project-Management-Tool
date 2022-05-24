@@ -265,6 +265,9 @@ const Register = () => {
     if (e.target.value === "panelMember") {
       setPanelMember(true);
     }
+    else{
+      setPanelMember(false);
+    }
   }
   function handleGenderChange(e) {
     setStaff({ ...staff, gender: e.target.value });
