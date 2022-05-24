@@ -32,8 +32,8 @@ app.use(groupRoutes);
 const uploadRoutes = require("./routes/uploadRoutes");
 app.use(uploadRoutes);
 
-const fileUploadRoutes = require("./routes/fileUploadRouter");
-app.use(fileUploadRoutes);
+const templateUploadRoutes = require("./routes/templateUploadRouter");
+app.use(templateUploadRoutes);
 
 
 

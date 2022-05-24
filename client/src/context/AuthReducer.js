@@ -48,6 +48,7 @@ const AuthReducer = (state, action) => {
           isPanelMember:false,
           isSupervisor:false,
           isCoSupervisor:false,
+          isAdmin: false,
           token: "",
           user: [],
         };
