@@ -14,6 +14,7 @@ import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
 import UserManagement from "../../components/Admin/UserManagement/UserManagement";
+import UploadTemplates from "../../components/Admin/UploadTemplates/UploadTemplates";
 
 
 
@@ -138,7 +139,7 @@ const history = useNavigate()
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {userManagement&&<UserManagement/>}
-           
+          {uploadtemplates&&<UploadTemplates/>}
            </div>
        </div>
       

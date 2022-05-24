@@ -26,9 +26,10 @@ router.post("/api/fileupload",upload.single("myFile"),async(req,res)=>{
             file.path,
             {
             folder: "templates",
-            resourse_type:"auto",
+            resource_type: "auto"
             },
             (err, result) => {
+            
             if (err) throw err;
             fs.unlinkSync(file.path);
             res.status(200).json({
@@ -37,7 +38,8 @@ router.post("/api/fileupload",upload.single("myFile"),async(req,res)=>{
                 bytes: result.bytes,
                 format:result.format,
                 name:file.originalname
-            });
+            }
+            );
             }
         );
 
