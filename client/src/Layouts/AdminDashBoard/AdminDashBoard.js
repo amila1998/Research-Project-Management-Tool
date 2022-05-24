@@ -107,7 +107,7 @@ const history = useNavigate()
           }
            <hr></hr>
           
-             <div onClick={logoutHadleClick} className={'nav1logout'}>
+          <div onClick={logoutHadleClick} className={'nav1logout'}>
           <div className={"navIconlogout"}><BiLogOutCircle/></div>
           <div className={'navTextlogout'}>LOGOUT</div>
           </div>
