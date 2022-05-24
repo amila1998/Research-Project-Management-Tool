@@ -16,7 +16,7 @@ import Profile from "../../components/Profile/Profile";
 import UserManagement from "../../components/Admin/UserManagement/UserManagement";
 
 const StaffDashBoard = () => {
-  const {dispatch, user, isLoggedIn,isAdmin,isCoSuprevisor,isPanelMember,isSupervisor } = useContext(AuthContext);
+  const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
   const [dashboard, setDashboard] = useState(true);
   const [profile, setProfile] = useState(false);
   const [updateprofile, setUpdateProfile] = useState(false);
@@ -129,10 +129,10 @@ const StaffDashBoard = () => {
     
     );
     
-  }else if(isCoSuprevisor){
+  }else if(isCoSupervisor){
     return(
       <>
-      <h1>isCoSuprevisor</h1>
+      <h1>isCoSupervisor</h1>
       </>
     );
   }
