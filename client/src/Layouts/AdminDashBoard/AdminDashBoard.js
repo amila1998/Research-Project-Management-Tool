@@ -9,7 +9,7 @@ import { AiFillHome,AiFillCaretDown,AiFillCaretRight } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-import { MdSupervisedUserCircle } from "react-icons/md";
+import { MdSupervisedUserCircle,MdDriveFolderUpload } from "react-icons/md";
 import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
@@ -26,6 +26,7 @@ const AdminDashboard = () => {
   const [profile, setProfile] = useState(false);
   const [updateprofile, setUpdateProfile] = useState(false);
   const [userManagement, setUserManagement] = useState(false);
+  const [uploadtemplates, setUploadTemplates] = useState(false);
 
 const history = useNavigate()
   const handleDashboard = () => {
@@ -33,6 +34,7 @@ const history = useNavigate()
     setProfile(false);
     setUpdateProfile(false);
     setUserManagement(false);
+    setUploadTemplates(false);
     history('/')
   };
 
@@ -41,11 +43,13 @@ const history = useNavigate()
     setProfile(true);
     setUpdateProfile(false);
     setUserManagement(false);
+    setUploadTemplates(false);
   }
   const handleUpdateProfile = () => {
     setDashboard(false);
     setProfile(profile);
     setUserManagement(false);
+    setUploadTemplates(false);
     setUpdateProfile(!updateprofile);
   }
 
@@ -54,6 +58,15 @@ const history = useNavigate()
     setProfile(false);
     setUserManagement(true);
     setUpdateProfile(false);
+    setUploadTemplates(false);
+  }
+
+  const handleUploadTemplates = () => {
+    setDashboard(false);
+    setProfile(false);
+    setUserManagement(false);
+    setUpdateProfile(false);
+    setUploadTemplates(true);
   }
 
   const logoutHadleClick =  async (e) =>{
@@ -84,6 +97,10 @@ const history = useNavigate()
           <div onClick={handleUserManagement} className={userManagement?'nav1Select':'nav1'}>
           <div className={userManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
           <div className={userManagement?'navTextSelect':'navText'}>USER MANAGEMENT</div>
+          </div>
+          <div onClick={handleUploadTemplates} className={uploadtemplates?'nav1Select':'nav1'}>
+          <div className={uploadtemplates?"navIconSelect":"navIcon"}><MdDriveFolderUpload/></div>
+          <div className={uploadtemplates?'navTextSelect':'navText'}>UPLOAD TEMPLATES</div>
           </div>
 
 
