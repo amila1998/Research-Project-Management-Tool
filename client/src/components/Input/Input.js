@@ -1,4 +1,4 @@
-import "./input.css";
+import "./input.scss";
 
 const Input = ({
   icon,

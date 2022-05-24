@@ -6,26 +6,34 @@ const { connect } = require("mongoose");
 const { success, error } = require("consola");
 
 
-const userRoutes = require("./routes/users");
+
 
 // Bring in the app constants
-const { DB, PORT } = require("./config");
+const { DB, PORT,ORIGING_URL } = require("./config");
 
 // Initialize the application
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  credentials:true,
+  origin:true,
+}));
 app.use(express.json());
 express.urlencoded({ extended: true });
 app.use(cookieParser());
 
+const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
-app.get('/' , (req , res)=>{
 
-   res.send('hello from simple server :)')
+const groupRoutes = require("./routes/groupRoutes");
+app.use(groupRoutes);
 
-})
+const uploadRoutes = require("./routes/uploadRoutes");
+app.use(uploadRoutes);
+
+const templateUploadRoutes = require("./routes/templateUploadRouter");
+app.use(templateUploadRoutes);
 
 
 

@@ -1,7 +1,12 @@
-import React from "react";
-import "./header.css"
+import Avatar from "../Avatar/Avatar";
+import React, { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import "./header.scss"
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
+  const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
   return (
     <>
       {/* Header */}
@@ -13,11 +18,20 @@ export default function Header() {
       Research Project Management Tool
     </a>
 
-    <a className="navbar-brand" href="#"></a><br/>
+    <a className="navbar-brand" href="/"></a><br/>
     
       <form className="d-flex">
-        <a className="nav-link active" aria-current="page" href="#">Name</a>
-        <img src={require("../../assets/img/Default_Avatar.png")} className="rounded"  width="40" height="40" alt="..."></img>
+        {!user.name?<>
+        
+        <button>Login</button>
+        
+        </>:<>
+        
+        <h3 className="nav-link active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>
+        <Avatar />
+        
+        </>}
+    
       </form>
     </div>
  

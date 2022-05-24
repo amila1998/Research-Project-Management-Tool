@@ -1,6 +1,63 @@
 @import "../../components/variables/variables.scss";
 
 .profilelayout {
-  background: $gray-dark;
+  height: 100%;
+  width: 100%;
+  //max-width: 600px;
+  background: rgba(255, 255,255, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: auto;
+  
+  padding: 20px 20px 20px 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.verfybatch{
+  width: 60px;
+  height: 50px;
+}
+
+.logout_btn {
+  display: flex;
+  flex-direction: column;
+ 
+  button {
+    margin: auto;
+    padding: 1.2em;
+    border-radius: 5px;
+    border: none;
+    width: 75%;
+    text-transform: uppercase;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+    color: #fff;
+    cursor: pointer;
+    outline: none;
+    background: linear-gradient(to right, $red, $gray-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    svg {
+      font-size: 1.1rem;
+      margin-left: 10px;
+    }
+  
+  }
+
+  button:hover {
+    transition: all 0.3s ease;
+    box-shadow: none;
+    background: linear-gradient(to left, $red, $gray-dark);
+  }
+
+  .btn-alt {
+    background: linear-gradient(to left, $red, $gray-dark);
+  }
+  .btn-alt:hover {
+    transition: all 0.3s ease;
+    box-shadow: none;
+    background: linear-gradient(to right, $red, $gray-dark);
+  }
 }
