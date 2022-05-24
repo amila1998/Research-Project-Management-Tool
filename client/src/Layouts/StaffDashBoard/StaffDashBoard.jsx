@@ -139,7 +139,58 @@ const StaffDashBoard = () => {
   else if(isPanelMember){
     return(
       <>
-      <h1>isPanelMember</h1>
+      {/* <h1>isPanelMember</h1> */}
+      <div className="dashboard">
+           
+           <div className="left">
+         
+          <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
+          <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
+          <div className={dashboard?'navTextSelect':'navText'}>PANEL MEMBER DASHBOARD</div>
+          </div>
+          <div onClick={handleUserManagement} className={userManagement?'nav1Select':'nav1'}>
+          <div className={userManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
+          <div className={userManagement?'navTextSelect':'navText'}>USER MANAGEMENT</div>
+          </div>
+
+
+
+
+          <hr></hr>
+         
+          <div onClick={handleProfile} className={profile?'nav1Select':'nav1'}>
+          <div className={profile?"navIconSelect":"navIcon"}><CgProfile/></div>
+          <div className={profile?'navTextSelect':'navText'}>PROFILE</div>
+          <div className={profile?'downSelect':'down'}>{profile?<AiFillCaretDown/>:<AiFillCaretRight/>}</div>
+          </div>
+          {
+            profile&&<>
+          <div onClick={handleUpdateProfile} className={updateprofile?'subnav1Select':'subnav1'}>
+          <div className={updateprofile?"navIconSelect":"navIcon"}><FaUserEdit/></div>
+          <div className={updateprofile?'navTextSelect':'navText'}>UPDATE PROFILE</div>
+          </div>
+            
+            </>
+          }
+           <hr></hr>
+          
+          <div onClick={logoutHadleClick} className={'nav1logout'}>
+          <div className={"navIconlogout"}><BiLogOutCircle/></div>
+          <div className={'navTextlogout'}>LOGOUT</div>
+          </div>
+   
+          
+            
+       
+     </div>
+    
+           <div className="right">
+          {dashboard&&<DashBoard/>}
+          {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
+          {userManagement&&<UserManagement/>}
+           
+           </div>
+       </div>
       </>
     );
   }else{
