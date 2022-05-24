@@ -55,8 +55,8 @@ const UploadTemplates = () => {
         <ToastContainer/>
       <div>
         <div {...getRootProps()}>
-            <input {...getInputProps} />
-            <p>Drag and Drop File</p>
+            <input {...getInputProps}  placeholder={file? file.name:"Drag & Drop your file"}/>
+          
 
         </div>
         {
