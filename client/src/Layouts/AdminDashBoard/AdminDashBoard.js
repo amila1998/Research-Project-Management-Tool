@@ -122,7 +122,7 @@ const history = useNavigate()
           </div>
           <div onClick={handleUploadTemplates} className={uploadtemplates?'nav1Select':'nav1'}>
           <div className={uploadtemplates?"navIconSelect":"navIcon"}><MdDriveFolderUpload/></div>
-          <div className={uploadtemplates?'navTextSelect':'navText'}>UPLOAD TEMPLATES</div>
+          <div className={uploadtemplates?'navTextSelect':'navText'}>TEMPLATES MANAGEMENT</div>
           </div>
 
 

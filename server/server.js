@@ -35,6 +35,9 @@ app.use(uploadRoutes);
 const templateUploadRoutes = require("./routes/templateUploadRouter");
 app.use(templateUploadRoutes);
 
+const templateRoutes = require("./routes/templateRouter");
+app.use(templateRoutes);
+
 
 
 const startApp = async () => {

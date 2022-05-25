@@ -4,8 +4,8 @@ const validateEmail = require("../helpers/validateEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-const { google } = require("googleapis");
-const { OAuth2 } = google.auth;
+
+
 
 const userController = {
   register: async (req, res) => {

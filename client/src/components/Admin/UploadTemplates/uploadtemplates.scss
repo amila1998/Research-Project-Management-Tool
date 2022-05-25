@@ -1,0 +1,50 @@
+
+.tempbody{
+    margin: auto;
+    align-items: center;
+    display:flex;
+    justify-content: space-between;
+}
+.tempLeft{
+    width: 45%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+}
+.tempRight{
+    width: 45%;
+}
+.tempupload{
+    padding: 10px;
+    border-style: dotted;
+}
+.tempupload:hover{
+    border-color: rgb(0, 190, 248);
+}
+.tempupload input{
+    padding: 10px;
+    width: 100%;
+    cursor: copy;
+    border: none;
+
+}
+
+.tinput:hover{
+    border-color: rgb(0, 190, 248);
+}
+
+.tinput{
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px; 
+}
+
+.trow{
+    margin-bottom: 5px;
+}
+
+.trow button{
+    justify-content: center;
+    width: 100%;
+}
+
