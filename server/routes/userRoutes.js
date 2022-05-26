@@ -32,6 +32,7 @@ route.get("/api/auth/user", auth, userController.info);
 route.patch("/api/auth/user_update", auth, userController.update);
 route.get("/api/auth/signout", userController.signout);
 route.get("/api/admin/getallUsers",auth,admin, userController.getAllUsers);
+route.patch("/api/admin/verifyUsers/:id",auth,admin, userController.verify);
 
 
 
