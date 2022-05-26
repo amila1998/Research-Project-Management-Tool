@@ -375,6 +375,20 @@ const userController = {
        } catch (error) {
       res.status(500).json({ msg: error.message });
     }
+  },
+  delete: async (req, res) => {
+    try {
+      await User.findOneAndDelete(req.params.id)
+      res.status(200).json({
+        msg: "Delete Successful!",
+        success: true
+      })
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+        success: false
+      });
+    }
   }
  
 };

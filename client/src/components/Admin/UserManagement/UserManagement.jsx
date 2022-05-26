@@ -37,12 +37,12 @@ const UserManagement = () => {
           { withCredentials: true }
         );
         setCallback(true);
-        return toast(res.data.msg, {
+        return toast.success(res.data.msg, {
           className: "toast-success",
           bodyClassName: "toast-success",
         });
       } catch (err) {
-        toast(err.response.data.msg, {
+        toast.error(err.response.data.msg, {
           className: "toast-failed",
           bodyClassName: "toast-failed",
         });
@@ -57,12 +57,12 @@ const UserManagement = () => {
           { withCredentials: true }
         );
         setCallback(true);
-        return toast(res.data.msg, {
+        return toast.success(res.data.msg, {
           className: "toast-success",
           bodyClassName: "toast-success",
         });
       } catch (err) {
-        toast(err.response.data.msg, {
+        toast.error(err.response.data.msg, {
           className: "toast-failed",
           bodyClassName: "toast-failed",
         });
@@ -70,7 +70,30 @@ const UserManagement = () => {
     };
 
     const handleDelete = async (id) => {
-      setCallback(true);
+      try {
+        const res = await axios.post(`/api/admin/deleteUser/${id}`,{ withCredentials: true });
+        setCallback(true);
+        toast.success(res.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      } catch (error) {
+        console.log(error);
+        toast.error(error.response.data.message, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     };
     
   
