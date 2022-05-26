@@ -15,6 +15,29 @@ const UploadTemplates = () => {
     const [data,setData]=useState({
       title:"",description:""
     });
+    const [templates,setTemplates]=useState([]);
+    const [callback,setCallback]=useState(true);
+    const [tempID,setTempID]=useState("");
+    const [fileName, setFileName]=useState("");
+    
+
+    useEffect(() => {
+      const getTemplates=async()=>{
+        try {
+         if(callback){
+          const res = await axios.get('/api/template/getAll');
+          console.log(res);
+          setCallback(false);
+          setTemplates(res.data.templates);
+         }       
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      getTemplates();
+    }, [callback])
+    console.log(callback);
+    
 
     const onDrop = useCallback((acceptedFiles)=>{
         //console.log(acceptedFiles);
@@ -27,6 +50,24 @@ const UploadTemplates = () => {
         multiple:false,
     
     });
+
+    const updateHandler = (id)=>{
+      
+      setOnEdite(true)
+      templates.forEach(temp => {
+        
+       if(temp._id===id){
+         //console.log(temp);
+          setTempID(temp._id)
+          setfileURL(temp.url);
+          setData({...data, title:temp.title,description:temp.description})
+          setFileName(temp.filename)
+       }
+        
+      
+    })
+    }
+    
 
   useEffect(() => {
     if (file?.name) {
@@ -56,14 +97,14 @@ const UploadTemplates = () => {
               draggable: true,
               progress: undefined,
             });
+            setFileName(file.name)
             setfileURL(uploadRes.data.url);
         } catch (error) {
           console.log(error);
           setfileURL(null)
         }
     }
-    handleUpload();
-      
+    handleUpload(); 
     }
   }, [file])
   
@@ -75,8 +116,70 @@ const handleChange = (e) => {
 
 
 const addTemplate = async()=>{
+  if (!onEdit) {
+    try {
+      const res = await axios.post("/api/template/add",{title:data.title,description:data.description,url:fileURL,filename:file.name});
+      toast.success(res.data.msg ,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setCallback(true);
+      setData({title:"",description:''});
+      setfileURL('');
+      setFile(null);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message ,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  } else {
+    try {
+      const res = await axios.post(`/api/template/update/${tempID}`,{title:data.title,description:data.description,url:fileURL,filename:fileName});
+      toast.success(res.data.msg ,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setData({title:"",description:''});
+      setfileURL('');
+      setFile(null);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message ,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });  
+    }
+    setCallback(true);
+    setOnEdite(false);
+  }
+}
+
+
+const deleteHandler=async(id)=>{
   try {
-    const res = await axios.post("/api/template/add",{title:data.title,description:data.description,url:fileURL});
+    const res = await axios.post(`/api/template/delete/${id}`);
     toast.success(res.data.msg ,{
       position: "top-right",
       autoClose: 5000,
@@ -86,24 +189,20 @@ const addTemplate = async()=>{
       draggable: true,
       progress: undefined,
     });
-    setData({title:"",description:''});
-    setfileURL('');
-    setFile(null);
+    
   } catch (error) {
     console.log(error);
-    toast.error(error.response.data.message ,{
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-    });
-    
-    
-  }
-
+      toast.error(error.response.data.message ,{
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });  
+    }
+    setCallback(true);
 }
 
     
@@ -122,7 +221,7 @@ const addTemplate = async()=>{
             <input  {...getInputProps}  placeholder={file? file.name:"Drag & Drop your file"}/>
           </div>
           {
-              fileURL?<><a href={fileURL}>{file?.name}</a></>:<></>
+              fileURL?<><a href={fileURL}>Uploaded File</a></>:<></>
           }
         </div>
         <br/>
@@ -150,12 +249,47 @@ const addTemplate = async()=>{
         </div>
       
     
-        <div className='trow'>
+        <div className='trow t_btn'>
         <button className='' onClick={addTemplate}>{onEdit?"Update":"Submit"}</button>
         </div>
       
         </div>
-        <div className='tempRightt'></div>
+        <div className='tempmid'>
+        <div className="vl"></div></div>
+        <div className='tempRightt'>
+        <h4>You have {templates.length} Têmplates</h4>
+
+<table>
+    <thead>
+        <tr>
+            <th>Template ID</th>
+            <th>Date of Created</th>
+            <th>Title</th>
+            <th>Format</th>
+            <th>Description</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {
+            templates.map(items => (
+                <tr key={items._id}>
+                    <td>{items._id}</td>
+                    <td>{new Date(items.createdAt).toLocaleDateString()}</td>
+                    <td><a href={items.url}>{items.title}</a></td>
+                    <td>{items.filename.split(".")[1]}</td>
+                    <td>{items.description}</td>
+                    <td><button onClick={()=>updateHandler(items._id)} className='btn btn-outline-warning'>Update</button></td>
+                    <td><button onClick={()=>deleteHandler(items._id)} className='btn btn-outline-danger'>Delete</button></td>
+                </tr>
+            ))
+        }
+    </tbody>
+</table>
+
+
+        </div>
         
     </div>
 
