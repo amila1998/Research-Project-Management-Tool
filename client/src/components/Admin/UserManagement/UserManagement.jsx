@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ViewUserDetails from '../../utils/AdminViewUser/ViewUserDetails';
+import Loading from '../../Loading/Loading'
 
 
 
@@ -17,6 +18,7 @@ const UserManagement = () => {
     const [sort,setSort]=useState("");
     const [role,setRole]=useState("");
     const [users,setUsers]=useState([]);
+    const [loading,setLoading]=useState(false);
 
     
     
@@ -97,6 +99,7 @@ const UserManagement = () => {
                         <th></th>
                     </tr>
                 </thead>
+                {loading?<Loading/>:<>
                 <tbody>
                     {
                         users.map(items => (
@@ -115,6 +118,9 @@ const UserManagement = () => {
                         ))
                     }
                 </tbody>
+                
+                </>}
+                
             </table>
             </div>
       </>
