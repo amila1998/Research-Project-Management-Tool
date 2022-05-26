@@ -35,6 +35,8 @@ app.use(uploadRoutes);
 const templateUploadRoutes = require("./routes/templateUploadRouter");
 app.use(templateUploadRoutes);
 
+const StudentSubmssionRoutes = require("./routes/StudentSubmssionRoutes");
+app.use(StudentSubmssionRoutes);
 const templateRoutes = require("./routes/templateRouter");
 app.use(templateRoutes);
 
