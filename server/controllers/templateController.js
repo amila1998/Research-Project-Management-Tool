@@ -4,8 +4,8 @@ const Template = require("../models/templateModel");
 const templateController ={
     addTemplate:async(req,res)=>{
         try {
-            const {title,url,description} = req.body;
-            if (!title||!url||!description) {
+            const {title,url,description,filename} = req.body;
+            if (!title||!url||!description||!filename) {
                 return res.status(400).json({ message: "Please fill in all fields." });
             }
             const exitTemp = await Template.findOne({title}) ;
@@ -14,7 +14,7 @@ const templateController ={
                 
             }
             const newTem = new Template({
-                title,url,description
+                title,url,description,filename
             })
             await newTem.save();  
             res.status(200).json({ 
@@ -40,6 +40,43 @@ const templateController ={
                 msg: error.message ,
                 success: false
             }); 
+        }
+    },
+    updateTemplate:async(req,res)=>{
+        try {
+            const {title,url,description,filename}=req.body;
+            if (!title||!url||!description||!filename) {
+                return res.status(400).json({ message: "Please fill in all fields." });
+            }
+
+            await Template.findByIdAndUpdate({_id:req.params.id},{
+                title,url,description,filename
+            })
+            res.status(200).json({ 
+                msg:"Update Successfull !",
+                success: true
+            }) 
+            
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
+        }
+
+    },
+    deleteTemp:async(req,res)=>{
+        try {
+            await Template.findOneAndDelete(req.params.id)
+            res.status(200).json({ 
+                msg:"Delete Successfull !",
+                success: true
+            }) 
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
         }
     }
 
