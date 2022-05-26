@@ -74,8 +74,7 @@ const groupController ={
   getMutualStudents: async (req, res) => {
     const { degree, faculty } = req.body;
     try {
-      // const users = await User.find({ student: { degree: degree, faculty: faculty } });
-      const users = await User.find({ degree: degree, faculty: faculty  });
+      const users = await User.find({ 'student.degree': degree, 'student.faculty': faculty, 'role': 'student', 'student.haveAGroup': false  });
       res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ msg: error.message });

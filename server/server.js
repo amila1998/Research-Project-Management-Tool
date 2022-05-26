@@ -37,6 +37,9 @@ app.use(templateUploadRoutes);
 
 const StudentSubmssionRoutes = require("./routes/StudentSubmssionRoutes");
 app.use(StudentSubmssionRoutes);
+const templateRoutes = require("./routes/templateRouter");
+app.use(templateRoutes);
+
 
 
 const startApp = async () => {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 
 
@@ -18,13 +18,14 @@ import ProfileUpdate from './components/Profile/ProfileUpdate';
 import StudentDashboard from './Layouts/StudentDashBoard/StudentDashboard';
 import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
 import StaffDashBoard from './Layouts/StaffDashBoard/StaffDashBoard';
+import Loading from './components/Loading/Loading';
 
 axios.defaults.withCredentials = true;
 
 let fRender = true;
 function App() {
   const { dispatch, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
-
+  const [loading,setLoading]=useState(false);
  //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSupervisor,isPanelMember,isSupervisor);
  
    // get user data
@@ -34,6 +35,7 @@ function App() {
       const getUser = async () => {
         
         try {
+          setLoading(true);
           dispatch({ type: "SIGNING" });
           const res = await axios.get("/api/auth/user",{
             withCredentials:true
@@ -50,9 +52,10 @@ function App() {
           }else if (res.data.role=="panelMember") {
             dispatch({ type: "IS_PANEL_MEMBER" });
           };
-          
+          setLoading(false);
         } catch (error) {
           console.log(error);
+          setLoading(false);
           try {
             await axios.get("/api/auth/signout")
             localStorage.removeItem("_appSignging")
@@ -89,6 +92,7 @@ function App() {
   return (
     <div className='body'>
       <React.Fragment>
+        {loading?<><Loading/></>:
         <Router>
           <header><Header/></header>
             
@@ -137,6 +141,7 @@ function App() {
           </footer>
             
           </Router>
+          }
         </React.Fragment>
     </div>
   );
