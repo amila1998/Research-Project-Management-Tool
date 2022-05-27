@@ -10,6 +10,7 @@ import { isEmpty } from "../../helper/validate";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from "../../Loading/Loading";
 import Radio from "@mui/material/Radio";
+import { useNavigate } from "react-router-dom";
 
 const CreateGroup = () => {
   const initialState = {
@@ -28,7 +29,7 @@ const CreateGroup = () => {
   const [group, setGroup] = useState(initialState);
   const { groupName, members } = group;
   const [selectedValue, setSelectedValue] = useState("");
-
+  const history = useNavigate();
   useEffect(() => {
     if (degree !== undefined || faculty !== undefined) {
       getMutualStudents(degree, faculty);
@@ -143,6 +144,7 @@ const CreateGroup = () => {
         draggable: true,
         progress: undefined,
       });
+      history('/');
     } catch (err) {
       console.log("🚀 ~~ handleSubmit ~ err", err);
       setIsLoading(false);

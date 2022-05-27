@@ -22,8 +22,9 @@ const StudentDashboard = () => {
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
     const [groupRegistration, setGroupRegistration] = useState(false);
-    const [uploadTemplates, setUploadTemplates] = useState(false);
-    const [submissionTypeManagement, setSubmissionTypeManagement] = useState(false);
+    const [topicRegistration,setTopicRegistration]=useState(false);
+
+    console.log(user.student?.haveAGroup);
 
 
     const handleDashboard = () => {
@@ -31,8 +32,7 @@ const StudentDashboard = () => {
         setProfile(false);
         setUpdateProfile(false);
         setGroupRegistration(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+
         navigate('/')
     };
 
@@ -41,16 +41,14 @@ const StudentDashboard = () => {
         setProfile(true);
         setUpdateProfile(false);
         setGroupRegistration(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+
     }
     const handleUpdateProfile = () => {
         setDashboard(false);
         setProfile(profile);
         setGroupRegistration(false);
-        setUploadTemplates(false);
         setUpdateProfile(!updateProfile);
-        setSubmissionTypeManagement(false);
+  
     }
 
     const handleGroupRegistration = () => {
@@ -58,28 +56,10 @@ const StudentDashboard = () => {
         setProfile(false);
         setGroupRegistration(true);
         setUpdateProfile(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+
     }
 
-    const handleUploadTemplates = () => {
-        setDashboard(false);
-        setProfile(false);
-        setGroupRegistration(false);
-        setUpdateProfile(false);
-        setUploadTemplates(true);
-        setSubmissionTypeManagement(false);
-    }
-
-    const handleSubmissionTypeManagement = () => {
-        setDashboard(false);
-        setProfile(false);
-        setGroupRegistration(false);
-        setUpdateProfile(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(true);
-    }
-
+    
     const logoutHandleClick = async (e) => {
         e.preventDefault();
         try {
@@ -102,18 +82,13 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
-                    <div onClick={handleGroupRegistration} className={groupRegistration ? 'nav1Select' : 'nav1'}>
+                    <div onClick={()=>{
+                        !user.student?.haveAGroup&&handleGroupRegistration
+                    }} className={user.student?.haveAGroup?'navDone':groupRegistration ? 'nav1Select' : 'nav1'}>
                         <div className={groupRegistration ? "navIconSelect" : "navIcon"}><MdSupervisedUserCircle /></div>
                         <div className={groupRegistration ? 'navTextSelect' : 'navText'}>GROUP REGISTRATION</div>
                     </div>
-                    <div onClick={handleSubmissionTypeManagement} className={submissionTypeManagement ? 'nav1Select' : 'nav1'}>
-                        <div className={submissionTypeManagement ? "navIconSelect" : "navIcon"}><MdDocumentScanner /></div>
-                        <div className={submissionTypeManagement ? 'navTextSelect' : 'navText'}>SUBMISSION TYPE MANAGEMENT</div>
-                    </div>
-                    <div onClick={handleUploadTemplates} className={uploadTemplates ? 'nav1Select' : 'nav1'}>
-                        <div className={uploadTemplates ? "navIconSelect" : "navIcon"}><MdDriveFolderUpload /></div>
-                        <div className={uploadTemplates ? 'navTextSelect' : 'navText'}>TEMPLATES MANAGEMENT</div>
-                    </div>
+                   
 
                     <hr></hr>
 
@@ -128,7 +103,6 @@ const StudentDashboard = () => {
                                 <div className={updateProfile ? "navIconSelect" : "navIcon"}><FaUserEdit /></div>
                                 <div className={updateProfile ? 'navTextSelect' : 'navText'}>UPDATE PROFILE</div>
                             </div>
-
                         </>
                     }
 
