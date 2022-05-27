@@ -15,7 +15,7 @@ export default function Navbar() {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <a className="nav-link active" aria-current="page" href="/">Home</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href="#">Link</a>
@@ -35,10 +35,10 @@ export default function Navbar() {
           <a className="nav-link disabled">Disabled</a>
         </li>
       </ul>
-      <form className="d-flex">
+      {/* <form className="d-flex">
         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
         <button className="btn btn-primary" type="submit">Search</button>
-      </form>
+      </form> */}
     </div>
   </div>
 </nav>

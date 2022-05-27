@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 
 
@@ -23,65 +23,65 @@ axios.defaults.withCredentials = true;
 
 let fRender = true;
 function App() {
-  const { dispatch, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
+  const { dispatch, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
 
- //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSupervisor,isPanelMember,isSupervisor);
- 
-   // get user data
+  //console.log("Log",isLoggedIn,"ad",isAdmin,isCoSupervisor,isPanelMember,isSupervisor);
+
+  // get user data
   useEffect(() => {
     const _appSignging = localStorage.getItem("_appSignging");
     if (_appSignging) {
       const getUser = async () => {
-        
+
         try {
           dispatch({ type: "SIGNING" });
-          const res = await axios.get("/api/auth/user",{
-            withCredentials:true
+          const res = await axios.get("/api/auth/user", {
+            withCredentials: true
           });
           dispatch({ type: "GET_USER", payload: res.data });
           //window.sessionStorage.setItem("_user", res.data.role);
           //console.log(res.data.role);
-          if (res.data.role=="admin") {
+          if (res.data.role == "admin") {
             dispatch({ type: "IS_ADMIN" });
-          }else if (res.data.role=="supervisor") {
+          } else if (res.data.role == "supervisor") {
             dispatch({ type: "IS_SUPERVISOR" });
-          }else if (res.data.role=="coSupervisor") {
+          } else if (res.data.role == "coSupervisor") {
             dispatch({ type: "IS_CO_SUPERVISOR" });
-          }else if (res.data.role=="panelMember") {
+          } else if (res.data.role == "panelMember") {
             dispatch({ type: "IS_PANEL_MEMBER" });
           };
-          
+
         } catch (error) {
           console.log(error);
           try {
             await axios.get("/api/auth/signout")
             localStorage.removeItem("_appSignging")
             sessionStorage.clear();
-            dispatch({type:"SIGNOUT"})
-            
+            dispatch({ type: "SIGNOUT" })
+
           } catch (error) {
             console.log(error);
           }
         }
-       
+
       };
       getUser();
 
-      if(fRender){
-        
+      if (fRender) {
+
         fRender = false;
-        
+
       }
-      if(!fRender){
-        const refreshToken = async ()=>{
-          await axios.post("/api/auth/refresh",{
-            withCredentials:true
+      if (!fRender) {
+        const refreshToken = async () => {
+          await axios.post("/api/auth/refresh", {
+            withCredentials: true
           }).catch(err => console.log(err))
         }
-        let interval = setInterval(()=>{
+        let interval = setInterval(() => {
           refreshToken().then(getUser())
-        },1000*60*55)//55m
-        return ()=>clearInterval(interval)
+        }, 1000 * 60 * 55)//55m
+        return () => clearInterval(interval)
       }
     }
   }, [dispatch, isLoggedIn]);
@@ -90,54 +90,54 @@ function App() {
     <div className='body'>
       <React.Fragment>
         <Router>
-          <header><Header/></header>
-            
-            <Navbar/>
-          
-            <main>
-              
-              <Routes>
+          <header><Header /></header>
+
+          <Navbar />
+
+          <main>
+
+            <Routes>
               <Route
-                  path="/"
-                  element={
-                    isLoggedIn?
-                      isAdmin?<AdminDashboard/>:
-                      isPanelMember||isSupervisor||isCoSupervisor?<StaffDashBoard/>:<StudentDashboard/>
-                      :<AuthLayout/>}
-                />
+                path="/"
+                element={
+                  isLoggedIn ?
+                    isAdmin ? <AdminDashboard /> :
+                      isPanelMember || isSupervisor || isCoSupervisor ? <StaffDashBoard /> : <StudentDashboard />
+                    : <AuthLayout />}
+              />
 
 
-                <Route
-                  path="/auth/reset-password/:token"
-                  element={<ResetLayout/>}
-                />
+              <Route
+                path="/auth/reset-password/:token"
+                element={<ResetLayout />}
+              />
 
-                <Route
-                  path="/auth/activate/:activation_token"
-                  element={<ActivateLayout/>}
-                />
+              <Route
+                path="/auth/activate/:activation_token"
+                element={<ActivateLayout />}
+              />
 
+              
 
-           
-                  <Route
-                    path="/updateProfile"
-                    element={isLoggedIn?<ProfileUpdate/>:<Navigate to={"/"}/>}
-                  />
-                  <Route
-                    path="/profile"
-                    element={isLoggedIn?<ProfileLayout/>:<Navigate to={"/"}/>}
-                  /> 
-         
-              </Routes>
-            
+              <Route
+                path="/updateProfile"
+                element={isLoggedIn ? <ProfileUpdate /> : <Navigate to={"/"} />}
+              />
+              <Route
+                path="/profile"
+                element={isLoggedIn ? <ProfileLayout /> : <Navigate to={"/"} />}
+              />
+
+            </Routes>
+
           </main>
 
           <footer>
-            <Footer/>
+            <Footer />
           </footer>
-            
-          </Router>
-        </React.Fragment>
+
+        </Router>
+      </React.Fragment>
     </div>
   );
 }
