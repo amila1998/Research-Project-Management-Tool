@@ -41,6 +41,8 @@ app.use(StudentSubmssionRoutes);
 const templateRoutes = require("./routes/templateRouter");
 app.use(templateRoutes);
 
+const submssionRouter = require("./routes/submssionRouter");
+app.use(submssionRouter);
 
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
