@@ -1,5 +1,5 @@
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 export const event = axios.create({
     baseURL: "/api/events"
   });
