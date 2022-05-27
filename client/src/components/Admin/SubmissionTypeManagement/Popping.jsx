@@ -30,7 +30,7 @@ const Popping = ({open, handleClose, event, deleteEventApi, renderStatus, rerend
             <Modal.Title className="text-capitalize">{title}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {update?<><UpdateEvent/></>:<>{describe? <p className="lead">{describe}</p>: "No Dsecriptions Yet"}
+            {update?<><UpdateEvent setUpdate={setUpdate}/></>:<>{describe? <p className="lead">{describe}</p>: "No Dsecriptions Yet"}
             <div className="row justify-content-between">
               <p className="col small text-muted text-center pb-0 mb-0">from: {start}</p>
               <p className="col small text-muted text-center pb-0 mb-0">to: {end}</p>

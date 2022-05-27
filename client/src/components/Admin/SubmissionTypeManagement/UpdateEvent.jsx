@@ -18,7 +18,7 @@ const schema = yup.object({
 
 
 
-const UpdateEvent = ({id,updateEventApi, event, error}) => {
+const UpdateEvent = ({setUpdate,updateEventApi, event, error}) => {
     const navigate = useNavigate();
     const [rerender, setRerender] = useState(false);
     const [dbError, setError] = useState(false)
@@ -52,6 +52,7 @@ const UpdateEvent = ({id,updateEventApi, event, error}) => {
       .then(res=> {
         console.log(res);
         setRerender(!rerender);
+        setUpdate(false)
         if(res === "response was successful"){
           navigate("/")
         }
