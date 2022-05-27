@@ -21,10 +21,12 @@
     "express": "^4.17.2",
     "googleapis": "^92.0.0",
     "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.3",
     "mongoose": "^6.1.7",
     "multer": "^1.4.4",
     "nodemailer": "^6.7.2",
     "nodemon": "^2.0.16",
-    "socket.io": "^4.5.1"
+    "socket.io": "^4.5.1",
+    "validator": "^13.7.0"
   }
 }

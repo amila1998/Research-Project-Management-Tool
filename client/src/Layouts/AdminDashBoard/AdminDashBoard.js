@@ -18,9 +18,9 @@ import UserManagement from "../../components/Admin/UserManagement/UserManagement
 import UploadTemplates from "../../components/Admin/UploadTemplates/UploadTemplates";
 import SubmissionTypeManagement from "../../components/Admin/SubmissionTypeManagement/SubmissionTypeManagement";
 
-
-
-
+import {Provider} from "react-redux"
+import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/Redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
 
 const AdminDashboard = () => {
   const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -162,7 +162,15 @@ const history = useNavigate()
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {userManagement&&<UserManagement/>}
           {uploadtemplates&&<UploadTemplates/>}
-          {submissionTypeManagement&&<SubmissionTypeManagement/>}
+          {submissionTypeManagement&&<>
+            <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+            <SubmissionTypeManagement/>
+            </PersistGate> 
+            </Provider>
+            
+          
+          </>}
            </div>
        </div>
       
