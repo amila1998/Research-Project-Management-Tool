@@ -9,7 +9,7 @@ import { AiFillHome,AiFillCaretDown,AiFillCaretRight } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-import { MdSupervisedUserCircle,MdDriveFolderUpload ,MdDocumentScanner} from "react-icons/md";
+import { MdSupervisedUserCircle,MdDriveFolderUpload ,MdDocumentScanner,MdSchema} from "react-icons/md";
 import {  } from "react-icons/gr";
 import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
@@ -18,9 +18,10 @@ import UserManagement from "../../components/Admin/UserManagement/UserManagement
 import UploadTemplates from "../../components/Admin/UploadTemplates/UploadTemplates";
 import SubmissionTypeManagement from "../../components/Admin/SubmissionTypeManagement/SubmissionTypeManagement";
 
-
-
-
+import {Provider} from "react-redux"
+import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/Redux/store';
+import { PersistGate } from 'redux-persist/integration/react'
+import MarkingShemaManagement from "../../components/Admin/MarkingShemaManagement/MarkingShemaManagement";
 
 const AdminDashboard = () => {
   const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -30,6 +31,7 @@ const AdminDashboard = () => {
   const [updateprofile, setUpdateProfile] = useState(false);
   const [userManagement, setUserManagement] = useState(false);
   const [uploadtemplates, setUploadTemplates] = useState(false);
+  const [markingSchema, setMarkingSchema] = useState(false);
   const [submissionTypeManagement, setSubmissionTypeManagement] = useState(false);
 
 const history = useNavigate()
@@ -40,6 +42,7 @@ const history = useNavigate()
     setUserManagement(false);
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
     history('/')
   };
 
@@ -50,6 +53,7 @@ const history = useNavigate()
     setUserManagement(false);
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
   }
   const handleUpdateProfile = () => {
     setDashboard(false);
@@ -58,6 +62,7 @@ const history = useNavigate()
     setUploadTemplates(false);
     setUpdateProfile(!updateprofile);
     setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
   }
 
   const handleUserManagement = () => {
@@ -67,6 +72,7 @@ const history = useNavigate()
     setUpdateProfile(false);
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
   }
 
   const handleUploadTemplates = () => {
@@ -76,6 +82,7 @@ const history = useNavigate()
     setUpdateProfile(false);
     setUploadTemplates(true);
     setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
   }
 
   const handleSubmissionTypeManagement = () => {
@@ -85,6 +92,17 @@ const history = useNavigate()
     setUpdateProfile(false);
     setUploadTemplates(false);
     setSubmissionTypeManagement(true);
+    setMarkingSchema(false);
+  }
+
+  const handleMakingSchemaManagement =()=>{
+    setDashboard(false);
+    setProfile(false);
+    setUserManagement(false);
+    setUpdateProfile(false);
+    setUploadTemplates(false);
+    setSubmissionTypeManagement(false);
+    setMarkingSchema(true);
   }
 
   const logoutHadleClick =  async (e) =>{
@@ -124,6 +142,10 @@ const history = useNavigate()
           <div className={uploadtemplates?"navIconSelect":"navIcon"}><MdDriveFolderUpload/></div>
           <div className={uploadtemplates?'navTextSelect':'navText'}>TEMPLATES MANAGEMENT</div>
           </div>
+          <div onClick={handleMakingSchemaManagement} className={markingSchema?'nav1Select':'nav1'}>
+          <div className={markingSchema?"navIconSelect":"navIcon"}><MdSchema/></div>
+          <div className={markingSchema?'navTextSelect':'navText'}>MARKING SCHEMA MANAGEMENT</div>
+          </div>
 
 
 
@@ -162,7 +184,16 @@ const history = useNavigate()
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {userManagement&&<UserManagement/>}
           {uploadtemplates&&<UploadTemplates/>}
-          {submissionTypeManagement&&<SubmissionTypeManagement/>}
+          {submissionTypeManagement&&<>
+            <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+            <SubmissionTypeManagement/>
+            </PersistGate> 
+            </Provider>
+            
+          
+          </>}
+          {markingSchema&&<MarkingShemaManagement/>}
            </div>
        </div>
       

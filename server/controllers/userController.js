@@ -319,6 +319,19 @@ const userController = {
       res.status(500).json({ msg: err.message });
     }
   },
+  verify: async (req, res) => {
+    try {
+      // get info
+      const { isverify } = req.body;
+
+      // update
+      await User.findOneAndUpdate({ _id: req.params.id }, { isverify:isverify });
+      // success
+      res.status(200).json({ msg: "Verification Update success." });
+    } catch (err) {
+      res.status(500).json({ msg: err.message });
+    }
+  },
   signout: async (req, res) => {
     try {
       // clear cookie

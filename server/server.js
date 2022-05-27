@@ -44,6 +44,8 @@ app.use(templateRoutes);
 const submssionRouter = require("./routes/submssionRouter");
 app.use(submssionRouter);
 
+const eventRoute = require("./routes/submissionTypeRoutes")
+app.use("/api/events", eventRoute)
 
 const startApp = async () => {
     try {
