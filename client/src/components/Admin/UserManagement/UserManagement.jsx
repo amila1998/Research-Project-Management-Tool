@@ -71,7 +71,7 @@ const UserManagement = () => {
 
     const handleDelete = async (id) => {
       try {
-        const res = await axios.post(`/api/admin/deleteUser/${id}`,{ withCredentials: true });
+        const res = await axios.delete(`/api/admin/deleteUser/${id}`,{ withCredentials: true });
         setCallback(true);
         toast.success(res.data.msg, {
           position: "top-right",
@@ -84,7 +84,7 @@ const UserManagement = () => {
         });
       } catch (error) {
         console.log(error);
-        toast.error(error.response.data.message, {
+        toast.error(error.response.data.msg, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
