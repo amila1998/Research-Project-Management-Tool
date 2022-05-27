@@ -1,14 +1,14 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
 import Select from "react-select";
 import InputLabel from "@mui/material/InputLabel";
 import "./group.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { isEmpty } from "../helper/validate";
+import { isEmpty } from "../../helper/validate";
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "../Loading/Loading";
+import Loading from "../../Loading/Loading";
 import Radio from "@mui/material/Radio";
 
 const CreateGroup = () => {
