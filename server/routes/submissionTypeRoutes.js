@@ -1,9 +1,10 @@
 const router = require("express").Router();
 const SubmissionType = require("../models/submissionType");
 const handleError = require("../helpers/submissionTypeErrors")
+const auth = require("../middlewares/auth");
+const admin = require("../middlewares/admin");
 
-
-router.get("/", async(req, res)=>{
+router.get("/", auth, admin, async(req, res)=>{
 
     const events = await SubmissionType.find({});
  
@@ -17,7 +18,7 @@ router.get("/", async(req, res)=>{
     }
 });
 
-router.get("/:id/show", async(req, res)=>{
+router.get("/:id/show",auth, admin, async(req, res)=>{
     const id =   req.params.id
     const event = await SubmissionType.findById(id);
  
@@ -32,7 +33,7 @@ router.get("/:id/show", async(req, res)=>{
 
 
 
-router.post("/", async(req, res)=>{
+router.post("/",auth, admin, async(req, res)=>{
    
         const newEvent = await new SubmissionType(req.body)
      
@@ -52,7 +53,7 @@ router.post("/", async(req, res)=>{
 
 
 
-router.put("/:id/update", async (req, res)=>{
+router.put("/:id/update",auth, admin, async (req, res)=>{
     const id = req.params.id
      try{
         const event = await SubmissionType.findOne({_id : id})
@@ -100,7 +101,7 @@ router.put("/:id/update", async (req, res)=>{
     // })
 })
 
-router.delete("/:id/delete", async(req, res)=>{
+router.delete("/:id/delete",auth, admin, async(req, res)=>{
     const id = req.params.id;
     try{
         await SubmissionType.findByIdAndRemove(id)
