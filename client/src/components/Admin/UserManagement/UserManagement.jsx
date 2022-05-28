@@ -120,7 +120,7 @@ const UserManagement = () => {
       <>
       <ToastContainer/>
       <>
-      <h1>User Management</h1>
+      <h1 className="User">User Management</h1>
       <div className='table-page'>
       <div className="filter_menu">
             <div className="row1">
@@ -157,7 +157,7 @@ const UserManagement = () => {
             </div>
         </div>
 
-            <h4>You have {users.length} users</h4>
+            <h4 className="u_manage">You have {users.length} users</h4>
 
             <table>
                 <thead>

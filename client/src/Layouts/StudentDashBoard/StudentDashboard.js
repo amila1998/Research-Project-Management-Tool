@@ -3,27 +3,46 @@ import ProfileUpdate from '../../components/Profile/ProfileUpdate';
 import Profile from "../../components/Profile/Profile";
 import DashBoard from "../../components/Student/DashBoard/DashBoard";
 import "./studentDashboard.scss"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { AiFillHome, AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
-import { MdSupervisedUserCircle, MdDriveFolderUpload, MdDocumentScanner } from "react-icons/md";
+import { MdSupervisedUserCircle, MdDriveFolderUpload, MdDocumentScanner,MdTopic } from "react-icons/md";
 import { } from "react-icons/gr";
 import axios from "axios";
+import StudentGroupDetails from '../../components/Student/StudentGroupDetails/StudentGroupDetails';
+import TopicRegistration from '../../components/Student/TopicRegistration/TopicRegistration';
+axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
     const navigate = useNavigate()
     const { dispatch, user, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
-
+    const [myGroup,setMyGroup]=useState();
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
     const [groupRegistration, setGroupRegistration] = useState(false);
-    const [uploadTemplates, setUploadTemplates] = useState(false);
-    const [submissionTypeManagement, setSubmissionTypeManagement] = useState(false);
+    const [topicRegistration,setTopicRegistration]=useState(false);
+
+
+
+    //console.log(user.student?.haveAGroup);
+
+    useEffect(() => {
+        ///api/group/getmygroup
+            const getMyGroup =async()=>{
+                if(user.student?.haveAGroup){
+                    const res=await axios.get(`/api/group/getmygroup/${user._id}`)
+                    setMyGroup(res.data);
+            }
+        }
+
+        getMyGroup();
+    }, [user])
+    
 
 
     const handleDashboard = () => {
@@ -31,8 +50,8 @@ const StudentDashboard = () => {
         setProfile(false);
         setUpdateProfile(false);
         setGroupRegistration(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+        setTopicRegistration(false);
+
         navigate('/')
     };
 
@@ -41,16 +60,16 @@ const StudentDashboard = () => {
         setProfile(true);
         setUpdateProfile(false);
         setGroupRegistration(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+        setTopicRegistration(false);
+
     }
     const handleUpdateProfile = () => {
         setDashboard(false);
         setProfile(profile);
         setGroupRegistration(false);
-        setUploadTemplates(false);
         setUpdateProfile(!updateProfile);
-        setSubmissionTypeManagement(false);
+        setTopicRegistration(false);
+  
     }
 
     const handleGroupRegistration = () => {
@@ -58,28 +77,20 @@ const StudentDashboard = () => {
         setProfile(false);
         setGroupRegistration(true);
         setUpdateProfile(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(false);
+        setTopicRegistration(false);
+
     }
 
-    const handleUploadTemplates = () => {
+    const handleTopicRegistration =()=>{
         setDashboard(false);
         setProfile(false);
-        setGroupRegistration(false);
         setUpdateProfile(false);
-        setUploadTemplates(true);
-        setSubmissionTypeManagement(false);
+        setGroupRegistration(false);
+        setTopicRegistration(true);
+
     }
 
-    const handleSubmissionTypeManagement = () => {
-        setDashboard(false);
-        setProfile(false);
-        setGroupRegistration(false);
-        setUpdateProfile(false);
-        setUploadTemplates(false);
-        setSubmissionTypeManagement(true);
-    }
-
+    
     const logoutHandleClick = async (e) => {
         e.preventDefault();
         try {
@@ -102,18 +113,20 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
+                    {user.student?.haveAGroup&&
+                    <div onClick={handleTopicRegistration} className={topicRegistration ? 'nav1Select' : 'nav1'}>
+                        <div className={topicRegistration ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={topicRegistration ? 'navTextSelect' : 'navText'}>TOPIC REGISTRATION</div>
+                    </div>
+                     }
                     <div onClick={handleGroupRegistration} className={groupRegistration ? 'nav1Select' : 'nav1'}>
-                        <div className={groupRegistration ? "navIconSelect" : "navIcon"}><MdSupervisedUserCircle /></div>
-                        <div className={groupRegistration ? 'navTextSelect' : 'navText'}>GROUP REGISTRATION</div>
-                    </div>
-                    <div onClick={handleSubmissionTypeManagement} className={submissionTypeManagement ? 'nav1Select' : 'nav1'}>
-                        <div className={submissionTypeManagement ? "navIconSelect" : "navIcon"}><MdDocumentScanner /></div>
-                        <div className={submissionTypeManagement ? 'navTextSelect' : 'navText'}>SUBMISSION TYPE MANAGEMENT</div>
-                    </div>
-                    <div onClick={handleUploadTemplates} className={uploadTemplates ? 'nav1Select' : 'nav1'}>
-                        <div className={uploadTemplates ? "navIconSelect" : "navIcon"}><MdDriveFolderUpload /></div>
-                        <div className={uploadTemplates ? 'navTextSelect' : 'navText'}>TEMPLATES MANAGEMENT</div>
-                    </div>
+                    <div className={groupRegistration ? "navIconSelect" : "navIcon"}><MdSupervisedUserCircle /></div>
+                    <div className={groupRegistration ? 'navTextSelect' : 'navText'}>{user.student?.haveAGroup?"GROUP DETAILS":"GROUP REGISTRATION"}</div>
+                    </div>    
+             
+                    
+                    
+                   
 
                     <hr></hr>
 
@@ -128,7 +141,6 @@ const StudentDashboard = () => {
                                 <div className={updateProfile ? "navIconSelect" : "navIcon"}><FaUserEdit /></div>
                                 <div className={updateProfile ? 'navTextSelect' : 'navText'}>UPDATE PROFILE</div>
                             </div>
-
                         </>
                     }
 
@@ -143,7 +155,8 @@ const StudentDashboard = () => {
                 <div className="student-dashboard">
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
-                    {groupRegistration && <CreateGroup />}
+                    {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
+                    {topicRegistration&&<TopicRegistration/>}
                 </div>
             </div>
         </>

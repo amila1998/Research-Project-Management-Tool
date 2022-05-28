@@ -47,6 +47,11 @@ app.use(submssionRouter);
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
 
+const topicsRouter = require("./routes/topicsRoutes");
+app.use(topicsRouter);
+
+
+
 const startApp = async () => {
     try {
       // Connection With DB

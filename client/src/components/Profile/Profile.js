@@ -10,7 +10,7 @@ const Profile = () => {
     console.log(user);
   return (
     <div className='myprofile'>
-      <h1>User Profile{user.isverify?<><img type="button" src={verify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
+      <h1 className="userpro">User Profile{user.isverify?<><img type="button" src={verify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
 </>:<>
 <img type="button" src={unverify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
 </>}</h1><br/>
