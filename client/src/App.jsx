@@ -19,6 +19,7 @@ import StudentDashboard from './Layouts/StudentDashBoard/StudentDashboard';
 import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
 import StaffDashBoard from './Layouts/StaffDashBoard/StaffDashBoard';
 import Loading from './components/Loading/Loading';
+import { Aboutus } from './components/AboutUs/Aboutus';
 
 axios.defaults.withCredentials = true;
 
@@ -33,23 +34,23 @@ function App() {
     const _appSignging = localStorage.getItem("_appSignging");
     if (_appSignging) {
       const getUser = async () => {
-        
+
         try {
           setLoading(true);
           dispatch({ type: "SIGNING" });
-          const res = await axios.get("/api/auth/user",{
-            withCredentials:true
+          const res = await axios.get("/api/auth/user", {
+            withCredentials: true
           });
           dispatch({ type: "GET_USER", payload: res.data });
           //window.sessionStorage.setItem("_user", res.data.role);
           //console.log(res.data.role);
-          if (res.data.role=="admin") {
+          if (res.data.role == "admin") {
             dispatch({ type: "IS_ADMIN" });
-          }else if (res.data.role=="supervisor") {
+          } else if (res.data.role == "supervisor") {
             dispatch({ type: "IS_SUPERVISOR" });
-          }else if (res.data.role=="coSupervisor") {
+          } else if (res.data.role == "coSupervisor") {
             dispatch({ type: "IS_CO_SUPERVISOR" });
-          }else if (res.data.role=="panelMember") {
+          } else if (res.data.role == "panelMember") {
             dispatch({ type: "IS_PANEL_MEMBER" });
           };
           setLoading(false);
@@ -60,31 +61,31 @@ function App() {
             await axios.get("/api/auth/signout")
             localStorage.removeItem("_appSignging")
             sessionStorage.clear();
-            dispatch({type:"SIGNOUT"})
-            
+            dispatch({ type: "SIGNOUT" })
+
           } catch (error) {
             console.log(error);
           }
         }
-       
+
       };
       getUser();
 
-      if(fRender){
-        
+      if (fRender) {
+
         fRender = false;
-        
+
       }
-      if(!fRender){
-        const refreshToken = async ()=>{
-          await axios.post("/api/auth/refresh",{
-            withCredentials:true
+      if (!fRender) {
+        const refreshToken = async () => {
+          await axios.post("/api/auth/refresh", {
+            withCredentials: true
           }).catch(err => console.log(err))
         }
-        let interval = setInterval(()=>{
+        let interval = setInterval(() => {
           refreshToken().then(getUser())
-        },1000*60*55)//55m
-        return ()=>clearInterval(interval)
+        }, 1000 * 60 * 55)//55m
+        return () => clearInterval(interval)
       }
     }
   }, [dispatch, isLoggedIn]);
@@ -94,50 +95,55 @@ function App() {
       <React.Fragment>
         {loading?<><Loading/></>:
         <Router>
-          <header><Header/></header>
-            
-            <Navbar/>
-          
-            <main>
-              
-              <Routes>
+          <header><Header /></header>
+
+          <Navbar />
+
+          <main>
+
+            <Routes>
               <Route
-                  path="/"
-                  element={
-                    isLoggedIn?
-                      isAdmin?<AdminDashboard/>:
-                      isPanelMember||isSupervisor||isCoSupervisor?<StaffDashBoard/>:<StudentDashboard/>
-                      :<AuthLayout/>}
-                />
+                path="/"
+                element={
+                  isLoggedIn ?
+                    isAdmin ? <AdminDashboard /> :
+                      isPanelMember || isSupervisor || isCoSupervisor ? <StaffDashBoard /> : <StudentDashboard />
+                    : <AuthLayout />}
+              />
 
+
+              <Route
+                path="/auth/reset-password/:token"
+                element={<ResetLayout />}
+              />
+
+              <Route
+                path="/auth/activate/:activation_token"
+                element={<ActivateLayout />}
+              />
 
                 <Route
-                  path="/auth/reset-password/:token"
-                  element={<ResetLayout/>}
+                  path="/aboutus"
+                  element={<Aboutus />}
                 />
-
-                <Route
-                  path="/auth/activate/:activation_token"
-                  element={<ActivateLayout/>}
-                />
-
-
-           
-                  <Route
-                    path="/updateProfile"
-                    element={isLoggedIn?<ProfileUpdate/>:<Navigate to={"/"}/>}
-                  />
-                  <Route
-                    path="/profile"
-                    element={isLoggedIn?<ProfileLayout/>:<Navigate to={"/"}/>}
-                  /> 
-         
-              </Routes>
             
+              
+
+              <Route
+                path="/updateProfile"
+                element={isLoggedIn ? <ProfileUpdate /> : <Navigate to={"/"} />}
+              />
+              <Route
+                path="/profile"
+                element={isLoggedIn ? <ProfileLayout /> : <Navigate to={"/"} />}
+              />
+
+            </Routes>
+
           </main>
 
           <footer>
-            <Footer/>
+            <Footer />
           </footer>
             
           </Router>

@@ -1,8 +1,9 @@
 import React from 'react'
+import './GroupManagement.css';
 
 const GroupManagement = () => {
   return (
-    <div>GroupManagement</div>
+    <div className="group_m">Group Management</div>
   )
 }
 

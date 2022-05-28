@@ -215,7 +215,7 @@ const deleteHandler=async(id)=>{
         <ToastContainer/>
       <div className='tempbody'>
         <div className='tempLeft'>
-          <h1>{!onEdit?"ADD NEW TEMPLATE":"UPDATE TEMPLATE"}</h1>
+          <h1 className="Tem">{!onEdit?"ADD NEW TEMPLATE":"UPDATE TEMPLATE"}</h1>
           <div className='trow'>
           <div {...getRootProps()} className="tempupload">
             <input  {...getInputProps}  placeholder={file? file.name:"Drag & Drop your file"}/>
@@ -257,7 +257,7 @@ const deleteHandler=async(id)=>{
         <div className='tempmid'>
         <div className="vl"></div></div>
         <div className='tempRightt'>
-        <h4>You have {templates.length} Têmplates</h4>
+        <h4 className="temp2">You have {templates.length} Templates</h4>
 
 <table>
     <thead>
