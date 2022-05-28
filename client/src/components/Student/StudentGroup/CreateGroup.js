@@ -30,6 +30,7 @@ const CreateGroup = () => {
   const { groupName, members } = group;
   const [selectedValue, setSelectedValue] = useState("");
   const history = useNavigate();
+
   useEffect(() => {
     if (degree !== undefined || faculty !== undefined) {
       getMutualStudents(degree, faculty);
@@ -144,7 +145,7 @@ const CreateGroup = () => {
         draggable: true,
         progress: undefined,
       });
-      history('/');
+      window.location.href = "/";
     } catch (err) {
       console.log("🚀 ~~ handleSubmit ~ err", err);
       setIsLoading(false);
@@ -167,7 +168,7 @@ const CreateGroup = () => {
         name: student.name,
         user_id: student._id,
       },
-      label: student.name,
+      label: student.email,
     })
   );
 

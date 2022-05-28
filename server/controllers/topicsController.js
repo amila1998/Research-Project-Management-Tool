@@ -4,7 +4,9 @@ const Group = require('../models/groupsModel')
 const topicController = {
     topicRegistration:async(req,res)=>{
         try {
-                const {topicname,group_id,topicDescribe,interestedTopics}=req.body;
+                const data=req.body;
+                console.log(data);
+                const {topicname,group_id,topicDescribe,interestedTopics}=data
                 if(!topicname||!group_id||!topicDescribe){
                     return res.status(400).json({ msg: "Fill All Fields" });
 
@@ -18,8 +20,8 @@ const topicController = {
                 })
 
                 await newTopic.save();
-
-             
+                await Group.findByIdAndUpdate(group_id,{"haveTopic":true});
+                return res.status(200).json({ msg: "Registration Successfull ! " });
             
         } catch (error) {
             res.status(500).json({ 
