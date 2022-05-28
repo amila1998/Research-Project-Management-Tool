@@ -13,10 +13,12 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
     <div className="container-fluid">
     
-    <a className="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
       <img src={require("../../assets/img/SLIIT_Logo_Crest.png")} alt="" width="40" height="45"/>
       Research Project Management Tool
     </a>
+
+          
 
     <a className="navbar-brand" href="/"></a><br/>
     
@@ -27,7 +29,7 @@ export default function Header() {
         
         </>:<>
         
-        <h3 className="nav-link active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>
+        <h3 className="nav-link-active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>
         <Avatar />
         
         </>}

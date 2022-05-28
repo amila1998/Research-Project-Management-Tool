@@ -3,28 +3,32 @@
 .student-dashboard {
   height: 100%;
   width: 100%;
-  max-width: 600px;
-  background: rgba(255, 255,255, 0.7);
+  // max-width: 600px;
+  min-height: 400px;
+  background: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: auto;
-  
+
 
   padding: 20px 20px 20px 20px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
   &_logo {
     //border-radius: 50%;
-    
+
     padding: 2em;
     margin-bottom: 1em;
+
     //animation: float 6s ease-in-out infinite;
     img {
       max-width: 100px;
-      
+
     }
   }
+
   &_actions {
     display: flex;
     justify-content: space-between;
@@ -32,14 +36,17 @@
     width: 100%;
     margin-top: 2em;
     padding: 0 2px;
+
     p {
       text-transform: capitalize;
       cursor: pointer;
       font-weight: 300;
     }
+
     &-l {
       color: $orange;
     }
+
     &-r {
       color: $gray-dark;
     }
@@ -53,20 +60,188 @@
     box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
     transform: translateX(0);
   }
+
   25% {
     box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
     transform: translateX(5px);
   }
+
   50% {
     box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
     transform: translateY(-5px);
   }
+
   75% {
     box-shadow: 0 25px 15px 0 rgba(255, 133, 173, 0.2);
     transform: translateX(5px);
   }
+
   100% {
     box-shadow: 0 5px 15px 0 rgba(252, 222, 255, 0.6);
     transform: translateX(0);
+  }
+}
+
+.dashboard {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+
+}
+
+.left {
+  width: 25%;
+  background-color: $gray-dark;
+  min-width: 25%;
+}
+
+.right {
+  width: 70%;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.nav1 {
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+}
+
+.nav1logout {
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  margin-bottom: 0;
+
+
+}
+
+.nav1logout:hover,
+.nav1Select:hover {
+  background-color: red;
+  cursor: pointer;
+  color: aliceblue;
+}
+
+.nav1:hover,
+.nav1Select:hover {
+  background-color: $orange;
+  cursor: pointer;
+}
+
+.nav1Select {
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  background-color: aliceblue;
+
+}
+
+.subnav1 {
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  margin-left: 40px;
+}
+
+.subnav1:hover,
+.subnav1Select:hover {
+  background-color: $orange;
+  cursor: pointer;
+}
+
+.subnav1Select {
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  background-color: aliceblue;
+  margin-left: 40px;
+
+}
+
+
+.navText {
+  color: aliceblue;
+
+}
+
+
+.navIcon {
+  color: aliceblue;
+  margin-right: 20px;
+
+
+
+
+}
+
+.navIconSelect {
+  color: rgb(0, 0, 0);
+  margin-right: 20px;
+}
+
+.navTextlogout {
+  color: rgb(255, 255, 255);
+
+}
+
+
+
+
+.navIconlogout {
+  color: aliceblue;
+  margin-right: 20px;
+
+
+
+}
+
+.navIconSelectlogout {
+  color: rgb(0, 0, 0);
+  margin-right: 20px;
+}
+
+.downSelect {
+  color: rgb(0, 0, 0);
+  margin-left: 5px;
+}
+
+.down {
+  color: rgb(255, 255, 255);
+  margin-left: 5px;
+}
+
+.navTextSelect {
+  color: rgb(0, 0, 0);
+}
+
+@media only screen and (max-width: 600px) {
+  .navText {
+    display: none;
+  }
+
+  .navTextSelect {
+    display: none;
+  }
+
+  .nav1 {
+    justify-content: center;
+  }
+
+  .nav1Select {
+    justify-content: center;
+  }
+
+  .subnav1 {
+    margin-left: 0px;
+  }
+
+  .subnav1Select {
+    margin-left: 0px;
+  }
+
+  .navTextlogout {
+    display: none;
+
   }
 }

@@ -21,18 +21,18 @@ export default function Navbar() {
           <a className="nav-link" href="#">Link</a>
         </li>
         <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
+                <a className="nav-link"/*dropdown-toggle*/ href="/aboutus" /*id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"*/>
+            About Us
           </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+          {/* <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><a className="dropdown-item" href="#">Action</a></li>
             <li><a className="dropdown-item" href="#">Another action</a></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+          </ul> */}
+        </li> 
         <li className="nav-item">
-          <a className="nav-link disabled">Disabled</a>
+          <a className="nav-link" href="#">Contact Us</a>
         </li>
       </ul>
       {/* <form className="d-flex">

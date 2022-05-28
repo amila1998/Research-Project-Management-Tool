@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ViewUserDetails from '../../utils/AdminViewUser/ViewUserDetails';
+import Loading from '../../Loading/Loading'
 
 
 
@@ -17,6 +18,8 @@ const UserManagement = () => {
     const [sort,setSort]=useState("");
     const [role,setRole]=useState("");
     const [users,setUsers]=useState([]);
+    const [loading,setLoading]=useState(false);
+    const [callback,setCallback]=useState(true);
 
     
     
@@ -26,27 +29,75 @@ const UserManagement = () => {
     }
 
     
+    const handleUnVerify = async (id) => {
+      try {
+        const res = await axios.patch(
+          `/api/admin/verifyUsers/${id}`,
+          { isverify: false },
+          { withCredentials: true }
+        );
+        setCallback(true);
+        return toast(res.data.msg, {
+          className: "toast-success",
+          bodyClassName: "toast-success",
+        });
+      } catch (err) {
+        toast(err.response.data.msg, {
+          className: "toast-failed",
+          bodyClassName: "toast-failed",
+        });
+      }
+    };
+
+    const handleVerify = async (id) => {
+      try {
+        const res = await axios.patch(
+          `/api/admin/verifyUsers/${id}`,
+          { isverify: true },
+          { withCredentials: true }
+        );
+        setCallback(true);
+        return toast(res.data.msg, {
+          className: "toast-success",
+          bodyClassName: "toast-success",
+        });
+      } catch (err) {
+        toast(err.response.data.msg, {
+          className: "toast-failed",
+          bodyClassName: "toast-failed",
+        });
+      }
+    };
+
+    const handleDelete = async (id) => {
+      setCallback(true);
+    };
+    
   
     useEffect(() => {
         console.log(search," ",isVerify," ",sort," ",role," " );
       const getAllUsers=async()=>{
         try {
-        
+            if (callback) {
           const res = await axios.get(`/api/admin/getallUsers?isVerify=${isVerify}&createdAt=${sort}&role=${role}&keyword=${search}`,{
             withCredentials:true
           });
+          setCallback(false);
           setUsers(res.data.users);
+        }
         } catch (error) {
           console.log(error)
         }
       }
       getAllUsers();
-    }, [isVerify,search,sort,role])
+    }, [isVerify,search,sort,role,callback])
 
     console.log(users);
   return (
       <>
-      <h1>User Management</h1>
+      <ToastContainer/>
+      <>
+      <h1 className="User">User Management</h1>
       <div className='table-page'>
       <div className="filter_menu">
             <div className="row1">
@@ -83,7 +134,7 @@ const UserManagement = () => {
             </div>
         </div>
 
-            <h4>You have {users.length} users</h4>
+            <h4 className="u_manage">You have {users.length} users</h4>
 
             <table>
                 <thead>
@@ -97,6 +148,7 @@ const UserManagement = () => {
                         <th></th>
                     </tr>
                 </thead>
+                {loading?<Loading/>:<>
                 <tbody>
                     {
                         users.map(items => (
@@ -105,18 +157,22 @@ const UserManagement = () => {
                                 <td>{new Date(items.createdAt).toLocaleDateString()}</td>
                                 <td>{items.email}</td>
                                 <td>{items.role}</td>
-                                <td>{items.isverify?<><button className='btn btn-outline-danger'>Unverify</button></>:<><button className='btn btn-outline-success'>Verify</button></>}</td>
+                                <td>{items.isverify?<><button onClick={()=>handleUnVerify(items._id)} className='btn btn-outline-danger'>Unverify</button></>:<><button onClick={()=>handleVerify(items._id)} className='btn btn-outline-success'>Verify</button></>}</td>
                                 <td>  
                                     <ViewUserDetails data={items}/>
                                    
                                 </td>
-                                <td><button className='btn btn-outline-danger'>Delete</button></td>
+                                <td><button onClick={()=>handleDelete(items._id)} className='btn btn-outline-danger'>Delete</button></td>
                             </tr>
                         ))
                     }
                 </tbody>
+                
+                </>}
+                
             </table>
             </div>
+            </>
       </>
     
   )

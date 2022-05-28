@@ -1,0 +1,118 @@
+@import "../../variables/variables.scss";
+.tempbody{
+    margin: auto;
+    align-items: center;
+    display:flex;
+    justify-content: space-between;
+}
+.tempLeft{
+    width: 45%;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+   
+    
+}
+.tempRight{
+    width: 45%;
+}
+.tempupload{
+    padding: 10px;
+    border-style: dotted;
+}
+.tempupload:hover{
+    border-color: rgb(0, 190, 248);
+}
+.tempupload input{
+    padding: 10px;
+    width: 100%;
+    cursor: copy;
+    border: none;
+
+}
+
+.tinput:hover{
+    border-color: rgb(0, 190, 248);
+}
+
+.tinput{
+    padding: 10px;
+    width: 100%;
+    margin-top: 5px; 
+}
+
+.trow{
+    margin-bottom: 5px;
+}
+
+.trow button{
+    justify-content: center;
+    width: 100%;
+}
+.vl {
+    border-left: 4px solid rgb(255, 145, 0);
+    height: 100vh;
+    margin-right: 5px;
+    margin-left: 5px;
+  }
+
+.tempmid{
+    width: 2%;
+}
+
+.t_btn{
+    display: flex;
+    flex-direction: column;
+   
+    button {
+      margin: auto;
+      padding: 1.2em;
+      border-radius: 5px;
+      border: none;
+      width: 75%;
+      text-transform: uppercase;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+      color: #fff;
+      cursor: pointer;
+      outline: none;
+      background: linear-gradient(to right, $orange, $gray-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        font-size: 1.1rem;
+        margin-left: 10px;
+      }
+    
+    }
+  
+    button:hover {
+      transition: all 0.3s ease;
+      box-shadow: none;
+      background: linear-gradient(to left, $orange, $gray-dark);
+    }
+  
+    .btn-alt {
+      background: linear-gradient(to left, $orange, $gray-dark);
+    }
+    .btn-alt:hover {
+      transition: all 0.3s ease;
+      box-shadow: none;
+      background: linear-gradient(to right, $orange, $gray-dark);
+    }
+}
+.temp2 {
+    color: #ff6a06;
+        font-weight: 100;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        font-weight: 700;
+}
+.Tem {
+    color: #ff6a06;
+        font-size: 2.75rem;
+        font-weight: 100;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

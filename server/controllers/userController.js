@@ -4,8 +4,8 @@ const validateEmail = require("../helpers/validateEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
-const { google } = require("googleapis");
-const { OAuth2 } = google.auth;
+
+
 
 const userController = {
   register: async (req, res) => {
@@ -315,6 +315,19 @@ const userController = {
       await User.findOneAndUpdate({ _id: req.user.id }, { name, logo:avatar });
       // success
       res.status(200).json({ msg: "Update success." });
+    } catch (err) {
+      res.status(500).json({ msg: err.message });
+    }
+  },
+  verify: async (req, res) => {
+    try {
+      // get info
+      const { isverify } = req.body;
+
+      // update
+      await User.findOneAndUpdate({ _id: req.params.id }, { isverify:isverify });
+      // success
+      res.status(200).json({ msg: "Verification Update success." });
     } catch (err) {
       res.status(500).json({ msg: err.message });
     }

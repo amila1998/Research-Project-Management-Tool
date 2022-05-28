@@ -1,6 +1,20 @@
 img {
     padding-right: 2%;
 }
-h3:hover{
-cursor: pointer;
+
+h3:hover {
+    cursor: pointer;
+}
+
+.navbar-brand {
+    color: transparent;
+    font-family: "Source Sans Pro", sans-serif;
+    letter-spacing: 8px;
+    
+}
+
+.nav-link-active {
+    color: black;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
 }

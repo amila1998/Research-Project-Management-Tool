@@ -35,7 +35,15 @@ app.use(uploadRoutes);
 const templateUploadRoutes = require("./routes/templateUploadRouter");
 app.use(templateUploadRoutes);
 
+const StudentSubmssionRoutes = require("./routes/StudentSubmssionRoutes");
+app.use(StudentSubmssionRoutes);
 
+const templateRoutes = require("./routes/templateRouter");
+app.use(templateRoutes);
+
+
+const eventRoute = require("./routes/submissionTypeRoutes")
+app.use("/api/events", eventRoute)
 
 const startApp = async () => {
     try {

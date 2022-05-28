@@ -1,7 +1,7 @@
 import React from "react";
 import "./footers.scss";
 import MyClock from "../clock/Myclock";
-import MyCalander from "../calander/calander";
+import MyCalander from "../calander/MyCalander";
 
 
 export default function Footer() {
