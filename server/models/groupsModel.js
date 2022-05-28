@@ -7,6 +7,10 @@ const groupSchema = new Schema(
         required:true,
         unique:true
     },
+    haveTopic:{
+        type:Boolean,
+        default:false
+    },
     members: [
         {
             name: String,

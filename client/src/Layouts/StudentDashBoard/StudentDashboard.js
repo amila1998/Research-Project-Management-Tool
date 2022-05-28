@@ -15,6 +15,7 @@ import { } from "react-icons/gr";
 import axios from "axios";
 import StudentGroupDetails from '../../components/Student/StudentGroupDetails/StudentGroupDetails';
 import TopicRegistration from '../../components/Student/TopicRegistration/TopicRegistration';
+import TopicDetails from '../../components/Student/TopicDetails/TopicDetails';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -29,7 +30,7 @@ const StudentDashboard = () => {
 
 
 
-    //console.log(user.student?.haveAGroup);
+    console.log(myGroup);
 
     useEffect(() => {
         ///api/group/getmygroup
@@ -52,7 +53,7 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
 
-        navigate('/')
+        window.location.href=('/');
     };
 
     const handleProfile = () => {
@@ -116,7 +117,7 @@ const StudentDashboard = () => {
                     {user.student?.haveAGroup&&
                     <div onClick={handleTopicRegistration} className={topicRegistration ? 'nav1Select' : 'nav1'}>
                         <div className={topicRegistration ? "navIconSelect" : "navIcon"}><MdTopic /></div>
-                        <div className={topicRegistration ? 'navTextSelect' : 'navText'}>TOPIC REGISTRATION</div>
+                        <div className={topicRegistration ? 'navTextSelect' : 'navText'}>{myGroup?.haveTopic?"TOPIC DETAILS":"TOPIC REGISTRATION"}</div>
                     </div>
                      }
                     <div onClick={handleGroupRegistration} className={groupRegistration ? 'nav1Select' : 'nav1'}>
@@ -156,7 +157,7 @@ const StudentDashboard = () => {
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
-                    {topicRegistration&&<TopicRegistration/>}
+                    {topicRegistration&&myGroup?.haveTopic?<TopicDetails data={myGroup}/>:topicRegistration&&<TopicRegistration data={myGroup}/>}
                 </div>
             </div>
         </>
