@@ -53,10 +53,10 @@ const Register = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
-    console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ ComputerTopics", ComputerTopics)
-    console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ BusinessTopics", BusinessTopics)
-    console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ EngineerTopics", EngineerTopics)
-    console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ staff", staff)
+    //console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ ComputerTopics", ComputerTopics)
+    //console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ BusinessTopics", BusinessTopics)
+    //console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ EngineerTopics", EngineerTopics)
+    //console.log("🚀 ~ file: Register.js ~ line 54 ~ handleRegister ~ staff", staff)
     e.preventDefault();
     // check fields
     if (isEmpty(name) || isEmpty(password))
@@ -161,7 +161,7 @@ const Register = () => {
       topics.push(topic)
     });
     setStaff({ ...staff, interestedTopics: topics });
-    console.log("🚀 ~ file: Register.js ~ line 71 ~ appendTopics ~ topics", topics)
+   // console.log("🚀 ~ file: Register.js ~ line 71 ~ appendTopics ~ topics", topics)
   }
 
   const handleComputingChange = (selectedOption) => {

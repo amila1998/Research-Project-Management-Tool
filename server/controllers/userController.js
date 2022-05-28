@@ -401,6 +401,18 @@ const userController = {
         success: false
       });
     }
+  },
+  getuserDedails:async(req,res)=>{
+    try {
+      const userID= req.params.id;
+      const userDetails = await User.findById(userID);
+      res.status(200).json(userDetails);
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+        success: false
+      });
+    }
   }
  
 };
