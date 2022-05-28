@@ -129,7 +129,7 @@ console.log(topic);
     setTopic({ ...topic, [input_field]: value });
   };
 
-  const handleRegister =()=>{
+  const handleRegister =async()=>{
     try {
       setisLoading(true);
       const res = await axios.post("/api/register-staff", {
