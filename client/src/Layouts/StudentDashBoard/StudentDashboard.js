@@ -1,4 +1,4 @@
-import CreateGroup from "../../components/StudentGroup/CreateGroup";
+import CreateGroup from '../../components/Student/StudentGroup/CreateGroup';
 import ProfileUpdate from '../../components/Profile/ProfileUpdate';
 import Profile from "../../components/Profile/Profile";
 import DashBoard from "../../components/Student/DashBoard/DashBoard";

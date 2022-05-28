@@ -375,6 +375,32 @@ const userController = {
        } catch (error) {
       res.status(500).json({ msg: error.message });
     }
+  },
+  delete: async (req, res) => {
+    
+    try {
+      const id = req.params.id
+      const admin = await User.findById(id);
+      if (admin.role === 'admin') {
+        console.log("🚀 ~~ delete if : ~ id", id)
+        return res
+          .status(400)
+          .json({ msg: "Admin cannot be deleted!" });
+      }
+      else {
+        await User.findOneAndDelete({'_id':id})
+        console.log("🚀 ~~ delete else: ~ id", id)
+        res.status(200).json({
+          msg: "Delete Successful!",
+          success: true
+        })
+      }
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+        success: false
+      });
+    }
   }
  
 };
