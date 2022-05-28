@@ -5,7 +5,7 @@ const topicController = {
     topicRegistration:async(req,res)=>{
         try {
                 const data=req.body;
-                console.log(data);
+                //console.log(data);
                 const {topicname,group_id,topicDescribe,interestedTopics}=data
                 if(!topicname||!group_id||!topicDescribe){
                     return res.status(400).json({ msg: "Fill All Fields" });
@@ -32,6 +32,23 @@ const topicController = {
         }
 
     },
+    getMyTopic:async(req,res)=>{
+        try {
+            const groupId = req.params.id;
+            const group = await Group.findById(groupId);
+            if(!group){
+                return res.status(400).json({ msg: "Can't Find your Group" });
+            }
+
+            const myTopic = await Topic.findOne({'group_id':groupId})
+            return res.status(200).json(myTopic);
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
+        }
+    }
 
 
 }
