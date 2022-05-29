@@ -57,6 +57,18 @@ h1{
   text-align: center;
 }
 .column{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1rem;
+  input:hover,
+  select:hover{
+      border-color: rgb(0, 204, 255);
+  }
+};
+.add-button{
+  display: flex;
+  justify-content: center;
   width: 100%;
   margin-top: 1rem;
   input:hover,

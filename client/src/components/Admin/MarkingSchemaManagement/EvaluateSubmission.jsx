@@ -16,60 +16,70 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
+import { event } from "../../Admin/SubmissionTypeManagement/Redux/Axios/event";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import { isEmpty } from "../../helper/validate";
+import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../Loading/Loading";
+import { useNavigate } from "react-router-dom";
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
 
 const EvaluateSubmission = () => {
-  const [submissionType, setSubmissionType] = useState("");
-  const [idIncrement, setIdIncrement] = useState(1);
+  const navigate = useNavigate();
+  const initialRowState = [{ criteria: "", marks: 0, comment: "" }];
+  const [arr, setArr] = useState([]);
+  const [isBlindReviewer, setIsBlindReviewer] = useState(false);
   const [previewEnabled, setPreviewEnabled] = useState(false);
   const [rows, setRows] = useState(initialRowState);
+  const [submissionTypes, setSubmissionTypes] = useState([]);
+  const [submissionTypeID, setSubmissionTypeID] = useState("");
+  const [title, setTitle] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [callback, setCallback] = useState(false);
+  const [markingSchemaData, setMarkingSchemaData] = useState([]);
+  const [markingSchemaArray, setMarkingSchema] = useState([]);
+  const [totalMark, setTotalMark] = useState(0);
 
-  const initialRowState = [{ criteria: "", marks: 0 }];
-  const inputArr = [
-    [
-      {
-        type: "text",
-        id: 0,
-        value: "",
-        label: "Criteria",
-      },
-      {
-        type: "text",
-        id: 0,
-        value: "",
-        label: "Comment",
-      },
-      {
-        type: "text",
-        id: 0,
-        value: "",
-        label: "Marks",
-      },
-    ],
-  ];
+  const {
+    _id: submissionTypeId,
+    describe: description,
+    title: submissionTypeTitle,
+  } = submissionTypes;
 
-  const [arr, setArr] = useState(inputArr);
+  const {
+    _id: markingSchemaId,
+    markingSchema,
+    title: markingSchemaTitle,
+  } = markingSchemaData;
 
-//   const addInput = () => {
-//     setArr((s) => {
-//       return [
-//         ...s,
-//         [
-//           { type: "text", id: idIncrement, value: "", label: "Criteria" },
-//           { type: "text", id: idIncrement, value: "", label: "Comment" },
-//           { type: "text", id: idIncrement, value: "", label: "Marks" },
-//         ],
-//       ];
-//     });
-//     setIdIncrement(idIncrement + 1);
-//   };
-
-  const preview = () => {
-    createData();
-    setPreviewEnabled(!previewEnabled);
+  const setMarkingSchemaForm = () => {
+    let tempSchema = [];
+    markingSchemaArray?.length > 0 &&
+      markingSchemaArray.map((data, i) => {
+        tempSchema.push([
+          {
+            type: "text",
+            id: i,
+            value: data.criteria,
+            label: "Criteria",
+          },
+          { type: "text", id: i, value: "", label: "Comment" },
+          {
+            type: "number",
+            id: i,
+            value: "",
+            label: "Marks",
+          },
+        ]);
+      });
+    setArr(tempSchema);
   };
 
   const handleInputChange = (e, key) => {
-    e.preventDefault();
+    setCallback(true);
     arr.map((arraySet) => {
       arraySet.map((dataset) => {
         if (dataset.id == key && dataset.label == e.target.name) {
@@ -79,161 +89,300 @@ const EvaluateSubmission = () => {
     });
   };
 
+  useEffect(() => {}, [arr, submissionTypes, markingSchemaData]);
+
   useEffect(() => {
-    console.log("🚀 ~~ arr", arr);
-    console.log("🚀 ~~ rowData", rowsData);
+    setMarkingSchemaForm();
+  }, [markingSchemaArray]);
+
+  useEffect(() => {
+    createData();
   }, [arr]);
 
+  useEffect(() => {
+    setMarkingSchema(markingSchema);
+  }, [markingSchema]);
+
+  useEffect(() => {
+    console.log("🚀 ~~ arr ", arr);
+    console.log("🚀 ~~ rows ", rows);
+    setCallback(false);
+  }, [callback]);
+
+  useEffect(() => {
+    console.log("🚀 ~~ rows ", rows);
+  }, [rows]);
+
   const createData = () => {
-    let rowArray =[];
-    arr.map((arraySet) => {      
+    let rowArray = [];
+    arr.map((arraySet) => {
+      let criteria = "";
+      let comment = "";
+      let marks = 0;
       arraySet.map((dataset) => {
-        let criteria = "";
-        let marks = 0;
         if (dataset.label === "Criteria") {
           criteria = dataset.value;
+        }
+        if (dataset.label === "Comment") {
+          comment = dataset.value;
         }
         if (dataset.label === "Marks") {
           marks = dataset.value;
         }
-        rowArray.push({ criteria: criteria, marks: marks });
       });
+      rowArray.push({ criteria: criteria, marks: marks, comment: comment });
     });
-    // setRows({ ...rows, rowArray });
-    // rowsData = rowArray;
+    setRows(rowArray);
   };
 
-  const handleChange = (e) => {
-    setSubmissionType(e.target.value);
+  // const handleChange = (e) => {
+  //   setSubmissionType(e.target.value);
+  // };
+
+  const onChangeSwitch = (e) => {
+    setIsBlindReviewer(e.target.checked);
   };
 
-  const submissionTypeOptions = [
-    { value: "Submission Type 1", label: "Submission Type 1" },
-    { value: "Submission Type 2", label: "Submission Type 2" },
-    { value: "Submission Type 3", label: "Submission Type 3" },
-    { value: "Submission Type 4", label: "Submission Type 4" },
-    { value: "Submission Type 5", label: "Submission Type 5" },
-  ];
+  const getSubmissionTypes = async () => {
+    try {
+      const result = await axios.get(
+        `/api/schema/get/629284dcf00425624e57a3e2`
+      );
+      console.log("getSubmissionTypes ~ result", result);
+      setMarkingSchemaData(result.data.markingSchema);
+      setSubmissionTypes(result.data.submissionData);
+    } catch (error) {
+      console.log("getSubmissionTypes ~ error", error);
+    }
+  };
 
+  useEffect(() => {
+    getSubmissionTypes();
+  }, []);
 
-  const rowsData = [
-    { criteria: "SRS Document", marks: 10 },
-    { criteria: "Frontend Development", marks: 25 },
-    { criteria: "Backend Development", marks: 25 },
-    { criteria: "Maintaining the Codebase", marks: 10 },
-    { criteria: "Both Frontend and Backend are hosted", marks: 10 },
-    { criteria: "Unit Tests", marks: 10 },
-  ];
+  const preview = () => {
+    let total = getTotalMarkAllocation();
+    createData();
+    setTotalMark(total);
+    setPreviewEnabled(!previewEnabled);
+  };
+
+  const onClickUpdate = () => {
+    let total = getTotalMarkAllocation();
+    createData();
+    setTotalMark(total);
+  };
+
+  const onClickEvaluate = async (e) => {
+    e.preventDefault();
+    // check fields
+    if (isEmpty(title) || isEmpty(submissionTypeID))
+      return toast.error("Please fill in all fields.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    try {
+      setIsLoading(true);
+      const res = await axios.post("/api/schema/addsacsacsas");
+      setIsLoading(false);
+
+      toast.success(res.data.msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      navigate("/");
+    } catch (err) {
+      setIsLoading(false);
+      toast.error(err.response.data.msg, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+    }
+  };
+
+  const getTotalMarkAllocation = () => {
+    let total = 0;
+    rows.length > 0 &&
+      rows.map((row) => {
+        total = total + Number(row.marks);
+      });
+    return total;
+  };
 
   return (
-    <div className="markingSchema">
-      <h1>Marking Schema Management</h1>
-      <Box
-        component="form"
-        sx={{
-          "& .MuiTextField-root": { m: 1, width: "25ch" },
-        }}
-        noValidate
-        autoComplete="off"
-      >
-        <FormControl sx={{ m: 1, minWidth: 120 }}>
-          <InputLabel id="demo-simple-select-helper-label">
-            Submission Type
-          </InputLabel>
-          <Select
-            labelId="demo-simple-select-helper-label"
-            id="demo-simple-select-helper"
-            value={submissionType}
-            label="Submission Type"
-            onChange={handleChange}
-            autoWidth
-            sx={{ minWidth: 200 }}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            {submissionTypeOptions.map((type) => (
-              <MenuItem value={type.value}>{type.label}</MenuItem>
-            ))}
-          </Select>
-          <FormHelperText>helper text</FormHelperText>
-        </FormControl>
-        <div>
-          <Divider />
-          {arr.map((items, key) => (
-            <>
-              {items.map((item) => (
-                <TextField
-                  required
-                  id="outlined-basic"
-                  name={item.label}
-                  label={item.label}
-                  defaultValue={item.value}
-                  onChange={(e) => handleInputChange(e, key)}
-                />
-              ))}
-              <Divider />
-            </>
-          ))}
-          <Divider />
-          <div>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                addInput();
+    <>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <ToastContainer />
+          <div className="markingSchema">
+            <h3>Create Marking Schema</h3>
+            <Box
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
               }}
+              noValidate
+              autoComplete="off"
             >
-              Add another field
-            </Button>
+              <div>
+                <form>
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Submission Type
+                  </InputLabel>
+                  <Typography variant="subtitle1" gutterBottom component="div">
+                    {submissionTypeTitle}
+                  </Typography>
+                  <Divider />
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Used marking Schema
+                  </InputLabel>
+                  <Typography variant="subtitle1" gutterBottom component="div">
+                    {markingSchemaTitle}
+                  </Typography>
+                  <Divider />
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Group ID
+                  </InputLabel>
+                  <Typography variant="subtitle1" gutterBottom component="div">
+                    Group ID
+                  </Typography>
+                  <Divider />
+                  <FormControlLabel
+                    control={<Switch onChange={(e) => onChangeSwitch(e)} />}
+                    label="Blind Reviewer"
+                  />
+                  <Divider />
+                  <InputLabel id="demo-simple-select-helper-label">
+                    Evaluation
+                  </InputLabel>
+                  {arr?.length > 0 &&
+                    arr.map((items, i) => (
+                      <>
+                        {items.map((item, index) =>
+                          index == 0 ? (
+                            <InputLabel id="demo-simple-select-helper-label">
+                              {item.label} : {item.value}
+                            </InputLabel>
+                          ) : (
+                            <TextField
+                              required
+                              id="outlined-basic"
+                              type={item.type}
+                              name={item.label}
+                              label={item.label}
+                              defaultValue={item.value}
+                              onChange={(e) => handleInputChange(e, i)}
+                            />
+                          )
+                        )}
+                        <br />
+                      </>
+                    ))}
+                  <Divider />
+                  <div className="row">
+                    <div className="column">
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          preview();
+                        }}
+                        size="medium"
+                      >
+                        Preview
+                      </Button>
+                      &nbsp;
+                      <Button
+                        variant="outlined"
+                        onClick={() => {
+                          onClickUpdate();
+                        }}
+                      >
+                        Update
+                      </Button>
+                      &nbsp;
+                      <Button
+                        type="submit"
+                        variant="outlined"
+                        onClick={(e) => {
+                          onClickEvaluate(e);
+                        }}
+                      >
+                        Save
+                      </Button>
+                    </div>
+                  </div>
+                  <Divider />
+                </form>
+              </div>
+            </Box>
+            {previewEnabled && (
+              <>
+                <h4>Result Preview</h4>
+                <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell align="right">No</TableCell>
+                        <TableCell align="left">Criteria</TableCell>
+                        <TableCell align="left">Comments</TableCell>
+                        <TableCell align="right">
+                          Marking Distribution
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {rows.length > 0 &&
+                        rows.map((row, i) => (
+                          <TableRow
+                            key={1000 + i}
+                            sx={{
+                              "&:last-child td, &:last-child th": { border: 0 },
+                            }}
+                          >
+                            <TableCell align="right">{i + 1}</TableCell>
+                            <TableCell align="left">{row.criteria}</TableCell>
+                            <TableCell align="left">{row.comment}</TableCell>
+                            <TableCell align="right">{row.marks}</TableCell>
+                          </TableRow>
+                        ))}
+                      <TableRow
+                        key="total"
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell align="left">Total</TableCell>
+                        <TableCell align="left"></TableCell>
+                        <TableCell align="left"></TableCell>
+                        <TableCell align="right">{totalMark}</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+                <Divider />
+              </>
+            )}
           </div>
-          <div>
-            <Button
-              variant="outlined"
-              onClick={() => {
-                preview();
-              }}
-            >
-              Preview
-            </Button>
-          </div>
-        </div>
-      </Box>
-      {previewEnabled && 
-      <>
-        <TableContainer component={Paper}>
-          <Table sx={{ minWidth: 650 }} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="right">No</TableCell>
-                <TableCell align="left">Criteria</TableCell>
-                <TableCell align="right">Marking Distribution</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row, i) => (
-                <TableRow
-                  key={row.criteria}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-                >
-                  <TableCell align="right">{i + 1}</TableCell>
-                  <TableCell align="left">{row.criteria}</TableCell>
-                  <TableCell align="right">{row.marks}</TableCell>
-                </TableRow>
-              ))}
-              <TableRow
-                key="total"
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell align="left"></TableCell>
-                <TableCell align="left">Total</TableCell>
-                <TableCell align="right">100</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
         </>
-       }
-    </div>
+      )}
+    </>
   );
 };
 

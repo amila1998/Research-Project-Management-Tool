@@ -24,6 +24,7 @@ import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/
 import { PersistGate } from 'redux-persist/integration/react'
 import MarkingSchemaManagement from "../../components/Admin/MarkingSchemaManagement/MarkingSchemaManagement";
 import GroupManagement from "../../components/Admin/GroupManagement/GroupManagement";
+import EvaluateSubmission from "../../components/Admin/MarkingSchemaManagement/EvaluateSubmission";
 
 const AdminDashboard = () => {
   const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -218,7 +219,8 @@ const history = useNavigate()
             
           
           </>}
-          {markingSchema&&<MarkingSchemaManagement/>}
+          {/* {markingSchema&&<MarkingSchemaManagement/>} */}
+          {markingSchema&&<EvaluateSubmission/>}
           {groupManagement&&<GroupManagement/>}
            </div>
        </div>
