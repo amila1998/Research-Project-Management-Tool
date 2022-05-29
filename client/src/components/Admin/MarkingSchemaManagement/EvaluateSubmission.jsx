@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import "./markingSchema.scss";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
@@ -26,10 +26,28 @@ import Loading from "../../Loading/Loading";
 import { useNavigate } from "react-router-dom";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
+import { AuthContext } from "../../../context/AuthContext";
 
 const EvaluateSubmission = () => {
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const initialRowState = [{ criteria: "", marks: 0, comment: "" }];
+  const initialEvaluationDataState = [
+    {
+      submissionTypeId: "",
+      groupId: "",
+      evaluatorId: "",
+      marks: 0,
+      isBlindReviewed: false,
+      result: [
+        {
+          criteria: "",
+          comment: "",
+          marks: 0,
+        },
+      ],
+    },
+  ];
   const [arr, setArr] = useState([]);
   const [isBlindReviewer, setIsBlindReviewer] = useState(false);
   const [previewEnabled, setPreviewEnabled] = useState(false);
@@ -41,7 +59,9 @@ const EvaluateSubmission = () => {
   const [callback, setCallback] = useState(false);
   const [markingSchemaData, setMarkingSchemaData] = useState([]);
   const [markingSchemaArray, setMarkingSchema] = useState([]);
+  const [evaluationData, setEvaluationData] = useState(initialEvaluationDataState);
   const [totalMark, setTotalMark] = useState(0);
+  const [groupId, setGroupId] = useState("");
 
   const {
     _id: submissionTypeId,
@@ -104,13 +124,17 @@ const EvaluateSubmission = () => {
   }, [markingSchema]);
 
   useEffect(() => {
-    console.log("🚀 ~~ arr ", arr);
-    console.log("🚀 ~~ rows ", rows);
+    console.log("🚀 ~  ~ evaluationData", evaluationData)
+  }, [evaluationData]);
+
+  useEffect(() => {
+    // console.log("🚀 ~~ arr ", arr);
+    // console.log("🚀 ~~ rows ", rows);
     setCallback(false);
   }, [callback]);
 
   useEffect(() => {
-    console.log("🚀 ~~ rows ", rows);
+    // console.log("🚀 ~~ rows ", rows);
   }, [rows]);
 
   const createData = () => {
@@ -151,6 +175,7 @@ const EvaluateSubmission = () => {
       console.log("getSubmissionTypes ~ result", result);
       setMarkingSchemaData(result.data.markingSchema);
       setSubmissionTypes(result.data.submissionData);
+      setGroupId("62922bcfaa5145fa58dee82e")
     } catch (error) {
       console.log("getSubmissionTypes ~ error", error);
     }
@@ -159,6 +184,10 @@ const EvaluateSubmission = () => {
   useEffect(() => {
     getSubmissionTypes();
   }, []);
+
+  useEffect(() => {
+    sendEvaluation();
+  }, [evaluationData]);
 
   const preview = () => {
     let total = getTotalMarkAllocation();
@@ -172,23 +201,23 @@ const EvaluateSubmission = () => {
     createData();
     setTotalMark(total);
   };
-
-  const onClickEvaluate = async (e) => {
-    e.preventDefault();
+  const sendEvaluation = async () => {
     // check fields
-    if (isEmpty(title) || isEmpty(submissionTypeID))
-      return toast.error("Please fill in all fields.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    // if (isEmpty(title) || isEmpty(submissionTypeID))
+    //   return toast.error("Please fill in all fields.", {
+    //     position: "top-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
     try {
+      console.log("🚀 ~~ evaluationData", evaluationData)
       setIsLoading(true);
-      const res = await axios.post("/api/schema/addsacsacsas");
+      const res = await axios.post("/api/evaluation/add", evaluationData);     
+      console.log("🚀 ~  ~ onClickEvaluate ~ res", res)
       setIsLoading(false);
 
       toast.success(res.data.msg, {
@@ -202,6 +231,8 @@ const EvaluateSubmission = () => {
       });
       navigate("/");
     } catch (err) {
+      console.log("🚀 ~ ~ onClickEvaluate ~ err", err)
+      console.log("🚀 ~~ evaluationData", evaluationData)
       setIsLoading(false);
       toast.error(err.response.data.msg, {
         position: "top-right",
@@ -213,6 +244,19 @@ const EvaluateSubmission = () => {
         progress: undefined,
       });
     }
+  };
+
+  const onClickEvaluate = async (e) => {
+    e.preventDefault();
+    setEvaluationData({
+      ...evaluationData,
+      submissionTypeId: submissionTypeId,
+      groupId: groupId,
+      evaluatorId: user._id,
+      marks: totalMark,
+      isBlindReviewed: isBlindReviewer,
+      result: rows,
+    });
   };
 
   const getTotalMarkAllocation = () => {
@@ -261,7 +305,7 @@ const EvaluateSubmission = () => {
                     Group ID
                   </InputLabel>
                   <Typography variant="subtitle1" gutterBottom component="div">
-                    Group ID
+                  {groupId}
                   </Typography>
                   <Divider />
                   <FormControlLabel
