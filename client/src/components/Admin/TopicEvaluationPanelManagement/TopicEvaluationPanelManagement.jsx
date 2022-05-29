@@ -35,7 +35,7 @@ const TopicEvaluationPanelManagement = () => {
     }
     const [evaPanalMembers,setEvaPanalMembers]=useState([]);
     const [callback,setCallback]=useState(true);
-    console.log("🚀 ~ file: TopicEvaluationPanelManagement.jsx ~ line 38 ~ TopicEvaluationPanelManagement ~ callback", callback)
+    //console.log("🚀 ~ file: TopicEvaluationPanelManagement.jsx ~ line 38 ~ TopicEvaluationPanelManagement ~ callback", callback)
     const [panalMembers,setPanalMemebers]=useState([]);
     const [loading,setLoading]=useState(false);
     const [panalMember_id,setPanalMemeber_id]=useState();
