@@ -22,6 +22,8 @@ const StudentDashboard = () => {
     const navigate = useNavigate()
     const { dispatch, user, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
     const [myGroup,setMyGroup]=useState();
+    const [topicDetails,setTopicDetail]=useState();
+
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
@@ -36,13 +38,33 @@ const StudentDashboard = () => {
         ///api/group/getmygroup
             const getMyGroup =async()=>{
                 if(user.student?.haveAGroup){
-                    const res=await axios.get(`/api/group/getmygroup/${user._id}`)
-                    setMyGroup(res.data);
+                    try {
+                        const res=await axios.get(`/api/group/getmygroup/${user._id}`)
+                        setMyGroup(res.data);
+                    } catch (error) {
+                        console.log(error);
+                    }
             }
         }
 
         getMyGroup();
     }, [user])
+
+
+    useEffect(() => {
+            if (myGroup?.haveTopic) {
+                const getTopicDetails =async()=>{
+                    try {
+                        const res = await axios.get(`/api/topics/getmyTopicDetails/${myGroup?._id}`);
+                        setTopicDetail(res.data); 
+                    } catch (error) {
+                        console.log(error);  
+                    }
+                 }
+                 getTopicDetails();
+            }
+    }, [myGroup?.haveTopic,myGroup?._id])
+    
     
 
 
@@ -157,7 +179,7 @@ const StudentDashboard = () => {
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
-                    {topicRegistration&&myGroup?.haveTopic?<TopicDetails data={myGroup}/>:topicRegistration&&<TopicRegistration data={myGroup}/>}
+                    {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
                 </div>
             </div>
         </>
