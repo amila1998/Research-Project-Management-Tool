@@ -10,7 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { RiProfileFill } from "react-icons/ri";
-import { MdSupervisedUserCircle,MdDriveFolderUpload ,MdDocumentScanner,MdSchema} from "react-icons/md";
+import { MdSupervisedUserCircle,MdDriveFolderUpload ,MdDocumentScanner,MdSchema,MdRememberMe} from "react-icons/md";
 import {  } from "react-icons/gr";
 import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
@@ -24,6 +24,7 @@ import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/
 import { PersistGate } from 'redux-persist/integration/react'
 import MarkingShemaManagement from "../../components/Admin/MarkingShemaManagement/MarkingShemaManagement";
 import GroupManagement from "../../components/Admin/GroupManagement/GroupManagement";
+import TopicEvaluationPanelManagement from "../../components/Admin/TopicEvaluationPanelManagement/TopicEvaluationPanelManagement";
 
 const AdminDashboard = () => {
   const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -36,6 +37,7 @@ const AdminDashboard = () => {
   const [markingSchema, setMarkingSchema] = useState(false);
   const [submissionTypeManagement, setSubmissionTypeManagement] = useState(false);
   const [groupManagement, setGroupManagement] = useState(false);
+  const [ topicEvaluationPanelManagement, settopicEvaluationPanelManagement]=useState(false);
 
 const history = useNavigate()
   const handleDashboard = () => {
@@ -47,6 +49,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
     history('/')
   };
 
@@ -59,6 +62,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
   const handleUpdateProfile = () => {
     setDashboard(false);
@@ -69,6 +73,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
 
   const handleUserManagement = () => {
@@ -80,6 +85,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
 
   const handleUploadTemplates = () => {
@@ -91,6 +97,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
 
   const handleSubmissionTypeManagement = () => {
@@ -102,6 +109,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(true);
     setMarkingSchema(false);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
 
   const handleMakingSchemaManagement =()=>{
@@ -113,6 +121,7 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(true);
     setGroupManagement(false);
+    settopicEvaluationPanelManagement(false);
   }
 
   const handleGroupManagement =()=>{
@@ -124,6 +133,19 @@ const history = useNavigate()
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
     setGroupManagement(true);
+    settopicEvaluationPanelManagement(false);
+  }
+
+  const topicEvaluationPanelManagementHandler =()=>{
+    setDashboard(false);
+    setProfile(false);
+    setUserManagement(false);
+    setUpdateProfile(false);
+    setUploadTemplates(false);
+    setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
+    setGroupManagement(false);
+    settopicEvaluationPanelManagement(true);
   }
 
   const logoutHadleClick =  async (e) =>{
@@ -170,6 +192,10 @@ const history = useNavigate()
           <div onClick={handleGroupManagement} className={groupManagement?'nav1Select':'nav1'}>
           <div className={groupManagement?"navIconSelect":"navIcon"}><RiProfileFill/></div>
           <div className={groupManagement?'navTextSelect':'navText'}>GROUP MANAGEMENT</div>
+          </div>
+          <div onClick={topicEvaluationPanelManagementHandler} className={topicEvaluationPanelManagement?'nav1Select':'nav1'}>
+          <div className={topicEvaluationPanelManagement?"navIconSelect":"navIcon"}><MdRememberMe/></div>
+          <div className={topicEvaluationPanelManagement?'navTextSelect':'navText'}>TOPIC EVALUVATION PANAL MANAGEMENT</div>
           </div>
 
 
@@ -220,6 +246,7 @@ const history = useNavigate()
           </>}
           {markingSchema&&<MarkingShemaManagement/>}
           {groupManagement&&<GroupManagement/>}
+          {topicEvaluationPanelManagement&&<TopicEvaluationPanelManagement/>}
            </div>
        </div>
       

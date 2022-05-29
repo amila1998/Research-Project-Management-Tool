@@ -176,6 +176,7 @@ const StudentDashboard = () => {
 
                 </div>
                 <div className="student-dashboard">
+                    
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}

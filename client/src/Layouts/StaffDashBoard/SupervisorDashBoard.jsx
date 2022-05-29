@@ -10,10 +10,11 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdSupervisedUserCircle } from "react-icons/md";
-import DashBoard from "../../components/Admin/DashBoard/DashBoard";
+
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
-import UserManagement from "../../components/Admin/UserManagement/UserManagement";
+import DashBoard from "../../components/Supervisor/DashBoard/Dashboard";
+
 
 
 const SupervisorDashBoard = () => {
@@ -21,36 +22,30 @@ const SupervisorDashBoard = () => {
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateprofile, setUpdateProfile] = useState(false);
-    const [userManagement, setUserManagement] = useState(false);
+    const [groups, setGroups] = useState(false);
+
   
     const history = useNavigate()
     const handleDashboard = () => {
       setDashboard(true);
       setProfile(false);
       setUpdateProfile(false);
-      setUserManagement(false);
-      history('/')
+      window.location.href=('/')
     };
   
     const handleProfile = () => {
       setDashboard(false);
       setProfile(true);
       setUpdateProfile(false);
-      setUserManagement(false);
     }
+    
     const handleUpdateProfile = () => {
       setDashboard(false);
       setProfile(profile);
-      setUserManagement(false);
       setUpdateProfile(!updateprofile);
     }
   
-    const handleUserManagement = () => {
-      setDashboard(false);
-      setProfile(false);
-      setUserManagement(true);
-      setUpdateProfile(false);
-    }
+
   
     const logoutHadleClick =  async (e) =>{
       e.preventDefault();
@@ -65,7 +60,7 @@ const SupervisorDashBoard = () => {
       }
     }
   return (
-    <div>SupervisorDashBoard
+    <div>
 
 <div className="dashboard">
            
@@ -75,10 +70,15 @@ const SupervisorDashBoard = () => {
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
           <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
           </div>
-          <div onClick={handleUserManagement} className={userManagement?'nav1Select':'nav1'}>
-          <div className={userManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
-          <div className={userManagement?'navTextSelect':'navText'}>USER MANAGEMENT</div>
+          <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
+          <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
+          <div className={dashboard?'navTextSelect':'navText'}>GROUP REQUESTS</div>
           </div>
+          <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
+          <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
+          <div className={dashboard?'navTextSelect':'navText'}>GROUP SUBMISSIONS</div>
+          </div>
+       
 
 
 
@@ -114,7 +114,7 @@ const SupervisorDashBoard = () => {
            <div className="right">
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
-          {userManagement&&<UserManagement/>}
+        
            
            </div>
        </div>
