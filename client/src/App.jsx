@@ -20,6 +20,7 @@ import AdminDashboard from './Layouts/AdminDashBoard/AdminDashBoard';
 import StaffDashBoard from './Layouts/StaffDashBoard/StaffDashBoard';
 import Loading from './components/Loading/Loading';
 import { Aboutus } from './components/AboutUs/Aboutus';
+import ContactUs from './components/ContactUs/ContactUs';
 
 axios.defaults.withCredentials = true;
 
@@ -125,6 +126,11 @@ function App() {
                 <Route
                   path="/aboutus"
                   element={<Aboutus />}
+                />
+
+                <Route
+                  path="/contactus"
+                  element={<ContactUs />}
                 />
             
               

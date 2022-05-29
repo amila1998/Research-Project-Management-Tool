@@ -1,11 +1,18 @@
 .content {
-    background-color: #12192c;
+    background-color: #ecf0f3;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
     border-radius: 0 12px 12px 0;
     color: #fff;
+    width: 600px;
+    padding: 1px;
+    margin: auto;
+    border-color: #ff6a06;
+    border-style:ridge;
+    
+
 }
 
 .content h2 {
@@ -13,6 +20,7 @@
     font-size: 36px;
     letter-spacing: 6px;
     opacity: 0.9;
+    color: #000;
 }
 
 .content span {
@@ -30,7 +38,7 @@
     text-align: center;
     margin: 0 auto;
     line-height: 1.7;
-    color: #ffffff
+    color: rgb(19, 15, 64);
 }
 
 .links {
@@ -38,7 +46,7 @@
 }
 
 .links li {
-    border: 2px solid #4158D0;
+    border: 2px solid #ff6a06;
     list-style: none;
     border-radius: 5px;
     padding: 10px 15px;
@@ -48,18 +56,19 @@
 
 .links li a {
     text-transform: uppercase;
-    color: #fff;
+    color: #ff6a06;
     text-decoration: none;
+    
 }
 
 .links li:hover {
-    border-color: #C850C0;
+    border-color: white;
 }
 
 .vertical-line {
     height: 30px;
     width: 3px;
-    background: #C850C0;
+    background: #ff6a06;
     margin: 0 auto;
 }
 
@@ -80,7 +89,7 @@
 }
 
 .icons li i:hover {
-    color: #C850C0;
+    color: #ff6a06;
     cursor: pointer;
 }
 
@@ -138,10 +147,4 @@
     text-align: center;
     color: #000;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-.credit a {
-    text-decoration: none;
-    color: #000;
-    font-weight: bold;
 }
