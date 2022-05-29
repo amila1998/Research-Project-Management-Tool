@@ -10,12 +10,14 @@ import { AiFillHome, AiFillCaretDown, AiFillCaretRight } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
+import { BsFillChatDotsFill } from "react-icons/bs";
 import { MdSupervisedUserCircle, MdDriveFolderUpload, MdDocumentScanner,MdTopic } from "react-icons/md";
 import { } from "react-icons/gr";
 import axios from "axios";
 import StudentGroupDetails from '../../components/Student/StudentGroupDetails/StudentGroupDetails';
 import TopicRegistration from '../../components/Student/TopicRegistration/TopicRegistration';
 import TopicDetails from '../../components/Student/TopicDetails/TopicDetails';
+import GroupChat from '../../components/GroupChat/GroupChat';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -29,6 +31,7 @@ const StudentDashboard = () => {
     const [updateProfile, setUpdateProfile] = useState(false);
     const [groupRegistration, setGroupRegistration] = useState(false);
     const [topicRegistration,setTopicRegistration]=useState(false);
+    const [groupchat,setGroupChat]=useState(false);
 
 
 
@@ -74,6 +77,7 @@ const StudentDashboard = () => {
         setUpdateProfile(false);
         setGroupRegistration(false);
         setTopicRegistration(false);
+        setGroupChat(false);
 
         window.location.href=('/');
     };
@@ -84,6 +88,7 @@ const StudentDashboard = () => {
         setUpdateProfile(false);
         setGroupRegistration(false);
         setTopicRegistration(false);
+        setGroupChat(false);
 
     }
     const handleUpdateProfile = () => {
@@ -92,6 +97,7 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setUpdateProfile(!updateProfile);
         setTopicRegistration(false);
+        setGroupChat(false);
   
     }
 
@@ -101,6 +107,7 @@ const StudentDashboard = () => {
         setGroupRegistration(true);
         setUpdateProfile(false);
         setTopicRegistration(false);
+        setGroupChat(false);
 
     }
 
@@ -110,8 +117,19 @@ const StudentDashboard = () => {
         setUpdateProfile(false);
         setGroupRegistration(false);
         setTopicRegistration(true);
+        setGroupChat(false);
 
-    }
+    } 
+
+    const handleGroupChat = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(true);
+
+    } 
 
     
     const logoutHandleClick = async (e) => {
@@ -167,6 +185,11 @@ const StudentDashboard = () => {
                         </>
                     }
 
+                    <div onClick={handleGroupChat} className={groupchat ? 'nav1Select' : 'nav1'}>
+                        <div className={groupchat ? "navIconSelect" : "navIcon"}><BsFillChatDotsFill /></div>
+                        <div className={groupchat ? 'navTextSelect' : 'navText'}>GROUP CHAT</div>
+                    </div>
+
                     <hr></hr>
 
                     <div onClick={logoutHandleClick} className={'nav1logout'}>
@@ -181,6 +204,7 @@ const StudentDashboard = () => {
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
                     {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
+                    {myGroup&&groupchat&&<GroupChat group={myGroup}/>}
                 </div>
             </div>
         </>

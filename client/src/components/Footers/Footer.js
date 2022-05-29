@@ -16,7 +16,7 @@ export default function Footer() {
 						<div className="footer-col">
 							<h4 className="h4class">Sections</h4>
 							<ul>
-								<li><a href="#">about us</a></li>
+								<li><a href="/aboutus">about us</a></li>
 								<li><a href="#">our services</a></li>
 								<li><a href="#">privacy policy</a></li>
 								<li><a href="#">Give a Feedback</a></li>
