@@ -296,8 +296,8 @@ const EvaluateSubmission = () => {
                       </>
                     ))}
                   <Divider />
-                  <div className="row">
-                    <div className="column">
+                  <div className="marking-schema-row">
+                    <div className="marking-schema-column">
                       <Button
                         variant="outlined"
                         onClick={() => {

@@ -57,7 +57,7 @@ const MarkingSchemaManagement = () => {
         label: "Criteria",
       },
       {
-        type: "text",
+        type: "number",
         id: 0,
         value: "",
         label: "Marks",
@@ -92,7 +92,7 @@ const MarkingSchemaManagement = () => {
         ...s,
         [
           { type: "text", id: idIncrement, value: "", label: "Criteria" },
-          { type: "text", id: idIncrement, value: "", label: "Marks" },
+          { type: "number", id: idIncrement, value: "", label: "Marks" },
         ],
       ];
     });
@@ -241,16 +241,17 @@ const MarkingSchemaManagement = () => {
               autoComplete="off"
             >              
               <div>
-              <form>
+              <form >
                 <InputLabel id="demo-simple-select-helper-label">
                     Submission Type
                   </InputLabel>
                   <Select
-                    id="demo-simple-select-helper"
-                    label="Submission Type"
+                    id="outlined-basic"
+                    label="-"
+                    displayEmpty
                     onChange={handleChange}
                     autoWidth
-                    sx={{ minWidth: 215 }}
+                    sx={{ minWidth: 215,margin: 1 }}
                   >
                     {submissionTypes.map((type) => (
                       <MenuItem value={type.value}>{type.label}</MenuItem>
@@ -280,6 +281,7 @@ const MarkingSchemaManagement = () => {
                         name={item.label}
                         label={item.label}
                         defaultValue={item.value}
+                        type={item.type}
                         onChange={(e) => handleInputChange(e, i)}
                       />
                     ))}
@@ -287,7 +289,7 @@ const MarkingSchemaManagement = () => {
                   </>
                 ))}
                 <Divider />
-                <div className="row">
+                <div className="marking-schema-row">
                   <div className="add-button">
                     <Button
                       variant="outlined"
@@ -298,7 +300,7 @@ const MarkingSchemaManagement = () => {
                       Add another field
                     </Button>
                   </div>
-                  <div className="column">
+                  <div className="marking-schema-column">
                     <Button
                       variant="outlined"
                       onClick={() => {
