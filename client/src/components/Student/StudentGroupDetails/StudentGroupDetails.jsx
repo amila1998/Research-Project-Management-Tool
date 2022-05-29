@@ -18,6 +18,10 @@ const StudentGroupDetails = ({groupData}) => {
             {groupData.level===1&&<><div className='nextStep'>Next Step: Request a Supervisor</div></>}
         </div>
         <br></br>
+        <div>
+        {groupData.level===1&& <></>}
+
+        </div>
         
         <div>
         <table>
