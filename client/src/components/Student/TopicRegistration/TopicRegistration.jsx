@@ -8,7 +8,7 @@ import InputLabel from '@mui/material/InputLabel';
 import axios from "axios";
 axios.defaults.withCredentials = true;
 
-const TopicRegistration = () => {
+const TopicRegistration = ({data}) => {
 
   const initialState = {
     topicname:"",
@@ -132,8 +132,11 @@ console.log(topic);
   const handleRegister =async()=>{
     try {
       setisLoading(true);
-      const res = await axios.post("/api/register-staff", {
-        topic
+      const res = await axios.post("/api/topics/addTopic", {
+        topicname,
+        topicDescribe,
+        interestedTopics,
+        group_id:data._id
       });
       setisLoading(false);
 
@@ -146,6 +149,7 @@ console.log(topic);
         draggable: true,
         progress: undefined,
       });
+      window.location.href=('/')
       
     } catch (err) {
       console.log("🚀 ~ file: Register.js ~ line 130 ~ handleRegister ~ err", err)

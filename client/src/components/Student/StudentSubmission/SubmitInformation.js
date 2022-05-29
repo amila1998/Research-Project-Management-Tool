@@ -4,6 +4,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { AddSubmission } from './AddSubmission';
+
 const style = {
     position: 'absolute',
     top: '50%',
@@ -21,9 +22,9 @@ export const SubmitInformation = () => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
   
+    const [subid,setsubid] = React.useState();
 
-
-
+  console.log(subid);
   return (
     <div>
         
@@ -86,7 +87,7 @@ export const SubmitInformation = () => {
             Add Submission
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <AddSubmission/>
+           <AddSubmission setsubid={setsubid}/>
           </Typography>
         </Box>
       </Modal>

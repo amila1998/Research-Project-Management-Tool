@@ -15,12 +15,15 @@ import { } from "react-icons/gr";
 import axios from "axios";
 import StudentGroupDetails from '../../components/Student/StudentGroupDetails/StudentGroupDetails';
 import TopicRegistration from '../../components/Student/TopicRegistration/TopicRegistration';
+import TopicDetails from '../../components/Student/TopicDetails/TopicDetails';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
     const navigate = useNavigate()
     const { dispatch, user, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
     const [myGroup,setMyGroup]=useState();
+    const [topicDetails,setTopicDetail]=useState();
+
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
@@ -29,19 +32,39 @@ const StudentDashboard = () => {
 
 
 
-    //console.log(user.student?.haveAGroup);
+    console.log(myGroup);
 
     useEffect(() => {
         ///api/group/getmygroup
             const getMyGroup =async()=>{
                 if(user.student?.haveAGroup){
-                    const res=await axios.get(`/api/group/getmygroup/${user._id}`)
-                    setMyGroup(res.data);
+                    try {
+                        const res=await axios.get(`/api/group/getmygroup/${user._id}`)
+                        setMyGroup(res.data);
+                    } catch (error) {
+                        console.log(error);
+                    }
             }
         }
 
         getMyGroup();
     }, [user])
+
+
+    useEffect(() => {
+            if (myGroup?.haveTopic) {
+                const getTopicDetails =async()=>{
+                    try {
+                        const res = await axios.get(`/api/topics/getmyTopicDetails/${myGroup?._id}`);
+                        setTopicDetail(res.data); 
+                    } catch (error) {
+                        console.log(error);  
+                    }
+                 }
+                 getTopicDetails();
+            }
+    }, [myGroup?.haveTopic,myGroup?._id])
+    
     
 
 
@@ -52,7 +75,7 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
 
-        navigate('/')
+        window.location.href=('/');
     };
 
     const handleProfile = () => {
@@ -116,7 +139,7 @@ const StudentDashboard = () => {
                     {user.student?.haveAGroup&&
                     <div onClick={handleTopicRegistration} className={topicRegistration ? 'nav1Select' : 'nav1'}>
                         <div className={topicRegistration ? "navIconSelect" : "navIcon"}><MdTopic /></div>
-                        <div className={topicRegistration ? 'navTextSelect' : 'navText'}>TOPIC REGISTRATION</div>
+                        <div className={topicRegistration ? 'navTextSelect' : 'navText'}>{myGroup?.haveTopic?"TOPIC DETAILS":"TOPIC REGISTRATION"}</div>
                     </div>
                      }
                     <div onClick={handleGroupRegistration} className={groupRegistration ? 'nav1Select' : 'nav1'}>
@@ -153,10 +176,11 @@ const StudentDashboard = () => {
 
                 </div>
                 <div className="student-dashboard">
+                    
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
-                    {topicRegistration&&<TopicRegistration/>}
+                    {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
                 </div>
             </div>
         </>

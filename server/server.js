@@ -44,6 +44,9 @@ app.use(templateRoutes);
 const submssionRouter = require("./routes/submssionRouter");
 app.use(submssionRouter);
 
+const topicEvaluationPanalRoutes = require("./routes/topicEvaluationPanalRoutes");
+app.use(topicEvaluationPanalRoutes);
+
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
 
