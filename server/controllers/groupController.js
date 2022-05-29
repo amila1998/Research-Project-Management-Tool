@@ -79,7 +79,22 @@ const groupController ={
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
-  }
+  },
+  getStutendGroup:async(req,res)=>{
+    try {
+        let studentId=req.params.user_id;
+        const submssion = await Groups.findOne({'members.user_id':studentId});
+        res.status(200).json({ 
+            submssion,
+            success: true
+        })                
+    } catch (error) {
+        res.status(500).json({ 
+            msg: error.message ,
+            success: false
+        }); 
+    }
+}
 
 }
 

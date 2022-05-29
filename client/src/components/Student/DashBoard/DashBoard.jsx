@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { SubmitInformation } from '../../StudentSubmission/SubmitInformation';
+import { SubmitInformation } from '../StudentSubmission/SubmitInformation';
 
 const DashBoard = () => {
  

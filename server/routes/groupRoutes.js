@@ -6,5 +6,5 @@ const admin = require("../middlewares/admin");
 
 route.post("/api/group/groupRegister",groupController.groupRegister);
 route.post("/api/group/getMutualStudents", auth,groupController.getMutualStudents);
-
+route.get("/api/group/getStutendGroup/:user_id",groupController.getStutendGroup);
 module.exports = route;

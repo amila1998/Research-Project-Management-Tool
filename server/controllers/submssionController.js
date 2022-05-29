@@ -9,8 +9,9 @@ const submssionController ={
             const newTem = new Submssion({
                 studentId,url,comments,groupID
             })
-            await newTem.save();  
+           const submitNew = await newTem.save();  
             res.status(200).json({ 
+                submitid:submitNew._id,
                 msg:"Submssion Added Successfull ;)" ,
                 success: true
             })     
