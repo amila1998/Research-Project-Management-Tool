@@ -7,7 +7,7 @@ import verify from "../../assets/img/verify.png"
 
 const Profile = () => {
     const { user, isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
-    console.log(user);
+    //console.log(user);
   return (
     <div className='myprofile'>
       <h1 className="userpro">User Profile{user.isverify?<><img type="button" src={verify} class="fa-solid fa-badge-check btn verfybatch" data-toggle="tooltip" data-placement="top" title="This is a Verification of Admin"/>
