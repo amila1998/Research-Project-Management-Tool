@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { AuthContext } from "../../../context/AuthContext";
 import axios from "axios";
 
 import Select from "react-select";
 import InputLabel from "@mui/material/InputLabel";
 import "./group.scss";
 import { ToastContainer, toast } from "react-toastify";
-import { isEmpty } from "../helper/validate";
+import { isEmpty } from "../../helper/validate";
 import "react-toastify/dist/ReactToastify.css";
-import Loading from "../Loading/Loading";
+import Loading from "../../Loading/Loading";
 import Radio from "@mui/material/Radio";
+import { useNavigate } from "react-router-dom";
 
 const CreateGroup = () => {
   const initialState = {
@@ -28,6 +29,7 @@ const CreateGroup = () => {
   const [group, setGroup] = useState(initialState);
   const { groupName, members } = group;
   const [selectedValue, setSelectedValue] = useState("");
+  const history = useNavigate();
 
   useEffect(() => {
     if (degree !== undefined || faculty !== undefined) {
@@ -143,6 +145,7 @@ const CreateGroup = () => {
         draggable: true,
         progress: undefined,
       });
+      window.location.href = "/";
     } catch (err) {
       console.log("🚀 ~~ handleSubmit ~ err", err);
       setIsLoading(false);
@@ -165,7 +168,7 @@ const CreateGroup = () => {
         name: student.name,
         user_id: student._id,
       },
-      label: student.name,
+      label: student.email,
     })
   );
 

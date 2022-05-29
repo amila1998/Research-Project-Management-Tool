@@ -1,11 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import './DashBoard.css';
 
 const DashBoard = () => {
  
   
   return (
-    <div>DashBoard</div>
+    <div className="Dash">DashBoard</div>
   )
 }
 

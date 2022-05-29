@@ -18,7 +18,7 @@ const SubmissionTypeManagement = () => {
      
      <div className="container-fluid align-items-center">
        <Link className="navbar-brand ms-2" to="/">
-         <h3>Agenda</h3>
+         <h3 className="Agenda">Agenda</h3>
        </Link>
        <span className="navbar-brand mb-0 h2 "><button onClick={addnewHandler} className='btn btn-outline-success'>{addSubmission?"View Calender":"Add New Submission"}</button></span>
      </div>

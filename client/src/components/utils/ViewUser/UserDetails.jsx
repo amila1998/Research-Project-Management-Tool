@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import ListItemText from "@mui/material/ListItemText";
@@ -12,8 +12,9 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import Avatar from '@mui/material/Avatar';
-
 import { styled } from "@mui/material";
+import axios from "axios";
+axios.defaults.withCredentials = true;
 
 const BootstrapButton = styled(Button)({
   boxShadow: "none",
@@ -47,8 +48,11 @@ const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ViewUserDetails = ({ data }) => {
+const UserDetails = ({member}) => {
   const [open, setOpen] = useState(false);
+console.log(member.user_id);
+  const[userDetails,setUserDetails]=useState();
+  const[callback,setCallback]=useState(true);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -58,11 +62,26 @@ const ViewUserDetails = ({ data }) => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    const getUser=async()=>{
+      if (callback) {
+        console.log(member.user_id);
+        const res = await axios.get(`/api/users/getuserDetails/${member.user_id}`);
+        console.log(res);
+        setUserDetails(res.data)
+        setCallback(false)
+      }
+    }
+    getUser();
+  }, [member.user_id])
+  
+
   return (
     <>
       <div>
-        <BootstrapButton variant="outlined" onClick={handleClickOpen}>
-          View All Details
+        <BootstrapButton variant="outlined" onClick={()=>{setCallback(true)
+        handleClickOpen()}}>
+         {member.name}
         </BootstrapButton>
         <Dialog
           open={open}
@@ -81,7 +100,7 @@ const ViewUserDetails = ({ data }) => {
                 <CloseIcon />
               </IconButton>
               <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                {data.name}
+                {userDetails?.name}
               </Typography>
             </Toolbar>
           </AppBar>
@@ -89,33 +108,33 @@ const ViewUserDetails = ({ data }) => {
           <List>
             <Avatar
               alt="Logo"
-              src={data.logo}
+              src={userDetails?.logo}
               sx={{ width: 200, height: 200 ,alignSelf:'center' }}
             />
             <Divider />
             <ListItem button>
-              <ListItemText primary="Name" secondary={data.name} />
+              <ListItemText primary="Name" secondary={userDetails?.name} />
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary="E-Mail" secondary={data.email} />
+              <ListItemText primary="E-Mail" secondary={userDetails?.email} />
             </ListItem>
             <Divider />
             <ListItem button>
-              <ListItemText primary="Role" secondary={data.role} />
+              <ListItemText primary="Role" secondary={userDetails?.role} />
             </ListItem>
             <Divider />
             <ListItem button>
               <ListItemText
                 primary="Verification"
-                secondary={data.isverify ? "Verified" : "Not Verified"}
+                secondary={userDetails?.isverify ? "Verified" : "Not Verified"}
               />
             </ListItem>
             <Divider />
             <ListItem button>
               <ListItemText
                 primary="Registered On"
-                secondary={new Date(data.createdAt).toLocaleDateString()}
+                secondary={new Date(userDetails?.createdAt).toLocaleDateString()}
               />
             </ListItem>
           </List>
@@ -126,4 +145,4 @@ const ViewUserDetails = ({ data }) => {
   );
 };
 
-export default ViewUserDetails;
+export default UserDetails;

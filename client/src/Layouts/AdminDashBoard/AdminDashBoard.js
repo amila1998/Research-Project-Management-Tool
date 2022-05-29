@@ -9,6 +9,7 @@ import { AiFillHome,AiFillCaretDown,AiFillCaretRight } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
+import { RiProfileFill } from "react-icons/ri";
 import { MdSupervisedUserCircle,MdDriveFolderUpload ,MdDocumentScanner,MdSchema} from "react-icons/md";
 import {  } from "react-icons/gr";
 import DashBoard from "../../components/Admin/DashBoard/DashBoard";
@@ -22,6 +23,7 @@ import {Provider} from "react-redux"
 import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/Redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
 import MarkingShemaManagement from "../../components/Admin/MarkingShemaManagement/MarkingShemaManagement";
+import GroupManagement from "../../components/Admin/GroupManagement/GroupManagement";
 
 const AdminDashboard = () => {
   const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -33,6 +35,7 @@ const AdminDashboard = () => {
   const [uploadtemplates, setUploadTemplates] = useState(false);
   const [markingSchema, setMarkingSchema] = useState(false);
   const [submissionTypeManagement, setSubmissionTypeManagement] = useState(false);
+  const [groupManagement, setGroupManagement] = useState(false);
 
 const history = useNavigate()
   const handleDashboard = () => {
@@ -43,6 +46,7 @@ const history = useNavigate()
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
+    setGroupManagement(false);
     history('/')
   };
 
@@ -54,6 +58,7 @@ const history = useNavigate()
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
+    setGroupManagement(false);
   }
   const handleUpdateProfile = () => {
     setDashboard(false);
@@ -63,6 +68,7 @@ const history = useNavigate()
     setUpdateProfile(!updateprofile);
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
+    setGroupManagement(false);
   }
 
   const handleUserManagement = () => {
@@ -73,6 +79,7 @@ const history = useNavigate()
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
+    setGroupManagement(false);
   }
 
   const handleUploadTemplates = () => {
@@ -83,6 +90,7 @@ const history = useNavigate()
     setUploadTemplates(true);
     setSubmissionTypeManagement(false);
     setMarkingSchema(false);
+    setGroupManagement(false);
   }
 
   const handleSubmissionTypeManagement = () => {
@@ -93,6 +101,7 @@ const history = useNavigate()
     setUploadTemplates(false);
     setSubmissionTypeManagement(true);
     setMarkingSchema(false);
+    setGroupManagement(false);
   }
 
   const handleMakingSchemaManagement =()=>{
@@ -103,6 +112,18 @@ const history = useNavigate()
     setUploadTemplates(false);
     setSubmissionTypeManagement(false);
     setMarkingSchema(true);
+    setGroupManagement(false);
+  }
+
+  const handleGroupManagement =()=>{
+    setDashboard(false);
+    setProfile(false);
+    setUserManagement(false);
+    setUpdateProfile(false);
+    setUploadTemplates(false);
+    setSubmissionTypeManagement(false);
+    setMarkingSchema(false);
+    setGroupManagement(true);
   }
 
   const logoutHadleClick =  async (e) =>{
@@ -145,6 +166,10 @@ const history = useNavigate()
           <div onClick={handleMakingSchemaManagement} className={markingSchema?'nav1Select':'nav1'}>
           <div className={markingSchema?"navIconSelect":"navIcon"}><MdSchema/></div>
           <div className={markingSchema?'navTextSelect':'navText'}>MARKING SCHEMA MANAGEMENT</div>
+          </div>
+          <div onClick={handleGroupManagement} className={groupManagement?'nav1Select':'nav1'}>
+          <div className={groupManagement?"navIconSelect":"navIcon"}><RiProfileFill/></div>
+          <div className={groupManagement?'navTextSelect':'navText'}>GROUP MANAGEMENT</div>
           </div>
 
 
@@ -194,6 +219,7 @@ const history = useNavigate()
           
           </>}
           {markingSchema&&<MarkingShemaManagement/>}
+          {groupManagement&&<GroupManagement/>}
            </div>
        </div>
       

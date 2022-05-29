@@ -1,8 +1,9 @@
-import React from 'react'
+import React from 'react';
+import './MarkingShemaManagement.css';
 
 const MarkingShemaManagement = () => {
   return (
-    <div>MarkingShemaManagement</div>
+    <div className="marking">MarkingShema Management</div>
   )
 }
 

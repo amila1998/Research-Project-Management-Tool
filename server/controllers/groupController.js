@@ -94,7 +94,19 @@ const groupController ={
             success: false
         }); 
     }
-}
+},
+  getMyGroupDetails:async(req,res)=>{
+    try {
+      const userID=req.params.id;
+      const myGroup = await Groups.findOne({'members.user_id':userID})
+      res.status(200).json(myGroup);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+   
+
+
+  }
 
 }
 
