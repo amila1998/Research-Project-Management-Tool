@@ -50,6 +50,8 @@ app.use("/api/events", eventRoute)
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
 
+const markingSchemaRouter = require("./routes/markingSchemaRoutes");
+app.use(markingSchemaRouter);
 
 
 const startApp = async () => {
