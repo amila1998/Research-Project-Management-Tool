@@ -32,7 +32,7 @@ export default function Navbar() {
           </ul> */}
         </li> 
         <li className="nav-item">
-          <a className="nav-link" href="#">Contact Us</a>
+          <a className="nav-link" href="/contactus">Contact Us</a>
         </li>
       </ul>
       {/* <form className="d-flex">

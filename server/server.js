@@ -44,12 +44,17 @@ app.use(templateRoutes);
 const submssionRouter = require("./routes/submssionRouter");
 app.use(submssionRouter);
 
+const topicEvaluationPanalRoutes = require("./routes/topicEvaluationPanalRoutes");
+app.use(topicEvaluationPanalRoutes);
+
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
 
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
 
+const markingSchemaRouter = require("./routes/markingSchemaRoutes");
+app.use(markingSchemaRouter);
 
 
 const startApp = async () => {
