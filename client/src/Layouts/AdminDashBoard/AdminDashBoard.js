@@ -22,8 +22,9 @@ import SubmissionTypeManagement from "../../components/Admin/SubmissionTypeManag
 import {Provider} from "react-redux"
 import store, {persistor} from '../../components/Admin/SubmissionTypeManagement/Redux/store';
 import { PersistGate } from 'redux-persist/integration/react'
-import MarkingShemaManagement from "../../components/Admin/MarkingShemaManagement/MarkingShemaManagement";
+import MarkingSchemaManagement from "../../components/Admin/MarkingSchemaManagement/MarkingSchemaManagement";
 import GroupManagement from "../../components/Admin/GroupManagement/GroupManagement";
+import EvaluateSubmission from "../../components/Admin/MarkingSchemaManagement/EvaluateSubmission";
 import TopicEvaluationPanelManagement from "../../components/Admin/TopicEvaluationPanelManagement/TopicEvaluationPanelManagement";
 
 const AdminDashboard = () => {
@@ -244,7 +245,8 @@ const history = useNavigate()
             
           
           </>}
-          {markingSchema&&<MarkingShemaManagement/>}
+          {markingSchema&&<MarkingSchemaManagement/>}
+          {/* {markingSchema&&<EvaluateSubmission/>} */}
           {groupManagement&&<GroupManagement/>}
           {topicEvaluationPanelManagement&&<TopicEvaluationPanelManagement/>}
            </div>
