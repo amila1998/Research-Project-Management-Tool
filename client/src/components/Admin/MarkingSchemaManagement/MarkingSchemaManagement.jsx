@@ -31,6 +31,7 @@ const MarkingSchemaManagement = () => {
   const [submissionTypeID, setSubmissionTypeID] = useState("");
   const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [enableUpdate, setEnableUpdate] = useState(true);
   const navigate = useNavigate();
   const initialSchemaData = [
     {
@@ -101,7 +102,8 @@ const MarkingSchemaManagement = () => {
 
   const preview = () => {
     createData();
-    setPreviewEnabled(!previewEnabled);
+    setPreviewEnabled(!previewEnabled);    
+    setEnableUpdate(false);
   };
 
   const onClickUpdate = () => {
@@ -313,6 +315,7 @@ const MarkingSchemaManagement = () => {
                     &nbsp;
                     <Button
                       variant="outlined"
+                      disabled={enableUpdate}
                       onClick={() => {
                         onClickUpdate();
                       }}
@@ -323,6 +326,7 @@ const MarkingSchemaManagement = () => {
                     <Button
                     type="submit"
                     variant="outlined"
+                    disabled={enableUpdate}
                     onClick={(e) => {
                       onClickSave(e);
                     }}
