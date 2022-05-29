@@ -5,7 +5,18 @@ const StudentGroupDetails = ({groupData}) => {
   return (
       <>
       <div className='GDtopic'>{groupData.groupName.toUpperCase()} GROUP DETAILS</div>
-        <div>Your Group level is {groupData.level+1}. You have to complete few more task.</div>
+        <div>Your Group level is {groupData.level}</div>
+        <div className='steps'>
+            <span className="line-1"></span>
+            <span className="line-2"></span>
+            <span className="line-3"></span>
+            <span className="line-4"></span>
+            <span className="line-5"></span>
+            <span className="line-6"></span>
+            {groupData.level===0&&<><div  className='nextStep'>Next Step:  Register Your Topic under the Topic Registraion</div></>}
+            {groupData.level===-1&&<><div className='backStep'>Please Delete and Add a new Topic under the Topic Details</div></>}
+            {groupData.level===1&&<><div className='nextStep'>Next Step: Request a Supervisor</div></>}
+        </div>
         <br></br>
         
         <div>
@@ -30,7 +41,6 @@ const StudentGroupDetails = ({groupData}) => {
                     <td>{items.isLeader?"Leader":"Memeber"}</td>
                     <td></td>
                     <td></td>
-                  
                 </tr>
             ))
         }
