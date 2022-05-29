@@ -28,8 +28,8 @@ export default function Header() {
         <button>Login</button>
         
         </>:<>
-        
-        <h3 className="nav-link-active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>
+      
+      <h3 className="nav-link-active" aria-current="page" onClick={() => navigate('/profile')}>{user.name}</h3>&nbsp;&nbsp;
         <Avatar />
         
         </>}

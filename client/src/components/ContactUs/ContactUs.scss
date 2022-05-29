@@ -1,0 +1,85 @@
+@import "../variables/variables.scss";
+
+.sub {
+    margin-top: 10px;
+    font-weight: 700;
+    font-size: 1.7rem;
+    background: #ff6a06;
+    color: white;
+    border-radius: 10px;
+    border-color: white;
+    background-size: auto;
+}
+
+.brand-title {
+    margin-top: 10px;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: #ff6a06;
+    letter-spacing: 1px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.inputs {
+    text-align: left;
+    margin-top: 30px;
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+
+}
+
+.button {
+    color: white;
+    margin-top: 20px;
+    background: #ff6a06;
+    height: 40px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 900;
+
+
+}
+
+button:hover {
+    box-shadow: none;
+}
+
+.form {
+
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    padding: 20px;
+    margin: auto;
+
+}
+
+.input100 {
+    width: 100%;
+}
+
+.message {
+    width: 100%;
+}
+
+.inpt {
+    width: 100%;
+
+    input {
+        width: 100%;
+    }
+
+    textarea {
+        width: 100%;
+    }
+}
+.alert {
+    padding: 10px;
+    background-color:rgb(54, 216, 52);
+    text-align: center;
+}
