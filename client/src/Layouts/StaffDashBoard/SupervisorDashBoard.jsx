@@ -14,7 +14,7 @@ import DashBoard from "../../components/Admin/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
 import UserManagement from "../../components/Admin/UserManagement/UserManagement";
-import { SubmitInformation } from "../../components/StudentSubmission/SubmitInformation";
+
 
 const SupervisorDashBoard = () => {
     const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
@@ -112,7 +112,7 @@ const SupervisorDashBoard = () => {
      </div>
     
            <div className="right">
-          {dashboard&&<SubmitInformation/>}
+          {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {userManagement&&<UserManagement/>}
            
