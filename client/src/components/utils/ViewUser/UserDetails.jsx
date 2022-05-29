@@ -50,7 +50,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const UserDetails = ({member}) => {
   const [open, setOpen] = useState(false);
-console.log(member.user_id);
   const[userDetails,setUserDetails]=useState();
   const[callback,setCallback]=useState(true);
 
@@ -65,9 +64,7 @@ console.log(member.user_id);
   useEffect(() => {
     const getUser=async()=>{
       if (callback) {
-        console.log(member.user_id);
         const res = await axios.get(`/api/users/getuserDetails/${member.user_id}`);
-        console.log(res);
         setUserDetails(res.data)
         setCallback(false)
       }
@@ -81,7 +78,7 @@ console.log(member.user_id);
       <div>
         <BootstrapButton variant="outlined" onClick={()=>{setCallback(true)
         handleClickOpen()}}>
-         {member.name}
+         {userDetails?.name}
         </BootstrapButton>
         <Dialog
           open={open}

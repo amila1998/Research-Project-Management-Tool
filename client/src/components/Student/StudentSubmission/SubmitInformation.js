@@ -16,21 +16,36 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-export const SubmitInformation = () => {
+export const SubmitInformation = ({evt}) => {
+// console.log("🚀 ~ file: SubmitInformation.js ~ line 20 ~ SubmitInformation ~ evt", evt)
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-  
-    const [subid,setsubid] = React.useState();
+    const [subid,setsubid] = React.useState(); 
+    const[isOpen,setisOpen]= React.useState(false);
+    
+    let countDownDate = new Date(evt.end).getTime();
+    let now = new Date().getTime();
+    let timeLeft = countDownDate - now;
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
 
-  console.log(subid);
+  
+  
+    const openbuttonhadal =()=>{
+        setisOpen(!isOpen)
+    }
+
+ 
   return (
     <div>
         
-        SubmitInformation
+        
+        {evt.title}
 
-
+{isOpen &&<>
 
 
     <table class="table table-striped">
@@ -43,22 +58,25 @@ export const SubmitInformation = () => {
     </tr>
     <tr>
       <th scope="row">Grading Status</th>
-      <td>Grading Status</td>
+      <td>{evt.describe}</td>
      
       
     </tr>
     <tr>
       <th scope="row">Due Data</th>
-      <td>	Tuesday, 8 February 2022, 12:00 AM</td>
+      <td>{new Date(evt.end).toLocaleDateString()}</td>
       
      
     </tr>
-    <tr>
+   {days>0 &&<><tr>
       <th scope="row">Time Remaining</th>
-      <td>Assignment was submitted 6 hours 56 mins early</td>
-      
-     
-    </tr>
+      <td>you have {days} days  {hours} hours {minutes} mins </td>
+    </tr></>}
+    {days<0 &&<><tr>
+      <th scope="row">Time Remaining</th>
+      <td>you Submission time excide {days} days  {hours} hours {minutes} mins </td>
+    </tr></>}
+
     <tr>
       <th scope="row">Last Modified</th>
       <td>Monday, 7 February 2022, 5:03 PM</td>
@@ -87,12 +105,14 @@ export const SubmitInformation = () => {
             Add Submission
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           <AddSubmission setsubid={setsubid}/>
+           <AddSubmission eventId={evt._id}/>
           </Typography>
         </Box>
       </Modal>
+     
     </div>
-
+    </>}
+    <button onClick={openbuttonhadal}>{isOpen?'Hide':'open'}</button>
 
     </div>
   )

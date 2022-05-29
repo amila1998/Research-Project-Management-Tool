@@ -17,6 +17,19 @@ router.get("/", auth, admin, async(req, res)=>{
         handleError(err, res)
     }
 });
+router.get("/got", auth,async(req, res)=>{
+
+    const events = await SubmissionType.find({});
+ 
+    try{
+       
+       res.status(200).json(events)
+
+      
+    }catch(err){
+        handleError(err, res)
+    }
+});
 
 router.get("/:id/show",auth, admin, async(req, res)=>{
     const id =   req.params.id
