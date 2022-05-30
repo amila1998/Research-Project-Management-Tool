@@ -6,6 +6,23 @@ const Group = require('../models/groupsModel')
 const requestSupervisorController={
     sendARequest:async(req,res)=>{
         try {
+            const group_id = req.params.gid;
+            const {supervisor} = req.body
+            const myGroup =await Group.findById(group_id);
+            if(!myGroup){
+                return res.status(400).json({msg:"Can't find your Group"});
+            }
+            await Group.findByIdAndUpdate(group_id,{
+                'supervisor.name':supervisor.name,
+                'supervisor.user_id':supervisor._id,
+                'level':2
+            });
+            //TO DO: Send a mail to supervisor
+            res.status(200).json({
+                msg: "Request Successfull !",
+                success: true
+              });
+
             
         } catch (error) {
             res.status(500).json({
@@ -19,6 +36,10 @@ const requestSupervisorController={
             const group_id = req.params.gid;
             const topic_id = req.params.tid;
 
+            const myGroup =await Group.findById(group_id);
+            if(!myGroup){
+                return res.status(400).json({msg:"Can't find your Group"});
+            }
             const oldSupervisors = await MyRejectedSupervisors.find({'group_id':group_id})
             if (oldSupervisors) {
                 
@@ -59,6 +80,21 @@ const requestSupervisorController={
                 res.status(200).json(relatedSupervisors);
 
            
+        } catch (error) {
+            res.status(500).json({
+                msg: error.message,
+                success: false
+              });
+        }
+    },
+    getMyGroupRequests:async(req,res)=>{
+        try {
+          const groupsRq =   await Group.find({
+              'supervisor.user_id':req.user.id,
+              'supervisor.isAccept':null
+          })
+          res.status(200).json(groupsRq);
+            
         } catch (error) {
             res.status(500).json({
                 msg: error.message,

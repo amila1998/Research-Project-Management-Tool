@@ -14,3 +14,8 @@ main{
     padding: 10px;
 }
 
+.loadingBody{
+    margin: auto;
+    align-items: center;
+}
+

@@ -14,14 +14,14 @@ const StudentGroupDetails = ({groupData}) => {
             <span className="line-5"></span>
             <span className="line-6"></span>
             {groupData.level===0&&<><div  className='nextStep'>Next Step:  Register Your Topic under the Topic Registraion</div></>}
-            {groupData.level===-1&&<><div className='backStep'>Please Delete and Add a new Topic under the Topic Details</div></>}
             {groupData.level===1&&<><div className='nextStep'>Next Step: Request a Supervisor</div></>}
+            {groupData.level===2&&<><div className='warnStep'>Wait for the Supervisor Response.</div></>}
+            {groupData.level===-1&&<><div className='backStep'>Please Try another Supervisor</div></>}
+            {groupData.level===3&&<><div className='warnStep'>Wait for the Topic Acception a from Topic Evaluvation Panal Member</div></>}
+            {groupData.level===-2&&<><div className='backStep'>Please Try another Topic</div></>}
         </div>
         <br></br>
-        <div>
-        {groupData.level===1&& <></>}
 
-        </div>
         
         <div>
         <table>
