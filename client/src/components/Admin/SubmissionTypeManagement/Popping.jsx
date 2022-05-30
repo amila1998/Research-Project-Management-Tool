@@ -9,7 +9,8 @@ import UpdateEvent from './UpdateEvent'
 
 const Popping = ({open, handleClose, event, deleteEventApi, renderStatus, rerender})=> {
   const navigate = useNavigate();
-  const {id, describe, title, start, end} = event;
+  const {id, describe, title, type, start, end} = event;
+  console.log("🚀 ~ file: Popping.jsx ~ line 13 ~ Popping ~ event", event)
   const [update,setUpdate]=useState(false);
 
    const updateHandler =()=>{
@@ -32,6 +33,7 @@ const Popping = ({open, handleClose, event, deleteEventApi, renderStatus, rerend
           <Modal.Body>
             {update?<><UpdateEvent setUpdate={setUpdate}/></>:<>{describe? <p className="lead">{describe}</p>: "No Dsecriptions Yet"}
             <div className="row justify-content-between">
+              <p className="col small text-muted text-center pb-0 mb-0">Submission Type: {type}</p>
               <p className="col small text-muted text-center pb-0 mb-0">from: {start}</p>
               <p className="col small text-muted text-center pb-0 mb-0">to: {end}</p>
             </div></>}
