@@ -13,7 +13,8 @@ import { MdSupervisedUserCircle } from "react-icons/md";
 
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
-import DashBoard from "../../components/Supervisor/DashBoard/Dashboard";
+import DashBoard from "../../components/Staff/Supervisor/DashBoard/Dashboard";
+import Requests from "../../components/Staff/Supervisor/Requests/Requests";
 
 
 
@@ -23,6 +24,8 @@ const SupervisorDashBoard = () => {
     const [profile, setProfile] = useState(false);
     const [updateprofile, setUpdateProfile] = useState(false);
     const [groups, setGroups] = useState(false);
+    const [groupsrequests, setGroupRequests]=useState(false);
+    const [groupsSubmissions, setGroupSubmissions]=useState(false);
 
   
     const history = useNavigate()
@@ -30,6 +33,8 @@ const SupervisorDashBoard = () => {
       setDashboard(true);
       setProfile(false);
       setUpdateProfile(false);
+      setGroupRequests(false);
+      setGroupSubmissions(false);
       window.location.href=('/')
     };
   
@@ -37,12 +42,32 @@ const SupervisorDashBoard = () => {
       setDashboard(false);
       setProfile(true);
       setUpdateProfile(false);
+      setGroupRequests(false);
+      setGroupSubmissions(false);
     }
     
     const handleUpdateProfile = () => {
       setDashboard(false);
       setProfile(profile);
       setUpdateProfile(!updateprofile);
+      setGroupRequests(false);
+      setGroupSubmissions(false);
+    }
+
+    const handleGroupRequets = () => {
+      setDashboard(false);
+      setProfile(false);
+      setUpdateProfile(false);
+      setGroupRequests(true);
+      setGroupSubmissions(false);
+    }
+
+    const handleGroupSubmissions = () => {
+      setDashboard(false);
+      setProfile(false);
+      setUpdateProfile(false);
+      setGroupRequests(false);
+      setGroupSubmissions(true);
     }
   
 
@@ -70,13 +95,13 @@ const SupervisorDashBoard = () => {
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
           <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
           </div>
-          <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
-          <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
-          <div className={dashboard?'navTextSelect':'navText'}>GROUP REQUESTS</div>
+          <div onClick={handleGroupRequets} className={groupsrequests?'nav1Select':'nav1'}>
+          <div className={groupsrequests?"navIconSelect":"navIcon"}><AiFillHome/></div>
+          <div className={groupsrequests?'navTextSelect':'navText'}>GROUP REQUESTS</div>
           </div>
-          <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
-          <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
-          <div className={dashboard?'navTextSelect':'navText'}>GROUP SUBMISSIONS</div>
+          <div onClick={handleGroupSubmissions} className={groupsSubmissions?'nav1Select':'nav1'}>
+          <div className={groupsSubmissions?"navIconSelect":"navIcon"}><AiFillHome/></div>
+          <div className={groupsSubmissions?'navTextSelect':'navText'}>GROUP SUBMISSIONS</div>
           </div>
        
 
@@ -114,6 +139,7 @@ const SupervisorDashBoard = () => {
            <div className="right">
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
+          {groupsrequests&&<Requests/>}
         
            
            </div>

@@ -34,6 +34,9 @@ const StudentDashboard = () => {
     const [topicRegistration,setTopicRegistration]=useState(false);
     const [groupchat,setGroupChat]=useState(false);
     const [requestSupervisor,setRequestSupervisor]=useState(false);
+    const [requestCoSupervisor,setRequestCoSupervisor]=useState(false);
+    const [supervisorDetails,setSupervisorDetails]=useState(false);
+    const [cosupervisorDetails,setCoSupervisorDetails]=useState(false);
 
 
 
@@ -81,6 +84,7 @@ const StudentDashboard = () => {
         setTopicRegistration(false);
         setGroupChat(false);
         setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
         window.location.href=('/');
     };
 
@@ -91,6 +95,7 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
         setGroupChat(false);
+        setRequestCoSupervisor(false);
         setRequestSupervisor(false);
     }
     const handleUpdateProfile = () => {
@@ -101,6 +106,7 @@ const StudentDashboard = () => {
         setTopicRegistration(false);
         setGroupChat(false);
         setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     }
 
     const handleGroupRegistration = () => {
@@ -111,6 +117,7 @@ const StudentDashboard = () => {
         setTopicRegistration(false);
         setGroupChat(false);
         setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     }
 
     const handleTopicRegistration =()=>{
@@ -121,6 +128,7 @@ const StudentDashboard = () => {
         setTopicRegistration(true);
         setGroupChat(false);
         setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     } 
 
     const handleGroupChat = () => {
@@ -131,6 +139,7 @@ const StudentDashboard = () => {
         setTopicRegistration(false);
         setGroupChat(true);
         setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     } 
 
     const handleRequestSupervisor = () => {
@@ -141,6 +150,18 @@ const StudentDashboard = () => {
         setTopicRegistration(false);
         setGroupChat(false);
         setRequestSupervisor(true);
+        setRequestCoSupervisor(false);
+    } 
+
+    const handleRequestCoSupervisor = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(false);
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(true);
     } 
 
     
@@ -166,6 +187,12 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
+                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept&&
+                    <div onClick={handleRequestCoSupervisor} className={requestCoSupervisor ? 'nav1Select' : 'nav1'}>
+                        <div className={requestCoSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===2?"REQUEST SUPERVISOR":"GROUP SUPERVISOR DETAILS"}</div>
+                    </div>
+                     }
                     {user.student?.haveAGroup&&
                     <div onClick={handleRequestSupervisor} className={requestSupervisor ? 'nav1Select' : 'nav1'}>
                         <div className={requestSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
