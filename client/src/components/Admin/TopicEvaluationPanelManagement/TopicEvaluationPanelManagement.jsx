@@ -35,6 +35,7 @@ const TopicEvaluationPanelManagement = () => {
     }
     const [evaPanalMembers,setEvaPanalMembers]=useState([]);
     const [callback,setCallback]=useState(true);
+    //console.log("🚀 ~ file: TopicEvaluationPanelManagement.jsx ~ line 38 ~ TopicEvaluationPanelManagement ~ callback", callback)
     const [panalMembers,setPanalMemebers]=useState([]);
     const [loading,setLoading]=useState(false);
     const [panalMember_id,setPanalMemeber_id]=useState();
@@ -42,42 +43,44 @@ const TopicEvaluationPanelManagement = () => {
     
 
     useEffect(() => {
+      if(callback){
       const getEvaPanalMembers = async()=>{
-        if(callback){
+      
             try {
                 setLoading(true)
                 const res = await axios.get('/api/topicEvPanlMem/getAll');
                 setEvaPanalMembers(res.data);
-                //setCallback(false)
+                setCallback(false)
                 setLoading(false)
             } catch (error) {
                 console.log(error);
                 setLoading(false)
             }
         }
-
+        getEvaPanalMembers()
       }
-      getEvaPanalMembers()
-    }, [])
+    
+    }, [callback])
 
     useEffect(() => {
+      if(callback){
         const getPanalMembers = async()=>{
-          if(callback){
+         
               try {
                 setLoading(true)
                   const res = await axios.get('/api/topicEvPanlMem/getAllPanaleMem');
                   setPanalMemebers(res.data);
-                  //setCallback(false)
+                  setCallback(false)
                   setLoading(false)
               } catch (error) {
               console.log("🚀 ~ file: TopicEvaluationPanelManagement.jsx ~ line 71 ~ getPanalMembers ~ error", error)
               setLoading(false)
               }
           }
-  
+          getPanalMembers()
         }
-        getPanalMembers()
-      }, [])
+        
+      }, [callback])
 
       const handlePanalMember =(e)=>{
         setPanalMemeber_id(e.value)
@@ -104,7 +107,7 @@ const TopicEvaluationPanelManagement = () => {
                     draggable: true,
                     progress: undefined,
                   });
-                  setCallback(true);
+                  
                   handleClose()
                   setLoading(false)
             } catch (error) {
@@ -120,6 +123,7 @@ const TopicEvaluationPanelManagement = () => {
                   });
                   setLoading(false)
             }
+            setCallback(true);
 
         }
         const handleDelete=async(id)=>{
@@ -134,7 +138,7 @@ const TopicEvaluationPanelManagement = () => {
                     draggable: true,
                     progress: undefined,
                   });
-                  setCallback(true);
+                  
                   setLoading(false)
                 
             } catch (error) {
@@ -150,6 +154,7 @@ const TopicEvaluationPanelManagement = () => {
                   });
                   setLoading(false)
             }
+            setCallback(true);
         }
     
   return (
