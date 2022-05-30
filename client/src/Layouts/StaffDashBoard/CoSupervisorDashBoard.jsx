@@ -10,7 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdSupervisedUserCircle } from "react-icons/md";
-import DashBoard from "../../components/Admin/DashBoard/DashBoard";
+import DashBoard from "../../components/Staff/CoSupervisor/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
 import UserManagement from "../../components/Admin/UserManagement/UserManagement";

@@ -13,7 +13,7 @@ import { MdSupervisedUserCircle } from "react-icons/md";
 
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
-import DashBoard from "../../components/Supervisor/DashBoard/Dashboard";
+import DashBoard from "../../components/Staff/Supervisor/DashBoard/Dashboard";
 import Requests from "../../components/Staff/Supervisor/Requests/Requests";
 
 
