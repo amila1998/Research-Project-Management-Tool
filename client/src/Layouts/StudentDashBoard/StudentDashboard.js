@@ -224,7 +224,7 @@ const StudentDashboard = () => {
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
                     {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
                     {myGroup&&groupchat&&<GroupChat group={myGroup}/>}
-                    {requestSupervisor&&myGroup?.level===1?<RequestSupervisor/>:requestSupervisor&&<></>}
+                    {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<></>}
                 </div>
             </div>
         </>
