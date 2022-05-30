@@ -59,6 +59,9 @@ app.use(topicsRouter);
 const markingSchemaRouter = require("./routes/markingSchemaRoutes");
 app.use(markingSchemaRouter);
 
+const evaluationsRouter = require("./routes/evaluationsRoutes");
+app.use(evaluationsRouter);
+
 
 const startApp = async () => {
     try {
