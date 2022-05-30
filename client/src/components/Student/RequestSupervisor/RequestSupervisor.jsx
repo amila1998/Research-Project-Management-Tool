@@ -45,6 +45,36 @@ const RequestSupervisor = ({topic,group}) => {
       }
       getSupervisor();
     }, [topic,group])
+
+
+    const requestHandler=async(supervisor)=>{
+      try {
+        const res = await axios.post(`/api/supervisor/sendRequest/${group._id}`,{supervisor:supervisor});
+        toast.success(res.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        window.location.href=('/')
+      } catch (error) {
+      console.log("🚀 ~ file: RequestSupervisor.jsx ~ line 54 ~ requestHandler ~ error", error)
+      toast.error(error.response.data.message, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+     
+      }
+    }
     
   return (
     <div> <ToastContainer/>
@@ -95,7 +125,7 @@ const RequestSupervisor = ({topic,group}) => {
               </Box>
             </Modal>
           </div>
-          <div className='col'><button className='btn btn-outline-success'>REQUEST</button></div>
+          <div className='col'><button onClick={()=>requestHandler(item)} className='btn btn-outline-success'>REQUEST</button></div>
           </div>
         </div>
 

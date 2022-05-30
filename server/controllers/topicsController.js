@@ -48,6 +48,18 @@ const topicController = {
                 success: false
             });
         }
+    },
+    getATopic:async(req,res)=>{
+        try {
+            const group_id = req.params.groupId
+            const topic = await Topic.findOne({'group_id':group_id})
+            res.status(200).json(topic);
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
+        }
     }
 
 
