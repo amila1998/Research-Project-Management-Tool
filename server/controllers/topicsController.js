@@ -20,7 +20,7 @@ const topicController = {
                 })
 
                 await newTopic.save();
-                await Group.findByIdAndUpdate(group_id,{"haveTopic":true});
+                await Group.findByIdAndUpdate(group_id,{"haveTopic":true,'level':1});
                 return res.status(200).json({ msg: "Registration Successfull ! " });
             
         } catch (error) {
