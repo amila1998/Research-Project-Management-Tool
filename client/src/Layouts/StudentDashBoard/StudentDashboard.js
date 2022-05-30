@@ -217,7 +217,7 @@ const StudentDashboard = () => {
                     </div>
 
                 </div>
-                <div className="student-dashboard">
+                <div className="right">
                     
                     {dashboard && <DashBoard />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
