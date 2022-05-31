@@ -9,5 +9,6 @@ route.get('/api/supervisor/getsupervisortoreq/:tid/:gid',auth,requestSupervisor.
 route.post('/api/supervisor/sendRequest/:gid',auth,requestSupervisor.sendARequest)
 
 route.get('/api/supervisor/getmygrouprequests',auth,supervisor,requestSupervisor.getMyGroupRequests)
+route.post('/api/supervisor/giveResponse/:gid',auth,supervisor,requestSupervisor.giveResponse)
 
 module.exports = route;
