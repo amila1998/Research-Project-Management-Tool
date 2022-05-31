@@ -14,3 +14,32 @@
 .btnbody{
     display: flex
 }
+
+.statusimg{
+    width: 150px;
+ 
+}
+.statusimg2{
+    width: 100px;
+ 
+}
+.statusbtn{
+    padding: 20px;
+    width: 100%;
+    font-weight: 500;
+    font-size: 26px;
+}
+.rej{
+    padding: 10px;
+    outline-style: dotted;
+    outline-color: rgb(255, 0, 21);
+    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.rejtxt{
+    padding: 10px;
+    color: rgb(255, 0, 0);
+    font-size: 18px;
+}

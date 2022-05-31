@@ -53,6 +53,9 @@ app.use(supervisorRoutes);
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
 
+const myRejectedSupervisorsRoutes =require("./routes/myRejectedSupervisorsRoutes")
+app.use(myRejectedSupervisorsRoutes);
+
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
 

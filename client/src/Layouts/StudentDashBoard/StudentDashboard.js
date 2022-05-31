@@ -19,6 +19,7 @@ import TopicRegistration from '../../components/Student/TopicRegistration/TopicR
 import TopicDetails from '../../components/Student/TopicDetails/TopicDetails';
 import GroupChat from '../../components/GroupChat/GroupChat';
 import RequestSupervisor from '../../components/Student/RequestSupervisor/RequestSupervisor';
+import GroupSupervisorDetaiils from '../../components/Student/GroupSupervisorDetails/GroupSupervisorDetaiils';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -26,7 +27,7 @@ const StudentDashboard = () => {
     const { dispatch, user, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
     const [myGroup,setMyGroup]=useState();
     const [topicDetails,setTopicDetail]=useState();
-
+    const [callbackStd,setCallBackStd]=useState(true);
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
@@ -187,10 +188,10 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
-                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept&&
+                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&
                     <div onClick={handleRequestCoSupervisor} className={requestCoSupervisor ? 'nav1Select' : 'nav1'}>
                         <div className={requestCoSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
-                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===2?"REQUEST SUPERVISOR":"GROUP SUPERVISOR DETAILS"}</div>
+                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===3?"REQUEST CO-SUPERVISOR":"GROUP CO-SUPERVISOR DETAILS"}</div>
                     </div>
                      }
                     {user.student?.haveAGroup&&
@@ -251,7 +252,7 @@ const StudentDashboard = () => {
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
                     {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
                     {myGroup&&groupchat&&<GroupChat group={myGroup}/>}
-                    {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<></>}
+                    {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<><GroupSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
                 </div>
             </div>
         </>

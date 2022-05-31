@@ -5,7 +5,8 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Loading from '../../../Loading/Loading'
 import UserDetails from '../../../utils/ViewUser/UserDetails';
-import ViewTopicDetails from '../../../utils/ViewTopicDetails/ViewTopicDetails'
+import ViewTopicDetails from '../../../utils/ViewTopicDetails/ViewTopicDetails';
+
 const Requests = () => {
     ///api/supervisor/getmygrouprequests
     const [myRequests,setMyRequests]=useState([]);
@@ -20,6 +21,8 @@ const Requests = () => {
                     const res = await axios.get(`/api/supervisor/getmygrouprequests`);
                     setMyRequests(res.data);
                     setLoading(false);
+                    setCallback(false);
+                 
                 } catch (error) {
                 console.log("🚀 ~ file: Requests.jsx ~ line 18 ~ getMyRequests ~ error", error)
                     
@@ -30,18 +33,72 @@ const Requests = () => {
     }, [callback])
     
     const conformHandler =async(id)=>{
+    try {
+        const res = await axios.post(`/api/supervisor/giveResponse/${id}`,{
+            supervisorResponse:true,
+            level:3
+        })
+        console.log("🚀 ~ file: Requests.jsx ~ line 39 ~ conformHandler ~ res", res)
+        toast.success(res.data.msg ,{
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+    } catch (error) {
+        toast.error(error.response.data.msg ,{
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+    }
+    setCallback(true);
 
     }
 
     const rejectmHandler=async(id)=>{
-
+        try {
+            const res = await axios.post(`/api/supervisor/giveResponse/${id}`,{
+                supervisorResponse:false,
+                level:-1
+            })
+            console.log("🚀 ~ file: Requests.jsx ~ line 67 ~ rejectmHandler ~ res", res)
+            toast.success(res.data.msg ,{
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        } catch (error) {
+            console.log("🚀 ~ file: Requests.jsx ~ line 78 ~ rejectmHandler ~ error", error)
+            toast.error(error.response.data.msg ,{
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        }
+        setCallback(true)
     }
 
   return (
-    <div>
+    <div >
 {loading?<><div className='loadingBody'><Loading/></div></>:<>
-
-<div>
+<ToastContainer/>
+<div className="Dash">
 You have {myRequests.length} Requests
 
 </div>
