@@ -50,7 +50,7 @@ const topicEvaluationPanelController ={
     },
     check:async(req,res)=>{
         try {
-            const user_id = req.body;
+            const user_id = req.params.uid;
             const exitTEvPanlMem = await TopicEvPanel.findOne({'user_id':user_id});
             if (exitTEvPanlMem) {
                 return res.status(200).json({ success:true });

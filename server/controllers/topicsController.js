@@ -60,6 +60,18 @@ const topicController = {
                 success: false
             });
         }
+    },
+    getAllTopics:async(req,res)=>{
+        try {
+            const topics = await Topic.find();
+            res.status(200).json(topics);
+            
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
+        }
     }
 
 
