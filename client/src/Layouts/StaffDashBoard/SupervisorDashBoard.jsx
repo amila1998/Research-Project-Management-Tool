@@ -13,9 +13,8 @@ import { MdSupervisedUserCircle } from "react-icons/md";
 
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
-import DashBoard from "../../components/Staff/Supervisor/DashBoard/Dashboard";
 import Requests from "../../components/Staff/Supervisor/Requests/Requests";
-
+import SupervisorDashBoardComp from '../../components/Staff/Supervisor/DashBoard/SupervisorDashBoardComp';
 
 
 const SupervisorDashBoard = () => {
@@ -138,7 +137,7 @@ const SupervisorDashBoard = () => {
      </div>
     
            <div className="right">
-          {dashboard&&<DashBoard/>}
+          {dashboard&&<SupervisorDashBoardComp/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {groupsrequests&&<Requests/>}
         

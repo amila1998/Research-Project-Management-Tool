@@ -10,7 +10,7 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdSupervisedUserCircle } from "react-icons/md";
-import DashBoard from "../../components/Staff/PanalMember/DashBoard/DashBoard";
+import PanalMemberDashBoardComp from "../../components/Staff/PanalMember/DashBoard/PanalMemberDashBoardComp";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
 axios.defaults.withCredentials = true;
@@ -129,7 +129,7 @@ export const PanelMemberDashBoard = () => {
      </div>
     
            <div className="right">
-          {dashboard&&<DashBoard/>}
+          {dashboard&&<PanalMemberDashBoardComp/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {topicmanagement&&isEvaPanlMem&&<TopicManagement/>}
            

@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DashBoard = () => {
+const PanalMemberDashBoardComp = () => {
   return (
     <div className="Dash">Panal Member DashBoard</div>
   )
 }
 
-export default DashBoard
+export default PanalMemberDashBoardComp
