@@ -81,7 +81,6 @@ const evaluationController = {
     getLevel: async (req, res) => {
         try {
             const { submissionTypeId, groupId } = req.body;
-            console.log("🚀 ~ file: evaluationsController.js ~ line 84 ~ getLevel: ~  submissionTypeId, groupId",  submissionTypeId, groupId)
             const evaluation = await Evaluation.findOne({ groupId: groupId ,submissionTypeId: submissionTypeId });
             res.status(200).json({
                 evaluation,
