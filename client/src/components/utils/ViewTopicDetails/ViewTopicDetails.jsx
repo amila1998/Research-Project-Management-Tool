@@ -52,7 +52,7 @@ const ViewTopicDetails = ({group}) => {
   const [open, setOpen] = useState(false);
   const[topicDetails,setTopicDetails]=useState();
   const[callback,setCallback]=useState(true);
-
+  const [rejectTopics,setRejectTopicDetails]=useState([]);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -74,7 +74,9 @@ const ViewTopicDetails = ({group}) => {
       }
       getATopic();
  
-  }, [group,callback])
+  }, [group,callback]);
+
+
   
 
   return (
