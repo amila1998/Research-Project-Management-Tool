@@ -22,6 +22,7 @@ import RequestSupervisor from '../../components/Student/RequestSupervisor/Reques
 import GroupSupervisorDetaiils from '../../components/Student/GroupSupervisorDetails/GroupSupervisorDetaiils';
 import GroupCoSupervisorDetaiils from '../../components/Student/GroupCoSupervisorDetails/GroupCoSupervisorDetaiils';
 import RequestCoSupervisor from '../../components/Student/RequestCoSupervisor/RequestCoSupervisor';
+import DownloadTemplates from '../../components/Student/DownloadTemplates/DownloadTemplates';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -38,9 +39,7 @@ const StudentDashboard = () => {
     const [groupchat,setGroupChat]=useState(false);
     const [requestSupervisor,setRequestSupervisor]=useState(false);
     const [requestCoSupervisor,setRequestCoSupervisor]=useState(false);
-    const [supervisorDetails,setSupervisorDetails]=useState(false);
-    const [cosupervisorDetails,setCoSupervisorDetails]=useState(false);
-
+    const [downloadTemplates,setDownloadTemplates]=useState(false);
 
 
     //console.log(myGroup);
@@ -88,6 +87,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
         window.location.href=('/');
     };
 
@@ -100,6 +100,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestCoSupervisor(false);
         setRequestSupervisor(false);
+        setDownloadTemplates(false);
     }
     const handleUpdateProfile = () => {
         setDashboard(false);
@@ -110,6 +111,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
     }
 
     const handleGroupRegistration = () => {
@@ -121,6 +123,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
     }
 
     const handleTopicRegistration =()=>{
@@ -132,6 +135,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
     } 
 
     const handleGroupChat = () => {
@@ -143,6 +147,7 @@ const StudentDashboard = () => {
         setGroupChat(true);
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
     } 
 
     const handleRequestSupervisor = () => {
@@ -154,6 +159,7 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(true);
         setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
     } 
 
     const handleRequestCoSupervisor = () => {
@@ -165,6 +171,19 @@ const StudentDashboard = () => {
         setGroupChat(false);
         setRequestSupervisor(false);
         setRequestCoSupervisor(true);
+        setDownloadTemplates(false);
+    } 
+
+    const handleDownloadTempla = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(false);
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
+        setDownloadTemplates(true);
     } 
 
     
@@ -190,6 +209,12 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
+                    {user.student?.haveAGroup&&myGroup?.level>=7&&
+                    <div onClick={handleDownloadTempla} className={downloadTemplates ? 'nav1Select' : 'nav1'}>
+                        <div className={downloadTemplates ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={downloadTemplates ? 'navTextSelect' : 'navText'}>DOWNLOAD TEMPLATES</div>
+                    </div>
+                     }
                     {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&myGroup?.level>=4||myGroup?.level===-3?
                     <div onClick={handleRequestCoSupervisor} className={requestCoSupervisor ? 'nav1Select' : 'nav1'}>
                         <div className={requestCoSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
@@ -256,6 +281,7 @@ const StudentDashboard = () => {
                     {myGroup&&groupchat&&<GroupChat group={myGroup}/>}
                     {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<><GroupSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
                     {requestCoSupervisor&&myGroup?.level===4?<RequestCoSupervisor topic={topicDetails} group={myGroup}/>:requestCoSupervisor&&<><GroupCoSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
+                    {downloadTemplates&&<DownloadTemplates/>}
                 </div>
             </div>
         </>

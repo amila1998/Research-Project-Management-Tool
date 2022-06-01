@@ -1,9 +1,9 @@
 import React from 'react'
 
-const DashBoard = () => {
+const CoSuperviserDashBoardComp = () => {
   return (
     <div className="Dash"> Co Supervisor DashBoard</div>
   )
 }
 
-export default DashBoard
+export default CoSuperviserDashBoardComp
