@@ -44,7 +44,7 @@ const markingSchemaController = {
     },
     getOne: async (req, res) => {
         try {
-            const markingSchema = await MarkingSchema.findById({_id:req.params.id});
+            const markingSchema = await MarkingSchema.findOne({submissionTypeId:req.params.id});
             try {
                 const submissionData = await SubmissionType.findById(markingSchema.submissionTypeId);
                 res.status(200).json({
