@@ -12,5 +12,6 @@ route.get('/api/topics/getTopicDetails/:groupId',auth,topicsController.getATopic
 route.get('/api/topics/getall',auth,panalMember,topicsController.getAllTopics);
 route.get('/api/topics/getalltoResponce',auth,panalMember,topicsController.getTopicsToResponce);
 route.post('/api/topics/panalMemResponse/:gid/:tid',auth,panalMember,topicsController.panalMemberResponse);
+route.get('/api/topics/getMyRejectTopics/:gid',auth,topicsController.getMyRejectedTopics);
 
 module.exports = route;

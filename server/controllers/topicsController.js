@@ -113,7 +113,7 @@ const topicController = {
                 }else{
                     let topic = [{'topic_id':topic_id,'status':panalmemberResponse}]
                     const newRejTop = new RejectedTopics({
-                        topic_id,  
+                        group_id,  
                         topic
                             
                     })
@@ -148,6 +148,18 @@ const topicController = {
             
              res.status(200).json({msg: 'Your Response is Successfully Send !'});
             
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            });
+        }
+    },
+    getMyRejectedTopics:async(req,res)=>{
+        try {
+           const group_id=req.params.gid;
+           const rejTopics=await Topic.find({'group_id':group_id+"REJECT"});
+           res.status(200).json(rejTopics);
         } catch (error) {
             res.status(500).json({ 
                 msg: error.message ,
