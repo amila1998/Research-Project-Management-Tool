@@ -115,6 +115,14 @@ const groupController ={
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
+  },
+  supervisorAllGroup:async(req,res)=>{
+    try {
+      const group = await Groups.find({'supervisor.user_id':req.user.id});    
+      res.status(200).json(group);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   }
 
 }
