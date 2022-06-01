@@ -1,3 +1,4 @@
+const Groups = require("../models/groupsModel");
 const Submssion = require("../models/submssionModel");
 
 
@@ -87,6 +88,25 @@ const submssionController ={
                 success: false
             }); 
         }
-    }
+    },
+   getSupervisorsSub:async(req,res)=>{
+       try {
+           const groups = await Groups.find({'supervisor.user_id':req.user.id});
+           let submissions=[]
+           for (const g of groups) {
+               const submssion =await Submssion.findOne({'groupID':g._id});
+               submissions.push(submssion)
+            }
+           res.status(200).json(
+            submissions
+           )
+       } catch (error) {
+        res.status(500).json({ 
+            msg: error.message ,
+            success: false
+        }); 
+       }
+   }   
+
 }
     module.exports = submssionController;

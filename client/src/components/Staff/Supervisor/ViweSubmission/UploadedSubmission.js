@@ -2,31 +2,36 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 
 const UploadedSubmission = () => {
-const[allSubmission,setallSubmission]=useState
-console.log("🚀 ~ file: UploadedSubmission.js ~ line 5 ~ UploadedSubmission ~ allSubmission", allSubmission)
+const[allMyGroups,setallMyGroups]=useState([]);
+console.log(allMyGroups)
 
-
-// useEffect(() => {
-//     const getSubmitted = async () => {
-//       try {
-//         const res = await axios.get(`/api/submssion/getAll`)
-//         setallSubmission(res.data)
-
-//       } catch (error) {
-//       console.log("🚀 ~ file: UploadedSubmission.js ~ line 14 ~ getSubmitted ~ error", error)
+  useEffect(() => {
+    
+    const getSubmitted = async () => {
        
+          await axios.get(`/api/submssion/getSupervisorsSub`).then((res) => {
+              setallMyGroups(res.data);
+          }).catch((err) => {
+              console.log("🚀 ~ file: UploadedSubmission.js ~ line 15 ~ awaitaxios.get ~ err", err)
 
-//       }
-
-//     }
-//     getSubmitted();
-
-//   }, [])
- 
+          })
+      }
+      getSubmitted();
+   
+  }, [])
+  
 
 
   return (
-    <div>UploadedSubmission</div>
+
+    <div>UploadedSubmission
+        {allMyGroups.map((i)=>
+        <div key={i._id}>
+            {i.eventId}
+
+        </div>)}
+        {/* <h4>{allSubmission.eventId}</h4> */}
+    </div>
   )
 }
 
