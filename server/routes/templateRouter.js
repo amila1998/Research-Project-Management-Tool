@@ -5,7 +5,7 @@ const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 
 route.post('/api/template/add',auth,admin,templateController.addTemplate);
-route.get('/api/template/getAll',auth,admin,templateController.getAll);
+route.get('/api/template/getAll',auth,templateController.getAll);
 route.post('/api/template/update/:id',auth,admin,templateController.updateTemplate);
 route.post('/api/template/delete/:id',auth,admin,templateController.deleteTemp);
 

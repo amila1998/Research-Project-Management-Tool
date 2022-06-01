@@ -1,0 +1,17 @@
+@import "../../variables/variables.scss";
+.downloadTemp{
+    padding: 10px;
+    background-color: $orange;
+    color: bisque;
+    margin: auto;
+    margin-bottom: 5px;
+}
+.downLink{
+    text-decoration: none;
+}
+.downloadTemp:hover{
+    background-color: rgb(255, 255, 255);
+    border-color: $orange;
+    border-style: solid;
+    color: black;
+}
