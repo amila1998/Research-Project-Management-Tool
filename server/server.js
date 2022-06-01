@@ -50,11 +50,17 @@ app.use(topicEvaluationPanalRoutes);
 const supervisorRoutes = require("./routes/supervisorRoutes");
 app.use(supervisorRoutes);
 
+const cosupervisorRoutes = require("./routes/cosupervisorRoutes");
+app.use(cosupervisorRoutes);
+
 const eventRoute = require("./routes/submissionTypeRoutes")
 app.use("/api/events", eventRoute)
 
 const myRejectedSupervisorsRoutes =require("./routes/myRejectedSupervisorsRoutes")
 app.use(myRejectedSupervisorsRoutes);
+
+const myRejectedCoSupervisorsRoutes =require("./routes/myRejectedCoSupervisorsRoutes")
+app.use(myRejectedCoSupervisorsRoutes);
 
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
