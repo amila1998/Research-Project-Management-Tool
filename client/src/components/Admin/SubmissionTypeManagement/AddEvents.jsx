@@ -12,6 +12,7 @@ import { set } from "date-fns";
 //schema to validate event inputs 
 const schema = yup.object({
   title: yup.string().required("Can't Be Empty"),
+  type: yup.string().required("Can't Be Empty"),
   start: yup.date().required("Please specify the time to start"),
 }).required();
 
@@ -58,6 +59,11 @@ const AddEvents = ({addEventApi, error, setAddSubmission}) => {
       <label htmlFor="title" className="form-label">Event Title</label>
       <input {...register("title")}  type="text" placeholder="title" className="form-control" id="title" aria-describedby="title" />
       <p className={`error text-warning position-absolute ${errors.title?"active":""}`}>{errors.title?<i className="bi bi-info-circle me-2"></i>:""}{errors.title?.message}</p>
+    </div>
+    <div className="mb-4">
+      <label htmlFor="type" className="form-label">Submission Type</label>
+      <input {...register("type")}  type="text" placeholder="type" className="form-control" id="type" aria-describedby="type" />
+      <p className={`error text-warning position-absolute ${errors.type?"active":""}`}>{errors.type?<i className="bi bi-info-circle me-2"></i>:""}{errors.type?.message}</p>
     </div>
     <div className="mb-4" style={{zIndex: "100"}}>
       <label htmlFor="start" className="form-label">Start Date</label>

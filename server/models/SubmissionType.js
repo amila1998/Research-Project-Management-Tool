@@ -26,6 +26,10 @@ const SubmissionTypeSchema = new mongoose.Schema({
       return date.setDate(date.getDate()+1)
     },
     },
+  type: {
+    type: String, 
+    required: true 
+  },
     describe: { type: String},
 })
 

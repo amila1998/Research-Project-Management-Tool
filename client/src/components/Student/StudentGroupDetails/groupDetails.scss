@@ -1,3 +1,108 @@
 .GDtopic{
     font-size: 30px;
 }
+
+.nextStep{
+    padding: 10px;
+    background-color: rgb(0, 160, 61);
+    color: azure;
+}
+.backStep{
+    padding: 10px;
+    background-color: rgb(160, 0, 67);
+    color: azure;
+}
+.warnStep{
+  padding: 10px;
+  background-color: rgb(194, 181, 0);
+  color: azure;
+}
+.steps {
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 50%;
+   
+    line-height: 30px;
+    font-family: 'Helvetica';
+    //overflow: hidden;
+    font-size: 14px;
+    color: #f09000;
+    text-transform: uppercase;
+    background: #fff;  
+    border-left: 2px solid #f09000;
+    span {
+      position: absolute;
+      transition: all 200ms ease-in-out;
+      /* horizontal */
+      &.line-1 {
+        top: 0;
+        left: 0;
+        width: 158px;
+        height: 2px;
+        background: #f09000;
+        transform: translateX(-48px);
+      }
+      &.line-2 {
+        bottom: 0;
+        right: 0;
+        width: 130px;
+        height: 2px;
+        background: #f09000;
+        transform: translateX(-25px);
+      }
+      /* horizontal - small */
+      &.line-3 {
+        top: 0;
+        right: 0;
+        width: 40px;
+        height: 2px;
+        background: #f09000;
+        transform: translateX(20px);
+      }
+      &.line-4 {
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 2px;
+        background: #f09000;
+        transform: translateX(95px);
+      }
+      &.line-5 {
+       bottom: 0;
+       right: 0;
+       width: 2px;
+       height: 50px;
+       background: #f09000;
+       transform: translateY(0px);
+      }
+      &.line-6 {
+       top: 0;
+       right: 0;
+       width: 2px;
+       height: 8px;
+       background: #f09000;
+       transform: translateY(-48px);
+      }
+    }
+    &:hover {
+      .line-1 {
+        transform: translateX(0px);
+      }
+      .line-2 { 
+        transform: translateX(-65px);
+      }
+      .line-3 {
+        transform: translateX(60px);
+      }
+      .line-4 {
+        transform: translateX(55px);
+      }
+      .line-5 {
+        transform: translateY(44px);
+      }
+      .line-6 {
+        transform: translateY(-2px);
+      }
+    }
+  }

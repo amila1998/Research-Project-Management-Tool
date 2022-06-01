@@ -18,6 +18,8 @@ import StudentGroupDetails from '../../components/Student/StudentGroupDetails/St
 import TopicRegistration from '../../components/Student/TopicRegistration/TopicRegistration';
 import TopicDetails from '../../components/Student/TopicDetails/TopicDetails';
 import GroupChat from '../../components/GroupChat/GroupChat';
+import RequestSupervisor from '../../components/Student/RequestSupervisor/RequestSupervisor';
+import GroupSupervisorDetaiils from '../../components/Student/GroupSupervisorDetails/GroupSupervisorDetaiils';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -25,17 +27,21 @@ const StudentDashboard = () => {
     const { dispatch, user, isLoggedIn, isAdmin, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
     const [myGroup,setMyGroup]=useState();
     const [topicDetails,setTopicDetail]=useState();
-
+    const [callbackStd,setCallBackStd]=useState(true);
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateProfile, setUpdateProfile] = useState(false);
     const [groupRegistration, setGroupRegistration] = useState(false);
     const [topicRegistration,setTopicRegistration]=useState(false);
     const [groupchat,setGroupChat]=useState(false);
+    const [requestSupervisor,setRequestSupervisor]=useState(false);
+    const [requestCoSupervisor,setRequestCoSupervisor]=useState(false);
+    const [supervisorDetails,setSupervisorDetails]=useState(false);
+    const [cosupervisorDetails,setCoSupervisorDetails]=useState(false);
 
 
 
-    console.log(myGroup);
+    //console.log(myGroup);
 
     useEffect(() => {
         ///api/group/getmygroup
@@ -78,7 +84,8 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
         setGroupChat(false);
-
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
         window.location.href=('/');
     };
 
@@ -89,7 +96,8 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
         setGroupChat(false);
-
+        setRequestCoSupervisor(false);
+        setRequestSupervisor(false);
     }
     const handleUpdateProfile = () => {
         setDashboard(false);
@@ -98,7 +106,8 @@ const StudentDashboard = () => {
         setUpdateProfile(!updateProfile);
         setTopicRegistration(false);
         setGroupChat(false);
-  
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     }
 
     const handleGroupRegistration = () => {
@@ -108,7 +117,8 @@ const StudentDashboard = () => {
         setUpdateProfile(false);
         setTopicRegistration(false);
         setGroupChat(false);
-
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     }
 
     const handleTopicRegistration =()=>{
@@ -118,7 +128,8 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(true);
         setGroupChat(false);
-
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
     } 
 
     const handleGroupChat = () => {
@@ -128,7 +139,30 @@ const StudentDashboard = () => {
         setGroupRegistration(false);
         setTopicRegistration(false);
         setGroupChat(true);
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
+    } 
 
+    const handleRequestSupervisor = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(false);
+        setRequestSupervisor(true);
+        setRequestCoSupervisor(false);
+    } 
+
+    const handleRequestCoSupervisor = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(false);
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(true);
     } 
 
     
@@ -154,12 +188,25 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
+                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&myGroup?.level===4&&
+                    <div onClick={handleRequestCoSupervisor} className={requestCoSupervisor ? 'nav1Select' : 'nav1'}>
+                        <div className={requestCoSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===4?"REQUEST CO-SUPERVISOR":"GROUP CO-SUPERVISOR DETAILS"}</div>
+                    </div>
+                     }
+                    {user.student?.haveAGroup&&
+                    <div onClick={handleRequestSupervisor} className={requestSupervisor ? 'nav1Select' : 'nav1'}>
+                        <div className={requestSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={requestSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===1?"REQUEST SUPERVISOR":"GROUP SUPERVISOR DETAILS"}</div>
+                    </div>
+                     }
                     {user.student?.haveAGroup&&
                     <div onClick={handleTopicRegistration} className={topicRegistration ? 'nav1Select' : 'nav1'}>
                         <div className={topicRegistration ? "navIconSelect" : "navIcon"}><MdTopic /></div>
                         <div className={topicRegistration ? 'navTextSelect' : 'navText'}>{myGroup?.haveTopic?"TOPIC DETAILS":"TOPIC REGISTRATION"}</div>
                     </div>
                      }
+                   
                     <div onClick={handleGroupRegistration} className={groupRegistration ? 'nav1Select' : 'nav1'}>
                     <div className={groupRegistration ? "navIconSelect" : "navIcon"}><MdSupervisedUserCircle /></div>
                     <div className={groupRegistration ? 'navTextSelect' : 'navText'}>{user.student?.haveAGroup?"GROUP DETAILS":"GROUP REGISTRATION"}</div>
@@ -198,13 +245,14 @@ const StudentDashboard = () => {
                     </div>
 
                 </div>
-                <div className="student-dashboard">
+                <div className="right">
                     
                     {dashboard && <DashBoard group={myGroup} />}
                     {profile && !updateProfile ? <Profile /> : profile && updateProfile && <ProfileUpdate />}
                     {groupRegistration &&user.student?.haveAGroup? <StudentGroupDetails groupData={myGroup}/>:groupRegistration &&<CreateGroup />}
                     {topicRegistration&&myGroup?.haveTopic?<TopicDetails topic={topicDetails} group={myGroup} />:topicRegistration&&<TopicRegistration data={myGroup}/>}
                     {myGroup&&groupchat&&<GroupChat group={myGroup}/>}
+                    {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<><GroupSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
                 </div>
             </div>
         </>

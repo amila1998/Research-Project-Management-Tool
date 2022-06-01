@@ -20,8 +20,7 @@ const UserManagement = () => {
     const [users,setUsers]=useState([]);
     const [loading,setLoading]=useState(false);
     const [callback,setCallback]=useState(true);
-
-    
+        
     
     const handleCategory = e => {
         setRole(e.target.value)
@@ -115,7 +114,6 @@ const UserManagement = () => {
       getAllUsers();
     }, [isVerify,search,sort,role,callback])
 
-    console.log(users);
   return (
       <>
       <ToastContainer/>
@@ -125,7 +123,7 @@ const UserManagement = () => {
       <div className="filter_menu">
             <div className="row1">
                 <span>Filters : </span>
-                <select name="category" value={role} onChange={e => setRole(e.target.value)} >
+                <select name="category" value={role} onChange={e =>{ setRole(e.target.value);setCallback(true);}} >
                     <option value='' selected>All Users</option>
                     <option value='admin'>Admin</option>
                     <option value='supervisor'>Supervisor</option>
@@ -137,10 +135,10 @@ const UserManagement = () => {
             </div>
 
             <input type="text" value={search} placeholder="Search by username or email..."
-            onChange={e => setSearch(e.target.value.toLowerCase())} />
+            onChange={e =>{ setSearch(e.target.value.toLowerCase());setCallback(true);}} />
             <div className="row1">
                 <span>Verification : </span>
-                <select name="category" value={isVerify} onChange={e => setIsVeryfiy(e.target.value)} >
+                <select name="category" value={isVerify} onChange={e => {setIsVeryfiy(e.target.value);setCallback(true);}} >
                     <option value='' selected>All</option>
                     <option value='true'>Verified</option>
                     <option value='false'>Not Verified</option>
@@ -150,7 +148,7 @@ const UserManagement = () => {
             </div>
             <div className="row1 sort">
                 <span>Sort By : </span>
-                <select value={sort} onChange={e => setSort(e.target.value)} >
+                <select value={sort} onChange={e => {setSort(e.target.value);setCallback(true);}} >
                     <option value=''>Oldest</option>
                     <option value='desc'>Newest</option>
                 </select>

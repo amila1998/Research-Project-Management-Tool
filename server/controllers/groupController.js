@@ -106,6 +106,15 @@ const groupController ={
    
 
 
+  },
+  getAGroup:async(req,res)=>{
+    try {
+      const group_id = req.params.gid;
+      const group = await Groups.findById(group_id);    
+      res.status(200).json(group);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   }
 
 }

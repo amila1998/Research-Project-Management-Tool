@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -10,24 +10,41 @@ import { CgProfile } from "react-icons/cg";
 import { FaUserEdit } from "react-icons/fa";
 import { BiLogOutCircle } from "react-icons/bi";
 import { MdSupervisedUserCircle } from "react-icons/md";
-import DashBoard from "../../components/Admin/DashBoard/DashBoard";
+import DashBoard from "../../components/Staff/PanalMember/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
-import UserManagement from "../../components/Admin/UserManagement/UserManagement";
+axios.defaults.withCredentials = true;
+import TopicManagement from "../../components/Staff/PanalMember/TopicManagement/TopicManagement";
 
 export const PanelMemberDashBoard = () => {
     const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateprofile, setUpdateProfile] = useState(false);
-    const [userManagement, setUserManagement] = useState(false);
+   const [topicmanagement,settopicManagement]=useState(false);
+   const [isEvaPanlMem,setIsEvaPanalMem]=useState();
+
+   useEffect(() => {
+     const checkEvaPanalMem=async()=>{
+       try {
+         const res = await axios.get(`/api/topicEvPanlMem/check/${user._id}`)
+         setIsEvaPanalMem(res.data.success)
+       } catch (error) {
+       console.log("🚀 ~ file: PanelMemberDashBoard.jsx ~ line 32 ~ checkEvaPanalMem ~ error", error)
+         
+       }
+     }
+     checkEvaPanalMem();
+   }, [user])
+   
   
     const history = useNavigate()
     const handleDashboard = () => {
       setDashboard(true);
       setProfile(false);
       setUpdateProfile(false);
-      setUserManagement(false);
+      settopicManagement(false);
+   
       history('/')
     };
   
@@ -35,19 +52,20 @@ export const PanelMemberDashBoard = () => {
       setDashboard(false);
       setProfile(true);
       setUpdateProfile(false);
-      setUserManagement(false);
+      settopicManagement(false);
+ 
     }
     const handleUpdateProfile = () => {
       setDashboard(false);
       setProfile(profile);
-      setUserManagement(false);
+      settopicManagement(false);
       setUpdateProfile(!updateprofile);
     }
   
-    const handleUserManagement = () => {
+    const handleTopicManagement = () => {
       setDashboard(false);
       setProfile(false);
-      setUserManagement(true);
+      settopicManagement(true);
       setUpdateProfile(false);
     }
   
@@ -64,20 +82,21 @@ export const PanelMemberDashBoard = () => {
       }
     }
   return (
-    <div>PanelMember 
+    <div>
 <div className="dashboard">
            
            <div className="left">
          
           <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
-          <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
+          <div className={dashboard?'navTextSelect':'navText'}>PANAL MEMBER DASHBOARD</div>
           </div>
-          <div onClick={handleUserManagement} className={userManagement?'nav1Select':'nav1'}>
-          <div className={userManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
-          <div className={userManagement?'navTextSelect':'navText'}>USER MANAGEMENT</div>
+          {isEvaPanlMem&&
+          <div onClick={handleTopicManagement} className={topicmanagement?'nav1Select':'nav1'}>
+          <div className={topicmanagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
+          <div className={topicmanagement?'navTextSelect':'navText'}>TOPIC MANAGEMENT</div>
           </div>
-
+        }
 
 
 
@@ -112,7 +131,7 @@ export const PanelMemberDashBoard = () => {
            <div className="right">
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
-          {userManagement&&<UserManagement/>}
+          {topicmanagement&&isEvaPanlMem&&<TopicManagement/>}
            
            </div>
        </div>
