@@ -188,10 +188,10 @@ const StudentDashboard = () => {
                         <div className={dashboard ? "navIconSelect" : "navIcon"}><AiFillHome /></div>
                         <div className={dashboard ? 'navTextSelect' : 'navText'}>DASHBOARD</div>
                     </div>
-                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&
+                    {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&myGroup?.level===4&&
                     <div onClick={handleRequestCoSupervisor} className={requestCoSupervisor ? 'nav1Select' : 'nav1'}>
                         <div className={requestCoSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
-                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===3?"REQUEST CO-SUPERVISOR":"GROUP CO-SUPERVISOR DETAILS"}</div>
+                        <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===4?"REQUEST CO-SUPERVISOR":"GROUP CO-SUPERVISOR DETAILS"}</div>
                     </div>
                      }
                     {user.student?.haveAGroup&&
