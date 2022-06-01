@@ -10,5 +10,7 @@ route.get("/api/group/getStutendGroup/:user_id",groupController.getStutendGroup)
 route.get("/api/group/supervisorAllGroup",auth,groupController.supervisorAllGroup);
 route.get('/api/group/getmygroup/:id',auth,groupController.getMyGroupDetails);
 route.get('/api/group/getgroup/:gid',auth,groupController.getAGroup);
+route.get('/api/admin/getallGroups',auth,admin,groupController.getAllGroups);
+route.post('/api/admin/addPanalMem/:gid',auth,admin,groupController.addPanalMember);
 
 module.exports = route;

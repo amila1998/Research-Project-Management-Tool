@@ -123,6 +123,38 @@ const groupController ={
     } catch (error) {
       res.status(500).json({ msg: error.message });
     }
+  },
+  getAllGroups: async (req, res) => {
+    const query = {};
+
+    if (req.query.level) {
+      query.level = req.query.level;
+    }
+ 
+    try {
+      const groups = await Groups.find(query);
+      res.status(200).json(groups);
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
+  },
+  addPanalMember:async(req,res)=>{
+    try {
+      const gid = req.params.gid;
+      const {user_id}=req.body;
+      const user =await User.findById(user_id);
+      if(!user){
+        return res.status(400).json({ msg: "User not Found" });
+      }
+      await Groups.findByIdAndUpdate(gid, {
+        'level': 7,
+        'panelMember.name': user.name,
+        'panelMember.user_id': user._id,
+      })
+      res.status(200).json({ msg: "Panal member Added !" });
+    } catch (error) {
+      res.status(500).json({ msg: error.message });
+    }
   }
 
 }
