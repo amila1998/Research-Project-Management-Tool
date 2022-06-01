@@ -20,6 +20,10 @@ const StudentGroupDetails = ({groupData}) => {
             {groupData.level===3&&<><div className='warnStep'>Wait for the Topic Acception a from Topic Evaluvation Panal Member</div></>}
             {groupData.level===-2&&<><div className='backStep'>Please Try another Topic</div></>}
             {groupData.level===4&&<><div className='nextStep'>Next Step: Request a Co Supervisor</div></>}
+            {groupData.level===5&&<><div className='warnStep'>Wait for the Co Supervisor Response.</div></>}
+            {groupData.level===-3&&<><div className='backStep'>Please Try another Co Supervisor</div></>}
+            {groupData.level===6&&<><div className='warnStep'>Wait for Assigning the Panal Member from Admin.</div></>}
+            {groupData.level===7&&<><div className='nextStep'>COOL !!! , Finally Your Group is Complete all Task. Now you can Submit your Submission before the Deadline</div></>}
         </div>
         <br></br>
 

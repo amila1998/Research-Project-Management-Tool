@@ -14,20 +14,21 @@ import DashBoard from "../../components/Staff/CoSupervisor/DashBoard/DashBoard";
 import axios from "axios";
 import Profile from "../../components/Profile/Profile";
 import UserManagement from "../../components/Admin/UserManagement/UserManagement";
+import Requests from "../../components/Staff/CoSupervisor/Requests/Requests";
 
 const CoSupervisorDashBoard = () => {
     const {dispatch, user, isLoggedIn,isAdmin,isCoSupervisor,isPanelMember,isSupervisor } = useContext(AuthContext);
     const [dashboard, setDashboard] = useState(true);
     const [profile, setProfile] = useState(false);
     const [updateprofile, setUpdateProfile] = useState(false);
-    const [userManagement, setUserManagement] = useState(false);
+    const [groupReqManagement, setGroupReqManagement] = useState(false);
   
     const history = useNavigate()
     const handleDashboard = () => {
       setDashboard(true);
       setProfile(false);
       setUpdateProfile(false);
-      setUserManagement(false);
+      setGroupReqManagement(false);
       history('/')
     };
   
@@ -35,20 +36,20 @@ const CoSupervisorDashBoard = () => {
       setDashboard(false);
       setProfile(true);
       setUpdateProfile(false);
-      setUserManagement(false);
+      setGroupReqManagement(false);
     }
     const handleUpdateProfile = () => {
       setDashboard(false);
       setProfile(profile);
-      setUserManagement(false);
       setUpdateProfile(!updateprofile);
+      setGroupReqManagement(false);
     }
   
-    const handleUserManagement = () => {
+    const handleGroupReqManagement = () => {
       setDashboard(false);
       setProfile(false);
-      setUserManagement(true);
       setUpdateProfile(false);
+      setGroupReqManagement(true);
     }
   
     const logoutHadleClick =  async (e) =>{
@@ -65,7 +66,7 @@ const CoSupervisorDashBoard = () => {
     }
    
   return (
-    <div>CoSupervisorDashBoard
+    <div>
         <div className="dashboard">
            
            <div className="left">
@@ -74,9 +75,9 @@ const CoSupervisorDashBoard = () => {
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
           <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
           </div>
-          <div onClick={handleUserManagement} className={userManagement?'nav1Select':'nav1'}>
-          <div className={userManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
-          <div className={userManagement?'navTextSelect':'navText'}>USER MANAGEMENT</div>
+          <div onClick={handleGroupReqManagement} className={groupReqManagement?'nav1Select':'nav1'}>
+          <div className={groupReqManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>
+          <div className={groupReqManagement?'navTextSelect':'navText'}>GROUP REQUEST</div>
           </div>
 
 
@@ -113,7 +114,7 @@ const CoSupervisorDashBoard = () => {
            <div className="right">
           {dashboard&&<DashBoard/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
-          {userManagement&&<UserManagement/>}
+          {groupReqManagement&&<Requests/>}
            
            </div>
        </div>
