@@ -73,7 +73,7 @@ const CoSupervisorDashBoard = () => {
          
           <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
-          <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
+          <div className={dashboard?'navTextSelect':'navText'}>CO SUPERVISOR DASHBOARD</div>
           </div>
           <div onClick={handleGroupReqManagement} className={groupReqManagement?'nav1Select':'nav1'}>
           <div className={groupReqManagement?"navIconSelect":"navIcon"}><MdSupervisedUserCircle/></div>

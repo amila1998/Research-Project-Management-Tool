@@ -12,7 +12,7 @@ const requestCoSupervisorController={
             if(!myGroup){
                 return res.status(400).json({msg:"Can't find your Group"});
             }
-            if (myGroup.level===-1) {
+            if (myGroup.level===-3) {
                 await Group.findByIdAndUpdate(group_id,{
                     'coSupervisor.isAccept':null,
                     'coSupervisor.name':coSupervisor.name,
@@ -51,7 +51,8 @@ const requestCoSupervisorController={
                 return res.status(400).json({msg:"Can't find your Group"});
             }
             const oldCoSupervisors = await MyRejectedCoSupervisors.find({'group_id':group_id})
-            console.log("🚀 ~ file: requestSupervisor.js ~ line 54 ~ getSupervisors:async ~ oldSupervisors", oldSupervisors)
+            console.log("🚀 ~ file: requestCoSupervisor.js ~ line 54 ~ getCoSupervisors:async ~ oldCoSupervisors", oldCoSupervisors)
+            
             if (oldCoSupervisors.length>0) {
                 
                 const coSupervisor = await User.find({'role':'coSupervisor'}).select("-password");
@@ -85,7 +86,7 @@ const requestCoSupervisorController={
                                                        if (oss.user_id===s._id) {
                                                             back=true;
                                                             break;
-                                                       }else{
+                                                       }else if(oss.user_id!=s._id){
                                                         relatedCoSupervisors.push(s);
                                                         back=true;
                                                         break;
