@@ -19,19 +19,19 @@ const StudentGroupDetails = ({groupData}) => {
             {groupData.level===-1&&<><div className='backStep'>Please Try another Supervisor</div></>}
             {groupData.level===3&&<><div className='warnStep'>Wait for the Topic Acception a from Topic Evaluvation Panal Member</div></>}
             {groupData.level===-2&&<><div className='backStep'>Please Try another Topic</div></>}
+            {groupData.level===4&&<><div className='nextStep'>Next Step: Request a Co Supervisor</div></>}
         </div>
         <br></br>
 
         
-        <div>
+        <div className='table-page'>
         <table>
     <thead>
         <tr>
             <th>User ID</th>
             <th>Member Name</th>
             <th>Role</th>
-            <th>Format</th>
-            <th>Description</th>
+            
         </tr>
     </thead>
     <tbody>
@@ -39,12 +39,10 @@ const StudentGroupDetails = ({groupData}) => {
            groupData.members.map(items => (
           
                 <tr key={items.user_id}>
-                         {console.log(items)}
                     <td>{items.user_id}</td>
                     <td><UserDetails member={items}/></td>
                     <td>{items.isLeader?"Leader":"Memeber"}</td>
-                    <td></td>
-                    <td></td>
+    
                 </tr>
             ))
         }

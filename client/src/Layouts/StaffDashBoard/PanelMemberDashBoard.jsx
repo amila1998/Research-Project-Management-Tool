@@ -89,7 +89,7 @@ export const PanelMemberDashBoard = () => {
          
           <div onClick={handleDashboard} className={dashboard?'nav1Select':'nav1'}>
           <div className={dashboard?"navIconSelect":"navIcon"}><AiFillHome/></div>
-          <div className={dashboard?'navTextSelect':'navText'}>SUPERVISOR DASHBOARD</div>
+          <div className={dashboard?'navTextSelect':'navText'}>PANAL MEMBER DASHBOARD</div>
           </div>
           {isEvaPanlMem&&
           <div onClick={handleTopicManagement} className={topicmanagement?'nav1Select':'nav1'}>

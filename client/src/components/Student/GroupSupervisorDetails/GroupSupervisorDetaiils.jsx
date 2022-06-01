@@ -65,10 +65,16 @@ const GroupSupervisorDetaiils = ({topic,group}) => {
     }, [group])
     
 
-    
+    if (group.level===-2) {
+      return(
+        <>
+       <div className='backStep'>Please Try another Topic</div>
+        </>
+      )
+      
+    }else{
 
-
-    return (
+      return (
         <div>
           {group.supervisor.isAccept?<><button className='btn btn-outline-success statusbtn' onClick={handleOpen}><img src={approved} className='statusimg'/> {group.supervisor.name} </button></>:
           <>{group.level===2?<><div className='warnStep'>Wait for the Supervisor Response.</div></>:<><RequestSupervisor topic={topic} group={group}/></>}</>}
@@ -127,6 +133,9 @@ const GroupSupervisorDetaiils = ({topic,group}) => {
           
         </div>
       ) 
+    }
+
+
 
 }
 

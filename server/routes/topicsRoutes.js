@@ -9,5 +9,8 @@ route.post('/api/topics/addTopic',auth,topicsController.topicRegistration);
 route.get('/api/topics/getmyTopicDetails/:id',auth,topicsController.getMyTopic);
 
 route.get('/api/topics/getTopicDetails/:groupId',auth,topicsController.getATopic);
-route.get('/api/topics/getall',auth,panalMember,topicsController.getAllTopics)
+route.get('/api/topics/getall',auth,panalMember,topicsController.getAllTopics);
+route.get('/api/topics/getalltoResponce',auth,panalMember,topicsController.getTopicsToResponce);
+route.post('/api/topics/panalMemResponse/:gid/:tid',auth,panalMember,topicsController.panalMemberResponse);
+
 module.exports = route;
