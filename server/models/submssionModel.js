@@ -16,6 +16,14 @@ const submssionSchema = new Schema({
     url: { 
         type: String, 
         required: true 
+    },
+    eventId:{
+        type: String, 
+        required: true 
+    },
+    isSubmitted:{
+        type:Boolean,
+        default:null
     }
     // date_ob:{
     //     type:String, 
