@@ -4,13 +4,14 @@ import { ToastContainer, toast } from "react-toastify";
 import {useDropzone} from 'react-dropzone'
 import "./addSubmission.scss"
 import axios from "axios";
-export const AddSubmission = ({eventId}) => {
-console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventId", eventId)
+export const AddSubmission = ({eventId,setsubId}) => {
+// console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventId", eventId)
     const {dispatch, user } = useContext(AuthContext);
     const [fileName, setFileName]=useState("");
     const [file, setFile] = useState(false);
     const [fileURL, setfileURL] = useState('');
     const[groupId,setGroupId]=useState([]);
+    const[isSubmitted,setisSubmitted]=useState(true)
     const [data,setData]=useState({
         comments:''
       });
@@ -91,9 +92,10 @@ const handleChange = (e) => {
   };
   
 
-   const addSubmition=async()=>{
+   const addSubmition=async(e)=>{
+    // e.preventDefault();
     try {
-        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId,comments:data.comments,url:fileURL});
+        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId,comments:data.comments,url:fileURL,eventId:eventId,isSubmitted:isSubmitted});
         toast.success(res.data.msg ,{
           position: "top-right",
           autoClose: 5000,
@@ -103,7 +105,9 @@ const handleChange = (e) => {
           draggable: true,
           progress: undefined,
         });
-        setsubid(res.data.submitid);
+        setsubId(res.data.submitid);
+        // setsubId("test");
+
       } catch (error) {
         console.log(error);
         toast.error(error.response.data.message ,{
@@ -154,7 +158,7 @@ const handleChange = (e) => {
                       fileURL ? <><a href={fileURL}>Uploaded File</a></> : <></>
                   }
               </div>
-              <button onClick={addSubmition}class="btn btn-primary">Submit</button>
+              <button onClick={addSubmition} class="btn btn-primary">Submit</button>
           </form>
 
 

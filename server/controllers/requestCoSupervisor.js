@@ -1,29 +1,29 @@
 const User = require('../models/userModel')
 const Topic = require('../models/topicsModel')
-const MyRejectedSupervisors = require('../models/myRejectedSupervisorsModel')
+const MyRejectedCoSupervisors = require('../models/myRejectedCoSupervisorsModel')
 const Group = require('../models/groupsModel')
 
-const requestSupervisorController={
+const requestCoSupervisorController={
     sendARequest:async(req,res)=>{
         try {
             const group_id = req.params.gid;
-            const {supervisor} = req.body
+            const {coSupervisor} = req.body
             const myGroup =await Group.findById(group_id);
             if(!myGroup){
                 return res.status(400).json({msg:"Can't find your Group"});
             }
-            if (myGroup.level===-1) {
+            if (myGroup.level===-3) {
                 await Group.findByIdAndUpdate(group_id,{
-                    'supervisor.isAccept':null,
-                    'supervisor.name':supervisor.name,
-                    'supervisor.user_id':supervisor._id,
-                    'level':2
+                    'coSupervisor.isAccept':null,
+                    'coSupervisor.name':coSupervisor.name,
+                    'coSupervisor.user_id':coSupervisor._id,
+                    'level':5
                 });
             }else{
                 await Group.findByIdAndUpdate(group_id,{
-                    'supervisor.name':supervisor.name,
-                    'supervisor.user_id':supervisor._id,
-                    'level':2
+                    'coSupervisor.name':coSupervisor.name,
+                    'coSupervisor.user_id':coSupervisor._id,
+                    'level':5
                 });
             }
             
@@ -41,7 +41,7 @@ const requestSupervisorController={
               });
         }
     },
-    getSupervisors:async(req,res)=>{
+    getCoSupervisors:async(req,res)=>{
         try {
             const group_id = req.params.gid;
             const topic_id = req.params.tid;
@@ -50,20 +50,21 @@ const requestSupervisorController={
             if (!myGroup) {
                 return res.status(400).json({ msg: "Can't find your Group" });
             }
-            const oldSupervisors = await MyRejectedSupervisors.find({ 'group_id': group_id })
-            console.log("🚀 ~ file: requestSupervisor.js ~ line 54 ~ getSupervisors:async ~ oldSupervisors", oldSupervisors)
-            if (oldSupervisors.length > 0) {
+            const oldCoSupervisors = await MyRejectedCoSupervisors.find({ 'group_id': group_id })
+            console.log("🚀 ~ file: requestCoSupervisor.js ~ line 54 ~ getCoSupervisors:async ~ oldCoSupervisors", oldCoSupervisors)
 
-                const supervisors = await User.find({ 'role': 'supervisor' }).select("-password");
+            if (oldCoSupervisors.length > 0) {
+
+                const coSupervisor = await User.find({ 'role': 'coSupervisor' }).select("-password");
                 const myTopicDetails = await Topic.findById(topic_id);
                 if (!myTopicDetails) {
                     return res.status(400).json({ msg: "Can't find your topic" });
                 }
 
-                let relatedSupervisors = [];
+                let relatedCoSupervisors = [];
                 let back = false;
 
-                for (const s of supervisors) {
+                for (const s of coSupervisor) {
 
                     for (const i of s.staff.interestedTopics) {
 
@@ -72,21 +73,21 @@ const requestSupervisorController={
                                 break;
                             }
                             if (i === t) {
-                                if (relatedSupervisors.length === 0) {
+                                if (relatedCoSupervisors.length === 0) {
 
-                                    for (const os of oldSupervisors) {
+                                    for (const os of oldCoSupervisors) {
                                         if (back === true) {
                                             break;
                                         }
-                                        for (const oss of os.supervisor) {
+                                        for (const oss of os.cosupervisor) {
                                             if (back === true) {
                                                 break;
                                             }
                                             if (oss.user_id === s._id) {
                                                 back = true;
                                                 break;
-                                            } else {
-                                                relatedSupervisors.push(s);
+                                            } else if (oss.user_id != s._id) {
+                                                relatedCoSupervisors.push(s);
                                                 back = true;
                                                 break;
                                             }
@@ -97,7 +98,7 @@ const requestSupervisorController={
 
 
                                 } else {
-                                    for (const ex of relatedSupervisors) {
+                                    for (const ex of relatedCoSupervisors) {
 
                                         if (back === true) {
                                             break;
@@ -105,11 +106,11 @@ const requestSupervisorController={
                                         if (s.email === ex.email) {
                                             break;
                                         } else if (ex.email != s.email) {
-                                            for (const os of oldSupervisors) {
+                                            for (const os of oldCoSupervisors) {
                                                 if (back === true) {
                                                     break;
                                                 }
-                                                for (const oss of os.supervisor) {
+                                                for (const oss of os.cosupervisor) {
                                                     if (back === true) {
                                                         break;
                                                     }
@@ -118,7 +119,7 @@ const requestSupervisorController={
                                                         back = true;
                                                         break;
                                                     } else {
-                                                        relatedSupervisors.push(s);
+                                                        relatedCoSupervisors.push(s);
                                                         back = true;
                                                         break;
                                                     }
@@ -138,22 +139,22 @@ const requestSupervisorController={
                     //}
                     // }
                 }
-                console.log("🚀 ~ file: requestSupervisor.js ~ line 141 ~ getSupervisors:async ~ relatedSupervisors", relatedSupervisors)
-                return res.status(200).json(relatedSupervisors);
+                console.log("🚀 ~ file: requestSupervisor.js ~ line 141 ~ getSupervisors:async ~ relatedCoSupervisors", relatedCoSupervisors)
+                return res.status(200).json(relatedCoSupervisors);
 
 
 
             } else {
-                const supervisors = await User.find({ 'role': 'supervisor' }).select("-password");
+                const coSupervisors = await User.find({ 'role': 'coSupervisor' }).select("-password");
                 const myTopicDetails = await Topic.findById(topic_id);
                 if (!myTopicDetails) {
                     return res.status(400).json({ msg: "Can't find your topic" });
                 }
 
-                let relatedSupervisors = [];
+                let relatedCoSupervisors = [];
                 let back = false;
 
-                for (const s of supervisors) {
+                for (const s of coSupervisors) {
                     if (back === true) {
                         back === false;
                     }
@@ -164,9 +165,9 @@ const requestSupervisorController={
                             }
                             if (i === t) {
 
-                                if (relatedSupervisors.length === 0) {
+                                if (relatedCoSupervisors.length === 0) {
                                     // for(const os of oldSupervisors){
-                                    relatedSupervisors.push(s);
+                                    relatedCoSupervisors.push(s);
                                     //     if(back===true){
                                     //         break;
                                     //     }
@@ -189,14 +190,14 @@ const requestSupervisorController={
                                     // }
 
                                 } else {
-                                    for (const ex of relatedSupervisors) {
+                                    for (const ex of relatedCoSupervisors) {
                                         if (back === true) {
                                             break;
                                         }
                                         if (s.email === ex.email) {
                                             break;
                                         } else if (ex.email != s.email) {
-                                            relatedSupervisors.push(s);
+                                            relatedCoSupervisors.push(s);
                                             // for(const os of oldSupervisors){
                                             //     if(back===true){
                                             //         break;
@@ -209,7 +210,7 @@ const requestSupervisorController={
                                             //             back=true;
                                             //             break;
                                             //        }else{
-                                            //         relatedSupervisors.push(s);
+                                            //         relatedCoSupervisors.push(s);
                                             //         back=true;
                                             //         break;
                                             //        }
@@ -230,7 +231,7 @@ const requestSupervisorController={
                     // }
                 }
 
-                return res.status(200).json(relatedSupervisors);
+                return res.status(200).json(relatedCoSupervisors);
 
             }
 
@@ -244,45 +245,45 @@ const requestSupervisorController={
     },
     getMyGroupRequests:async(req,res)=>{
         try {
-            const groupsRq = await Group.find({
-                'supervisor.user_id': req.user.id,
-                'supervisor.isAccept': null
-            })
-            res.status(200).json(groupsRq);
-
+          const groupsRq =   await Group.find({
+              'coSupervisor.user_id':req.user.id,
+              'coSupervisor.isAccept':null
+          })
+          res.status(200).json(groupsRq);
+            
         } catch (error) {
             res.status(500).json({
                 msg: error.message,
                 success: false
-            });
+              });
         }
     },
     giveResponse:async(req,res)=>{
         try {
             const group_id = req.params.gid;
-            const {supervisorResponse,level}=req.body;
+            const {cosupervisorResponse,level}=req.body;
             const user = await User.findById(req.user.id);
-            if(!supervisorResponse){
-                const myRejSupervisors = await MyRejectedSupervisors.findOne({group_id})
+            if(!cosupervisorResponse){
+                const myRejCoSupervisors = await MyRejectedCoSupervisors.findOne({group_id})
                               
-                if (myRejSupervisors) {                  
-                     let newSupervisor = [];
-                     newSupervisor=myRejSupervisors.supervisor
-                    const newSup ={'user_id':user._id,'status':supervisorResponse};
-                    newSupervisor.push(newSup);
-                    await MyRejectedSupervisors.findOneAndUpdate(group_id,{'supervisor':newSupervisor})
+                if (myRejCoSupervisors) {                  
+                     let newCoSupervisor = [];
+                     newCoSupervisor=myRejCoSupervisors.cosupervisor
+                    const newCoSup ={'user_id':user._id,'status':cosupervisorResponse};
+                    newCoSupervisor.push(newCoSup);
+                    await MyRejectedCoSupervisors.findOneAndUpdate(group_id,{'cosupervisor':newCoSupervisor})
                 }else{
-                    let supervisor = [{'user_id':user._id,'status':supervisorResponse}]
-                    const newRejSup = new MyRejectedSupervisors({
+                    let cosupervisor = [{'user_id':user._id,'status':cosupervisorResponse}]
+                    const newRejCoSup = new MyRejectedCoSupervisors({
                         group_id,  
-                        supervisor
+                        cosupervisor
                             
                     })
-                    await newRejSup.save();
+                    await newRejCoSup.save();
                 }  
             }
             await Group.findByIdAndUpdate(group_id,{
-                'supervisor.isAccept':supervisorResponse,
+                'coSupervisor.isAccept':cosupervisorResponse,
                 'level':level
             })
              res.status(200).json({msg: 'Your Response is Successfully Send !'});
@@ -295,4 +296,4 @@ const requestSupervisorController={
     }
 }
 
-module.exports =requestSupervisorController;
+module.exports =requestCoSupervisorController;
