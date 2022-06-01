@@ -7,5 +7,6 @@ const admin = require("../middlewares/admin");
 route.post('/api/submssion/add',submssionController.addSubmssion);
 route.get('/api/submssion/getAll',submssionController.getAll);
 route.get('/api/submssion/getOne/:id',submssionController.getOne);
+route.get('/api/submssion/getSubmitted/:groupId/:eventId',submssionController.getSubmitted);
 route.put('/api/submssion/updateSubmssion/:id',submssionController.updateSubmssion);
 module.exports = route;

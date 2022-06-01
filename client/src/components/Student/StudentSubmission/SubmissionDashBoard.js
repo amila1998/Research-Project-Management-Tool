@@ -4,7 +4,7 @@ import axios from "axios";
 import { SubmitInformation } from './SubmitInformation';
 import { Hidden } from '@mui/material';
 axios.defaults.withCredentials = true;
-const SubmissionDashBoard =  () => {
+const SubmissionDashBoard =  ({myGroup}) => {
     // const result = await event.get(`/`);
     // console.log('result')
     const[events,setevents]=useState([]);
@@ -26,7 +26,7 @@ useEffect(()=>{
     {events.map((evt)=>(
         // <a href="#"><h3>{evt.title}</h3></a>
         <>
-        <SubmitInformation evt={evt}/>
+        <SubmitInformation evt={evt} group={myGroup}/>
         
         </>
     ))}

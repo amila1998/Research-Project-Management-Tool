@@ -4,10 +4,10 @@ const Submssion = require("../models/submssionModel");
 const submssionController ={
     addSubmssion:async(req,res)=>{
         try {
-            const {studentId,url,comments,groupID} = req.body;
+            const {studentId,url,comments,groupID,eventId,isSubmitted} = req.body;
             // let date_ob = new Date();
             const newTem = new Submssion({
-                studentId,url,comments,groupID
+                studentId,url,comments,groupID,eventId,isSubmitted
             })
            const submitNew = await newTem.save();  
             res.status(200).json({ 
@@ -57,7 +57,7 @@ const submssionController ={
             }
 
             await Submssion.findByIdAndUpdate({_id:req.params.id},{
-                studentId,url,comments,groupID
+                studentId,url,comments,groupID,eventId
             })
             res.status(200).json({ 
                 msg:"Update Successfull !",
@@ -71,6 +71,22 @@ const submssionController ={
             });
         }
 
+    }, 
+    getSubmitted:async(req,res)=>{
+           
+        try {
+            const groupId=req.params.groupId
+            const eventId=req.params.eventId
+            const submssion = await Submssion.findOne({'groupID':groupId,'eventId':eventId});
+            res.status(200).json( 
+                submssion
+            )                
+        } catch (error) {
+            res.status(500).json({ 
+                msg: error.message ,
+                success: false
+            }); 
+        }
     }
 }
     module.exports = submssionController;
