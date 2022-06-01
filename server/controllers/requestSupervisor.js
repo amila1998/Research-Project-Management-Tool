@@ -51,7 +51,8 @@ const requestSupervisorController={
                 return res.status(400).json({msg:"Can't find your Group"});
             }
             const oldSupervisors = await MyRejectedSupervisors.find({'group_id':group_id})
-            if (oldSupervisors) {
+            console.log("🚀 ~ file: requestSupervisor.js ~ line 54 ~ getSupervisors:async ~ oldSupervisors", oldSupervisors)
+            if (oldSupervisors.length>0) {
                 
                 const supervisors = await User.find({'role':'supervisor'}).select("-password");
                 const myTopicDetails = await Topic.findById(topic_id);
@@ -63,7 +64,9 @@ const requestSupervisorController={
                 let back = false;
                 
                 for(const s of supervisors){
+                    
                             for(const i of s.staff.interestedTopics){
+                                
                                 for(const t of myTopicDetails.interestedTopics){
                                     if(back===true){
                                         break;
@@ -135,8 +138,9 @@ const requestSupervisorController={
                         //}
                    // }
                 }
-                
-                res.status(200).json(relatedSupervisors);
+                console.log("🚀 ~ file: requestSupervisor.js ~ line 141 ~ getSupervisors:async ~ relatedSupervisors", relatedSupervisors)
+               return res.status(200).json(relatedSupervisors);
+               
 
                                 
             }else{
@@ -150,34 +154,39 @@ const requestSupervisorController={
                 let back = false;
                 
                 for(const s of supervisors){
+                    if(back===true){
+                        back===false;
+                    }
                             for(const i of s.staff.interestedTopics){
                                 for(const t of myTopicDetails.interestedTopics){
                                     if(back===true){
                                         break;
                                     }
                                         if (i===t) {
+                                            
                                             if (relatedSupervisors.length===0) {
-                                                for(const os of oldSupervisors){
-                                                    if(back===true){
-                                                        break;
-                                                    }
-                                                    for (const oss of os.supervisor) {
-                                                        if(back===true){
-                                                            break;
-                                                        }
-                                                       if (oss.user_id===s._id) {
-                                                           console.log('hiiiiiiiii');
-                                                            back=true;
-                                                            break;
-                                                       }else{
-                                                            relatedSupervisors.push(s);
-                                                            back=true;
-                                                            break;
-                                                       }
+                                                // for(const os of oldSupervisors){
+                                                    relatedSupervisors.push(s);
+                                                //     if(back===true){
+                                                //         break;
+                                                //     }
+                                                //     for (const oss of os.supervisor) {
+                                                //         if(back===true){
+                                                //             break;
+                                                //         }
+                                                //        if (oss.user_id===s._id) {
+                                                //            console.log('hiiiiiiiii');
+                                                //             back=true;
+                                                //             break;
+                                                //        }else{
+                                                           
+                                                //             back=true;
+                                                //             break;
+                                                //        }
                                                         
-                                                    }
+                                                //     }
                                                     
-                                                }
+                                                // }
                                                 
                                                 }else{
                                                     for(const ex of relatedSupervisors){
@@ -187,26 +196,27 @@ const requestSupervisorController={
                                                         if (s.email===ex.email) {
                                                             break;
                                                         }else if(ex.email!=s.email){
-                                                            for(const os of oldSupervisors){
-                                                                if(back===true){
-                                                                    break;
-                                                                }
-                                                                for (const oss of os.supervisor) {
-                                                                    if(back===true){
-                                                                        break;
-                                                                    }
-                                                                   if (oss.user_id===s._id) {
-                                                                        back=true;
-                                                                        break;
-                                                                   }else{
-                                                                    relatedSupervisors.push(s);
-                                                                    back=true;
-                                                                    break;
-                                                                   }
+                                                            relatedSupervisors.push(s);
+                                                            // for(const os of oldSupervisors){
+                                                            //     if(back===true){
+                                                            //         break;
+                                                            //     }
+                                                            //     for (const oss of os.supervisor) {
+                                                            //         if(back===true){
+                                                            //             break;
+                                                            //         }
+                                                            //        if (oss.user_id===s._id) {
+                                                            //             back=true;
+                                                            //             break;
+                                                            //        }else{
+                                                            //         relatedSupervisors.push(s);
+                                                            //         back=true;
+                                                            //         break;
+                                                            //        }
                                                                     
-                                                                }
+                                                            //     }
                                                                 
-                                                            }
+                                                            // }
                                                             back=true;
                                                             break;
                                                         }
@@ -219,8 +229,9 @@ const requestSupervisorController={
                         //}
                    // }
                 }
-                
-                res.status(200).json(relatedSupervisors);
+               
+                return  res.status(200).json(relatedSupervisors);
+               
             }
                 
            

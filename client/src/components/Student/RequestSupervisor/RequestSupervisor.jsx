@@ -37,6 +37,7 @@ const RequestSupervisor = ({topic,group}) => {
       const getSupervisor = async()=>{
         try {
           const res = await axios.get(`/api/supervisor/getsupervisortoreq/${topic._id}/${group._id}`)
+          console.log("🚀 ~ file: RequestSupervisor.jsx ~ line 40 ~ getSupervisor ~ res", res)
           setSupervisors(res.data)
         } catch (error) {
           console.log("🚀 ~ file: RequestSupervisor.jsx ~ line 42 ~ getSupervisor ~ error", error)
