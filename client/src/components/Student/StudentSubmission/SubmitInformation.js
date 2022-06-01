@@ -43,17 +43,18 @@ export const SubmitInformation = ({ evt, group }) => {
 
   if (submited === null) {
 
-  } else {
+  } else {}
     //console.log("🚀 ~ file: SubmitInformation.js ~ line 31 ~ SubmitInformation ~ submited",submited?.updatedAt);
     let submissionData=new Date(submited?.updatedAt).getTime();
     let assessmentDate=countDownDate-submissionData;
+    
     const assessmentDays = Math.floor(assessmentDate / (1000 * 60 * 60 * 24));
     console.log("🚀 ~ file: SubmitInformation.js ~ line 51 ~ SubmitInformation ~ assessmentDays", assessmentDays)
     const assessmenthours = Math.floor((assessmentDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     console.log("🚀 ~ file: SubmitInformation.js ~ line 53 ~ SubmitInformation ~ assessmenthours", assessmenthours)
     const assessmentminutes = Math.floor((assessmentDate % (1000 * 60 * 60)) / (1000 * 60));
     console.log("🚀 ~ file: SubmitInformation.js ~ line 55 ~ SubmitInformation ~ assessmentminutes", assessmentminutes)
-  }
+  
   
   
 
@@ -98,7 +99,7 @@ export const SubmitInformation = ({ evt, group }) => {
 
   return (
     <div>
-
+      
 
       {evt.title}
       {submited === null ? <>
@@ -137,7 +138,7 @@ export const SubmitInformation = ({ evt, group }) => {
               {days < 0 && <>
                 <tr>
                   <th scope="row">Time Remaining</th>
-                  <td>you Submission time excide {days} days  {hours} hours {minutes} mins </td>
+                  <td>you Submission time excide {days*-1} days  {hours*-1} hours {minutes*-1} mins </td>
                 </tr>
               </>}
 
@@ -186,12 +187,13 @@ export const SubmitInformation = ({ evt, group }) => {
             </Modal>
           </div>
         </>}
-        <button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        &nbsp;&nbsp;<button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        <br/>
       </> : <>
-      //updated submission
+      {/* <h4>updated submission</h4> */}
         {isOpen && <>
 
-          <h3> updata</h3>
+          {/* <h3> updata</h3> */}
           <table class="table table-striped">
             <tbody>
               <tr>
@@ -215,13 +217,13 @@ export const SubmitInformation = ({ evt, group }) => {
               {days > 0 &&
                 <><tr>
                   <th scope="row">Time Remaining</th>
-                  <td>you have {days} days  {hours} hours {minutes} mins </td>
+                  <td>you submited document in {assessmentDays} days  {assessmenthours} hours {assessmentminutes} mins early </td>
                 </tr></>
 
               }
               {days < 0 && <><tr>
                 <th scope="row">Time Remaining</th>
-                <td>you Submission time excide {days} days  {hours} hours {minutes} mins </td>
+                <td>you Submission time excide {assessmentDays*-1} days  {assessmenthours*-1} hours {assessmentminutes*-1} mins </td>
               </tr></>}
 
               <tr>
@@ -256,8 +258,11 @@ export const SubmitInformation = ({ evt, group }) => {
               </Box>
             </Modal>
           </div>
+          
         </>}
-        <button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        
+        &nbsp;&nbsp;<button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        <br/>
       </>
 
       }
