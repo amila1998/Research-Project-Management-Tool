@@ -46,215 +46,215 @@ const requestSupervisorController={
             const group_id = req.params.gid;
             const topic_id = req.params.tid;
 
-            const myGroup =await Group.findById(group_id);
-            if(!myGroup){
-                return res.status(400).json({msg:"Can't find your Group"});
+            const myGroup = await Group.findById(group_id);
+            if (!myGroup) {
+                return res.status(400).json({ msg: "Can't find your Group" });
             }
-            const oldSupervisors = await MyRejectedSupervisors.find({'group_id':group_id})
+            const oldSupervisors = await MyRejectedSupervisors.find({ 'group_id': group_id })
             console.log("🚀 ~ file: requestSupervisor.js ~ line 54 ~ getSupervisors:async ~ oldSupervisors", oldSupervisors)
-            if (oldSupervisors.length>0) {
-                
-                const supervisors = await User.find({'role':'supervisor'}).select("-password");
+            if (oldSupervisors.length > 0) {
+
+                const supervisors = await User.find({ 'role': 'supervisor' }).select("-password");
                 const myTopicDetails = await Topic.findById(topic_id);
-                if(!myTopicDetails){
-                    return res.status(400).json({msg:"Can't find your topic"});
+                if (!myTopicDetails) {
+                    return res.status(400).json({ msg: "Can't find your topic" });
                 }
 
-                let relatedSupervisors=[];
+                let relatedSupervisors = [];
                 let back = false;
-                
-                for(const s of supervisors){
-                    
-                            for(const i of s.staff.interestedTopics){
-                                
-                                for(const t of myTopicDetails.interestedTopics){
-                                    if(back===true){
-                                        break;
+
+                for (const s of supervisors) {
+
+                    for (const i of s.staff.interestedTopics) {
+
+                        for (const t of myTopicDetails.interestedTopics) {
+                            if (back === true) {
+                                break;
+                            }
+                            if (i === t) {
+                                if (relatedSupervisors.length === 0) {
+
+                                    for (const os of oldSupervisors) {
+                                        if (back === true) {
+                                            break;
+                                        }
+                                        for (const oss of os.supervisor) {
+                                            if (back === true) {
+                                                break;
+                                            }
+                                            if (oss.user_id === s._id) {
+                                                back = true;
+                                                break;
+                                            } else {
+                                                relatedSupervisors.push(s);
+                                                back = true;
+                                                break;
+                                            }
+
+                                        }
+
                                     }
-                                        if (i===t) {
-                                            if (relatedSupervisors.length===0) {
-                                                     
-                                                for(const os of oldSupervisors){
-                                                    if(back===true){
+
+
+                                } else {
+                                    for (const ex of relatedSupervisors) {
+
+                                        if (back === true) {
+                                            break;
+                                        }
+                                        if (s.email === ex.email) {
+                                            break;
+                                        } else if (ex.email != s.email) {
+                                            for (const os of oldSupervisors) {
+                                                if (back === true) {
+                                                    break;
+                                                }
+                                                for (const oss of os.supervisor) {
+                                                    if (back === true) {
                                                         break;
                                                     }
-                                                    for (const oss of os.supervisor) {
-                                                        if(back===true){
-                                                            break;
-                                                        }
-                                                       if (oss.user_id===s._id) {
-                                                            back=true;
-                                                            break;
-                                                       }else{
+                                                    if (oss.user_id === s._id) {
+                                                        console.log('hiiiiiiiii');
+                                                        back = true;
+                                                        break;
+                                                    } else {
                                                         relatedSupervisors.push(s);
-                                                        back=true;
+                                                        back = true;
                                                         break;
-                                                       }
-                                                        
                                                     }
-                                                    
+
                                                 }
-                                             
-                                                    
-                                                }else{
-                                                    for(const ex of relatedSupervisors){
-                                                   
-                                                        if(back===true){
-                                                            break;
-                                                        }
-                                                        if (s.email===ex.email) {
-                                                            break;
-                                                        }else if(ex.email!=s.email){
-                                                            for(const os of oldSupervisors){
-                                                                if(back===true){
-                                                                    break;
-                                                                }
-                                                                for (const oss of os.supervisor) {
-                                                                    if(back===true){
-                                                                        break;
-                                                                    }
-                                                                   if (oss.user_id===s._id) {
-                                                                       console.log('hiiiiiiiii');
-                                                                        back=true;
-                                                                        break;
-                                                                   }else{
-                                                                    relatedSupervisors.push(s);
-                                                                    back=true;
-                                                                    break;
-                                                                   }
-                                                                    
-                                                                }
-                                                                
-                                                            }
-                                                            back=true;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                            
+
+                                            }
+                                            back = true;
+                                            break;
                                         }
                                     }
+                                }
+
                             }
-                        //}
-                   // }
+                        }
+                    }
+                    //}
+                    // }
                 }
                 console.log("🚀 ~ file: requestSupervisor.js ~ line 141 ~ getSupervisors:async ~ relatedSupervisors", relatedSupervisors)
-               return res.status(200).json(relatedSupervisors);
-               
+                return res.status(200).json(relatedSupervisors);
 
-                                
-            }else{
-                const supervisors = await User.find({'role':'supervisor'}).select("-password");
+
+
+            } else {
+                const supervisors = await User.find({ 'role': 'supervisor' }).select("-password");
                 const myTopicDetails = await Topic.findById(topic_id);
-                if(!myTopicDetails){
-                    return res.status(400).json({msg:"Can't find your topic"});
+                if (!myTopicDetails) {
+                    return res.status(400).json({ msg: "Can't find your topic" });
                 }
 
-                let relatedSupervisors=[];
+                let relatedSupervisors = [];
                 let back = false;
-                
-                for(const s of supervisors){
-                    if(back===true){
-                        back===false;
+
+                for (const s of supervisors) {
+                    if (back === true) {
+                        back === false;
                     }
-                            for(const i of s.staff.interestedTopics){
-                                for(const t of myTopicDetails.interestedTopics){
-                                    if(back===true){
-                                        break;
-                                    }
-                                        if (i===t) {
-                                            
-                                            if (relatedSupervisors.length===0) {
-                                                // for(const os of oldSupervisors){
-                                                    relatedSupervisors.push(s);
-                                                //     if(back===true){
-                                                //         break;
-                                                //     }
-                                                //     for (const oss of os.supervisor) {
-                                                //         if(back===true){
-                                                //             break;
-                                                //         }
-                                                //        if (oss.user_id===s._id) {
-                                                //            console.log('hiiiiiiiii');
-                                                //             back=true;
-                                                //             break;
-                                                //        }else{
-                                                           
-                                                //             back=true;
-                                                //             break;
-                                                //        }
-                                                        
-                                                //     }
-                                                    
-                                                // }
-                                                
-                                                }else{
-                                                    for(const ex of relatedSupervisors){
-                                                        if(back===true){
-                                                            break;
-                                                        }
-                                                        if (s.email===ex.email) {
-                                                            break;
-                                                        }else if(ex.email!=s.email){
-                                                            relatedSupervisors.push(s);
-                                                            // for(const os of oldSupervisors){
-                                                            //     if(back===true){
-                                                            //         break;
-                                                            //     }
-                                                            //     for (const oss of os.supervisor) {
-                                                            //         if(back===true){
-                                                            //             break;
-                                                            //         }
-                                                            //        if (oss.user_id===s._id) {
-                                                            //             back=true;
-                                                            //             break;
-                                                            //        }else{
-                                                            //         relatedSupervisors.push(s);
-                                                            //         back=true;
-                                                            //         break;
-                                                            //        }
-                                                                    
-                                                            //     }
-                                                                
-                                                            // }
-                                                            back=true;
-                                                            break;
-                                                        }
-                                                    }
-                                                }
-                                            
+                    for (const i of s.staff.interestedTopics) {
+                        for (const t of myTopicDetails.interestedTopics) {
+                            if (back === true) {
+                                break;
+                            }
+                            if (i === t) {
+
+                                if (relatedSupervisors.length === 0) {
+                                    // for(const os of oldSupervisors){
+                                    relatedSupervisors.push(s);
+                                    //     if(back===true){
+                                    //         break;
+                                    //     }
+                                    //     for (const oss of os.supervisor) {
+                                    //         if(back===true){
+                                    //             break;
+                                    //         }
+                                    //        if (oss.user_id===s._id) {
+                                    //            console.log('hiiiiiiiii');
+                                    //             back=true;
+                                    //             break;
+                                    //        }else{
+
+                                    //             back=true;
+                                    //             break;
+                                    //        }
+
+                                    //     }
+
+                                    // }
+
+                                } else {
+                                    for (const ex of relatedSupervisors) {
+                                        if (back === true) {
+                                            break;
+                                        }
+                                        if (s.email === ex.email) {
+                                            break;
+                                        } else if (ex.email != s.email) {
+                                            relatedSupervisors.push(s);
+                                            // for(const os of oldSupervisors){
+                                            //     if(back===true){
+                                            //         break;
+                                            //     }
+                                            //     for (const oss of os.supervisor) {
+                                            //         if(back===true){
+                                            //             break;
+                                            //         }
+                                            //        if (oss.user_id===s._id) {
+                                            //             back=true;
+                                            //             break;
+                                            //        }else{
+                                            //         relatedSupervisors.push(s);
+                                            //         back=true;
+                                            //         break;
+                                            //        }
+
+                                            //     }
+
+                                            // }
+                                            back = true;
+                                            break;
                                         }
                                     }
+                                }
+
                             }
-                        //}
-                   // }
+                        }
+                    }
+                    //}
+                    // }
                 }
-               
-                return  res.status(200).json(relatedSupervisors);
-               
+
+                return res.status(200).json(relatedSupervisors);
+
             }
-                
-           
+
+
         } catch (error) {
             res.status(500).json({
                 msg: error.message,
                 success: false
-              });
+            });
         }
     },
     getMyGroupRequests:async(req,res)=>{
         try {
-          const groupsRq =   await Group.find({
-              'supervisor.user_id':req.user.id,
-              'supervisor.isAccept':null
-          })
-          res.status(200).json(groupsRq);
-            
+            const groupsRq = await Group.find({
+                'supervisor.user_id': req.user.id,
+                'supervisor.isAccept': null
+            })
+            res.status(200).json(groupsRq);
+
         } catch (error) {
             res.status(500).json({
                 msg: error.message,
                 success: false
-              });
+            });
         }
     },
     giveResponse:async(req,res)=>{

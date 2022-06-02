@@ -23,6 +23,7 @@ import GroupSupervisorDetaiils from '../../components/Student/GroupSupervisorDet
 import GroupCoSupervisorDetaiils from '../../components/Student/GroupCoSupervisorDetails/GroupCoSupervisorDetaiils';
 import RequestCoSupervisor from '../../components/Student/RequestCoSupervisor/RequestCoSupervisor';
 import DownloadTemplates from '../../components/Student/DownloadTemplates/DownloadTemplates';
+import PanalMemberDetails from '../../components/Student/PanalMemberDetails/PanalMemberDetails';
 axios.defaults.withCredentials = true;
 
 const StudentDashboard = () => {
@@ -40,6 +41,7 @@ const StudentDashboard = () => {
     const [requestSupervisor,setRequestSupervisor]=useState(false);
     const [requestCoSupervisor,setRequestCoSupervisor]=useState(false);
     const [downloadTemplates,setDownloadTemplates]=useState(false);
+    const [panalMemberDetails,setPanalMemberDetails]=useState(false);
 
 
     //console.log(myGroup);
@@ -88,6 +90,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
         window.location.href=('/');
     };
 
@@ -101,6 +104,7 @@ const StudentDashboard = () => {
         setRequestCoSupervisor(false);
         setRequestSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     }
     const handleUpdateProfile = () => {
         setDashboard(false);
@@ -112,6 +116,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     }
 
     const handleGroupRegistration = () => {
@@ -124,6 +129,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     }
 
     const handleTopicRegistration =()=>{
@@ -136,6 +142,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     } 
 
     const handleGroupChat = () => {
@@ -148,6 +155,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     } 
 
     const handleRequestSupervisor = () => {
@@ -160,6 +168,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(true);
         setRequestCoSupervisor(false);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     } 
 
     const handleRequestCoSupervisor = () => {
@@ -172,6 +181,7 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(true);
         setDownloadTemplates(false);
+        setPanalMemberDetails(false);
     } 
 
     const handleDownloadTempla = () => {
@@ -184,6 +194,20 @@ const StudentDashboard = () => {
         setRequestSupervisor(false);
         setRequestCoSupervisor(false);
         setDownloadTemplates(true);
+        setPanalMemberDetails(false);
+    } 
+
+    const handlePanalMemberDetails = () => {
+        setDashboard(false);
+        setProfile(false);
+        setUpdateProfile(false);
+        setGroupRegistration(false);
+        setTopicRegistration(false);
+        setGroupChat(false);
+        setRequestSupervisor(false);
+        setRequestCoSupervisor(false);
+        setDownloadTemplates(false);
+        setPanalMemberDetails(true);
     } 
 
     
@@ -213,6 +237,12 @@ const StudentDashboard = () => {
                     <div onClick={handleDownloadTempla} className={downloadTemplates ? 'nav1Select' : 'nav1'}>
                         <div className={downloadTemplates ? "navIconSelect" : "navIcon"}><MdTopic /></div>
                         <div className={downloadTemplates ? 'navTextSelect' : 'navText'}>DOWNLOAD TEMPLATES</div>
+                    </div>
+                     }
+                      {user.student?.haveAGroup&&myGroup?.level>=7&&
+                    <div onClick={handlePanalMemberDetails} className={panalMemberDetails ? 'nav1Select' : 'nav1'}>
+                        <div className={panalMemberDetails ? "navIconSelect" : "navIcon"}><MdTopic /></div>
+                        <div className={panalMemberDetails ? 'navTextSelect' : 'navText'}>PANAL MEMBER DETAILS</div>
                     </div>
                      }
                     {user.student?.haveAGroup&&myGroup?.supervisor.isAccept===true&&myGroup?.level>=4||myGroup?.level===-3?
@@ -282,6 +312,7 @@ const StudentDashboard = () => {
                     {requestSupervisor&&myGroup?.level===1?<RequestSupervisor topic={topicDetails} group={myGroup}/>:requestSupervisor&&<><GroupSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
                     {requestCoSupervisor&&myGroup?.level===4?<RequestCoSupervisor topic={topicDetails} group={myGroup}/>:requestCoSupervisor&&<><GroupCoSupervisorDetaiils topic={topicDetails} group={myGroup}/></>}
                     {downloadTemplates&&<DownloadTemplates/>}
+                    {panalMemberDetails&&<PanalMemberDetails  group={myGroup}/>}
                 </div>
             </div>
         </>

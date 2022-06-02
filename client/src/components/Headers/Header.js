@@ -25,7 +25,7 @@ export default function Header() {
       <form className="d-flex">
         {!user.name?<>
         
-        <button>Login</button>
+        <button className="btn btn-outline-primary">Login</button>
         
         </>:<>
       

@@ -97,7 +97,7 @@ const UserManagement = () => {
     
   
     useEffect(() => {
-        console.log(search," ",isVerify," ",sort," ",role," " );
+       // console.log(search," ",isVerify," ",sort," ",role," " );
       const getAllUsers=async()=>{
         try {
             if (callback) {

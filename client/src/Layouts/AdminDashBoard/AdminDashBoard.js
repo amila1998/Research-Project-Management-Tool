@@ -51,7 +51,7 @@ const history = useNavigate()
     setMarkingSchema(false);
     setGroupManagement(false);
     settopicEvaluationPanelManagement(false);
-    history('/')
+    window.location.href=('/');
   };
 
   const handleProfile = () => {
@@ -245,8 +245,8 @@ const history = useNavigate()
             
           
           </>}
-          {/* {markingSchema&&<MarkingSchemaManagement/>} */}
-          {markingSchema&&<EvaluateSubmission/>}
+          {markingSchema&&<MarkingSchemaManagement/>}
+          {/* {markingSchema&&<EvaluateSubmission/>} */}
           {groupManagement&&<GroupManagement/>}
           {topicEvaluationPanelManagement&&<TopicEvaluationPanelManagement/>}
            </div>

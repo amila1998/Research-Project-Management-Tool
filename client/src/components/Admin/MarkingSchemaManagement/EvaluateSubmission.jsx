@@ -29,6 +29,10 @@ import Switch from '@mui/material/Switch';
 import { AuthContext } from "../../../context/AuthContext";
 
 const EvaluateSubmission = () => {
+// const EvaluateSubmission = (data) => {
+  // const {groupId,submissionTypeId} = data;
+  const groupId = '62922bcfaa5145fa58dee82e';
+  const submissionTypeId = '629248b48e431770ca56e870';
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const initialRowState = [{ criteria: "", marks: 0, comment: "" }];
@@ -50,21 +54,25 @@ const EvaluateSubmission = () => {
   ];
   const [arr, setArr] = useState([]);
   const [isBlindReviewer, setIsBlindReviewer] = useState(false);
+  const [isSecondEvaluation, setIsSecondEvaluation] = useState(false);
   const [previewEnabled, setPreviewEnabled] = useState(false);
   const [rows, setRows] = useState(initialRowState);
   const [submissionTypes, setSubmissionTypes] = useState([]);
-  const [submissionTypeID, setSubmissionTypeID] = useState("");
+  // const [submissionTypeID, setSubmissionTypeID] = useState("");
   const [title, setTitle] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [callback, setCallback] = useState(false);
   const [markingSchemaData, setMarkingSchemaData] = useState([]);
   const [markingSchemaArray, setMarkingSchema] = useState([]);
+  const [markingSchemaUpdatedArray, setUpdatedMarkingSchema] = useState([]);
   const [evaluationData, setEvaluationData] = useState(initialEvaluationDataState);
   const [totalMark, setTotalMark] = useState(0);
-  const [groupId, setGroupId] = useState("");
+  const [level, setLevel] = useState(0);
+  // const [groupId, setGroupId] = useState("");
+  const [evaluationLevel, setEvaluationLevel] = useState(0);
+  const [evaluationId, setEvaluationId] = useState("");
 
   const {
-    _id: submissionTypeId,
     describe: description,
     title: submissionTypeTitle,
   } = submissionTypes;
@@ -98,6 +106,23 @@ const EvaluateSubmission = () => {
     setArr(tempSchema);
   };
 
+  const setMarkingSchemaUpdatedForm = () => {
+    let tempSchema = [];
+    markingSchemaUpdatedArray?.length > 0 &&
+      markingSchemaUpdatedArray.map((data, i) => {
+        tempSchema.push([
+          {
+            type: "text", id: i, value: data.criteria, label: "Criteria",
+          },
+          { type: "text", id: i, value: data.comment, label: "Comment" },
+          {
+            type: "number", id: i, value: data.marks, label: "Marks",
+          },
+        ]);
+      });
+    setArr(tempSchema);
+  };
+
   const handleInputChange = (e, key) => {
     setCallback(true);
     arr.map((arraySet) => {
@@ -107,6 +132,7 @@ const EvaluateSubmission = () => {
         }
       });
     });
+    createData();
   };
 
   useEffect(() => {}, [arr, submissionTypes, markingSchemaData]);
@@ -116,12 +142,8 @@ const EvaluateSubmission = () => {
   }, [markingSchemaArray]);
 
   useEffect(() => {
-    createData();
-  }, [arr]);
-
-  useEffect(() => {
-    setMarkingSchema(markingSchema);
-  }, [markingSchema]);
+    setMarkingSchemaUpdatedForm();
+  }, [markingSchemaUpdatedArray]);
 
   useEffect(() => {
     console.log("🚀 ~  ~ evaluationData", evaluationData)
@@ -134,7 +156,8 @@ const EvaluateSubmission = () => {
   }, [callback]);
 
   useEffect(() => {
-    // console.log("🚀 ~~ rows ", rows);
+    let total = getTotalMarkAllocation();
+    setTotalMark(total);
   }, [rows]);
 
   const createData = () => {
@@ -159,10 +182,6 @@ const EvaluateSubmission = () => {
     setRows(rowArray);
   };
 
-  // const handleChange = (e) => {
-  //   setSubmissionType(e.target.value);
-  // };
-
   const onChangeSwitch = (e) => {
     setIsBlindReviewer(e.target.checked);
   };
@@ -170,16 +189,53 @@ const EvaluateSubmission = () => {
   const getSubmissionTypes = async () => {
     try {
       const result = await axios.get(
-        `/api/schema/get/629284dcf00425624e57a3e2`
+        `/api/schema/get/${submissionTypeId}`
       );
       console.log("getSubmissionTypes ~ result", result);
       setMarkingSchemaData(result.data.markingSchema);
+      setMarkingSchema(result.data.markingSchema.markingSchema);
       setSubmissionTypes(result.data.submissionData);
-      setGroupId("62922bcfaa5145fa58dee82e")
     } catch (error) {
+      toast.error("This submission has no marking schema please add one", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       console.log("getSubmissionTypes ~ error", error);
     }
   };
+
+  const getEvaluationValue = async () => {
+    try {
+      const result = await axios.post(
+        `/api/evaluation/getLevel/`,
+        {submissionTypeId,
+        groupId}
+      );
+      console.log("getEvaluationValue ~ result", result);
+      if (result.data.success) {
+        setEvaluationLevel(result.data.evaluation.level);        
+        setLevel(result.data.evaluation.level);        
+        setUpdatedMarkingSchema(result.data.evaluation.result);        
+        setEvaluationId(result.data.evaluation._id);     
+        setIsSecondEvaluation(true);      
+      }
+    } catch (error) {
+      if (!result.data.success) {
+        setEvaluationLevel(0);
+        setLevel(0);     
+      }
+      console.log("getEvaluationValue ~ error", error);
+    }
+  };
+
+  useEffect(() => {
+    getEvaluationValue();
+  }, []);
 
   useEffect(() => {
     getSubmissionTypes();
@@ -190,59 +246,75 @@ const EvaluateSubmission = () => {
   }, [evaluationData]);
 
   const preview = () => {
-    let total = getTotalMarkAllocation();
     createData();
-    setTotalMark(total);
     setPreviewEnabled(!previewEnabled);
   };
 
-  const onClickUpdate = () => {
-    let total = getTotalMarkAllocation();
-    createData();
-    setTotalMark(total);
-  };
   const sendEvaluation = async () => {
-    // check fields
-    // if (isEmpty(title) || isEmpty(submissionTypeID))
-    //   return toast.error("Please fill in all fields.", {
-    //     position: "top-right",
-    //     autoClose: 5000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //   });
-    try {
-      console.log("🚀 ~~ evaluationData", evaluationData)
-      setIsLoading(true);
-      const res = await axios.post("/api/evaluation/add", evaluationData);     
-      console.log("🚀 ~  ~ onClickEvaluate ~ res", res)
-      setIsLoading(false);
-
-      toast.success(res.data.msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      navigate("/");
-    } catch (err) {
-      console.log("🚀 ~ ~ onClickEvaluate ~ err", err)
-      console.log("🚀 ~~ evaluationData", evaluationData)
-      setIsLoading(false);
-      toast.error(err.response.data.msg, {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
+    if (isSecondEvaluation) {
+      try {
+        console.log("🚀 ~~ evaluationData", evaluationData)
+        setIsLoading(true);
+        const res = await axios.post(`/api/evaluation/update/${evaluationId}`, evaluationData);     
+        console.log("🚀 ~  ~ onClickEvaluate ~ res", res)
+        setIsLoading(false);
+  
+        toast.success(res.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate("/");
+      } catch (err) {
+        console.log("🚀 ~ ~ onClickEvaluate ~ err", err)
+        console.log("🚀 ~~ evaluationData", evaluationData)
+        setIsLoading(false);
+        toast.error(err.response.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    } else {
+      try {
+        console.log("🚀 ~~ evaluationData", evaluationData)
+        setIsLoading(true);
+        const res = await axios.post("/api/evaluation/add", evaluationData);     
+        console.log("🚀 ~  ~ onClickEvaluate ~ res", res)
+        setIsLoading(false);
+  
+        toast.success(res.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        navigate("/");
+      } catch (err) {
+        console.log("🚀 ~ ~ onClickEvaluate ~ err", err)
+        console.log("🚀 ~~ evaluationData", evaluationData)
+        setIsLoading(false);
+        toast.error(err.response.data.msg, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      }
     }
   };
 
@@ -254,6 +326,7 @@ const EvaluateSubmission = () => {
       groupId: groupId,
       evaluatorId: user._id,
       marks: totalMark,
+      level: level,
       isBlindReviewed: isBlindReviewer,
       result: rows,
     });
@@ -276,7 +349,16 @@ const EvaluateSubmission = () => {
         <>
           <ToastContainer />
           <div className="markingSchema">
-            <h3>Create Marking Schema</h3>
+            <h3>Submission Evaluation</h3>
+              <div>Evaluation Level {evaluationLevel+1}</div>
+              <div className='steps'>
+                <span className="line-1"></span>
+                <span className="line-2"></span>
+                {evaluationLevel === 0 && <><div className='nextStep'>Initial Evaluation</div></>}
+                {evaluationLevel === 1 && <><div className='nextStep'>Second Evaluation</div></>}
+                
+              </div>
+              <br></br>
             <Box
               component="form"
               sx={{
@@ -308,11 +390,12 @@ const EvaluateSubmission = () => {
                   {groupId}
                   </Typography>
                   <Divider />
-                  <FormControlLabel
-                    control={<Switch onChange={(e) => onChangeSwitch(e)} />}
-                    label="Blind Reviewer"
-                  />
-                  <Divider />
+                    {level === 1 && <>
+                      <FormControlLabel
+                        control={<Switch onChange={(e) => onChangeSwitch(e)} />}
+                        label="Blind Reviewer"
+                      />
+                      <Divider /></>}
                   <InputLabel id="demo-simple-select-helper-label">
                     Evaluation
                   </InputLabel>
@@ -350,15 +433,6 @@ const EvaluateSubmission = () => {
                         size="medium"
                       >
                         Preview
-                      </Button>
-                      &nbsp;
-                      <Button
-                        variant="outlined"
-                        onClick={() => {
-                          onClickUpdate();
-                        }}
-                      >
-                        Update
                       </Button>
                       &nbsp;
                       <Button
