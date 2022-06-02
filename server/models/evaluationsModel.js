@@ -17,6 +17,10 @@ const evaluationSchema = new Schema({
         type: Number,
         required: true
     },
+    level: {
+        type: Number,
+        default: 0
+    },
     isBlindReviewed: {
         type: Boolean,
         default: false
