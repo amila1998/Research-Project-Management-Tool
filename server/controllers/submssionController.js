@@ -92,10 +92,13 @@ const submssionController ={
    getSupervisorsSub:async(req,res)=>{
        try {
            const groups = await Groups.find({'supervisor.user_id':req.user.id});
+           const eventType="document"
            let submissions=[]
            for (const g of groups) {
-               const submssion =await Submssion.findOne({'groupID':g._id});
-               submissions.push(submssion)
+               const submssion =await Submssion.find({'groupID':g._id ,"eventType":"document"});
+               if(submssion){
+                   submissions.push(submssion)
+                }
             }
            res.status(200).json(
             submissions

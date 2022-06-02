@@ -12,6 +12,7 @@ console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventtype"
     const [file, setFile] = useState(false);
     const [fileURL, setfileURL] = useState('');
     const[groupId,setGroupId]=useState([]);
+    console.log("🚀 ~ file: AddSubmission.js ~ line 15 ~ AddSubmission ~ groupId", groupId)
    
 
     const[isSubmitted,setisSubmitted]=useState(true)
@@ -98,7 +99,7 @@ const handleChange = (e) => {
    const addSubmition=async(e)=>{
     // e.preventDefault();
     try {
-        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId,comments:data.comments,url:fileURL,eventId:eventId,isSubmitted:isSubmitted});
+        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId._id,groupName:groupId.groupName,eventId:eventId,eventName:eventName,eventType:eventtype,comments:data.comments,url:fileURL,isSubmitted:isSubmitted});
         toast.success(res.data.msg ,{
           position: "top-right",
           autoClose: 5000,
