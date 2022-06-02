@@ -45,7 +45,7 @@ export const PanelMemberDashBoard = () => {
       setUpdateProfile(false);
       settopicManagement(false);
    
-      history('/')
+      window.location.href=('/');
     };
   
     const handleProfile = () => {

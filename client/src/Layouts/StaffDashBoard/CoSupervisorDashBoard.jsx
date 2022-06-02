@@ -29,7 +29,7 @@ const CoSupervisorDashBoard = () => {
       setProfile(false);
       setUpdateProfile(false);
       setGroupReqManagement(false);
-      history('/')
+      window.location.href=('/');
     };
   
     const handleProfile = () => {
