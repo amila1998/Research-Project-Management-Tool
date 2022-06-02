@@ -51,7 +51,7 @@ const history = useNavigate()
     setMarkingSchema(false);
     setGroupManagement(false);
     settopicEvaluationPanelManagement(false);
-    history('/')
+    window.location.href=('/');
   };
 
   const handleProfile = () => {
