@@ -93,7 +93,7 @@ const UsersCharts = () => {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="count" fill="#82ca9d" />
+        <Bar dataKey="count" fill="#f7904a" />
       </BarChart>
     </>
   )
