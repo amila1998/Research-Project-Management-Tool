@@ -5,10 +5,10 @@ const Submssion = require("../models/submssionModel");
 const submssionController ={
     addSubmssion:async(req,res)=>{
         try {
-            const {studentId,url,comments,groupID,eventId,isSubmitted} = req.body;
+            const {studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType} = req.body;
             // let date_ob = new Date();
             const newTem = new Submssion({
-                studentId,url,comments,groupID,eventId,isSubmitted
+                studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType
             })
            const submitNew = await newTem.save();  
             res.status(200).json({ 

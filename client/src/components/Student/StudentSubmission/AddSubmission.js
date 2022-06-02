@@ -4,13 +4,16 @@ import { ToastContainer, toast } from "react-toastify";
 import {useDropzone} from 'react-dropzone'
 import "./addSubmission.scss"
 import axios from "axios";
-export const AddSubmission = ({eventId,setsubId}) => {
+export const AddSubmission = ({eventtype,eventName,eventId,setsubId}) => {
+console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventtype", eventtype)
 // console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventId", eventId)
     const {dispatch, user } = useContext(AuthContext);
     const [fileName, setFileName]=useState("");
     const [file, setFile] = useState(false);
     const [fileURL, setfileURL] = useState('');
     const[groupId,setGroupId]=useState([]);
+   
+
     const[isSubmitted,setisSubmitted]=useState(true)
     const [data,setData]=useState({
         comments:''

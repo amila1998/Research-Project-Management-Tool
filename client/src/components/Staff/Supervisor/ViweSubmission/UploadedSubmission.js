@@ -24,13 +24,12 @@ console.log(allMyGroups)
 
   return (
 
-    <div>UploadedSubmission
+    <div>
         {allMyGroups.map((i)=>
         <div key={i._id}>
             {i.eventId}
 
         </div>)}
-        {/* <h4>{allSubmission.eventId}</h4> */}
     </div>
   )
 }

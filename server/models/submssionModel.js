@@ -9,6 +9,22 @@ const submssionSchema = new Schema({
         type: String, 
         required: true 
     },
+    groupName:{
+        type: String, 
+        required: true 
+    },
+    eventId:{
+        type: String, 
+        required: true 
+    },
+    eventName:{
+        type: String, 
+        required: true
+    },
+    eventType:{
+        type: String, 
+        required: true
+    },
     comments:{
         type: String, 
         required: true 
@@ -17,10 +33,7 @@ const submssionSchema = new Schema({
         type: String, 
         required: true 
     },
-    eventId:{
-        type: String, 
-        required: true 
-    },
+   
     isSubmitted:{
         type:Boolean,
         default:null
