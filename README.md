@@ -63,7 +63,7 @@
 <h3>Auth</h3>
 
 <div align="center">
-  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Login Page.gif" alt="login page" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/LoginPage.gif" alt="login" width="500" height="300">
  
 </div>
 
