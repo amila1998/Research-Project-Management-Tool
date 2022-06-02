@@ -28,11 +28,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
 import { AuthContext } from "../../../context/AuthContext";
 
-const EvaluateSubmission = () => {
+const EvaluateSubmission = ({groupID,eventId}) => {
+console.log("🚀 ~ file: EvaluateSubmission.jsx ~ line 32 ~ EvaluateSubmission ~ groupID", groupID)
+console.log("🚀 ~ file: EvaluateSubmission.jsx ~ line 32 ~ EvaluateSubmission ~ eventId",eventId)
 // const EvaluateSubmission = (data) => {
   // const {groupId,submissionTypeId} = data;
-  const groupId = '62922bcfaa5145fa58dee82e';
-  const submissionTypeId = '629248b48e431770ca56e870';
+  const groupId=groupID;
+  const submissionTypeId=eventId;
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const initialRowState = [{ criteria: "", marks: 0, comment: "" }];
@@ -191,6 +193,7 @@ const EvaluateSubmission = () => {
       const result = await axios.get(
         `/api/schema/get/${submissionTypeId}`
       );
+        console.log("🚀 ~ file: EvaluateSubmission.jsx ~ line 196 ~ getSubmissionTypes ~ submissionTypeId", submissionTypeId)
       console.log("getSubmissionTypes ~ result", result);
       setMarkingSchemaData(result.data.markingSchema);
       setMarkingSchema(result.data.markingSchema.markingSchema);

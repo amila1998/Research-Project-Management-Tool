@@ -5,10 +5,10 @@ const Submssion = require("../models/submssionModel");
 const submssionController ={
     addSubmssion:async(req,res)=>{
         try {
-            const {studentId,url,comments,groupID,eventId,isSubmitted} = req.body;
+            const {studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType} = req.body;
             // let date_ob = new Date();
             const newTem = new Submssion({
-                studentId,url,comments,groupID,eventId,isSubmitted
+                studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType
             })
            const submitNew = await newTem.save();  
             res.status(200).json({ 
@@ -92,10 +92,13 @@ const submssionController ={
    getSupervisorsSub:async(req,res)=>{
        try {
            const groups = await Groups.find({'supervisor.user_id':req.user.id});
+           const eventType="document"
            let submissions=[]
            for (const g of groups) {
-               const submssion =await Submssion.findOne({'groupID':g._id});
-               submissions.push(submssion)
+               const submssion =await Submssion.find({'groupID':g._id ,"eventType":"document"});
+               if(submssion){
+                   submissions.push(submssion)
+                }
             }
            res.status(200).json(
             submissions

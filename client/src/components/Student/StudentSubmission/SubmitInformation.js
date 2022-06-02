@@ -49,11 +49,11 @@ export const SubmitInformation = ({ evt, group }) => {
     let assessmentDate=countDownDate-submissionData;
     
     const assessmentDays = Math.floor(assessmentDate / (1000 * 60 * 60 * 24));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 51 ~ SubmitInformation ~ assessmentDays", assessmentDays)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 51 ~ SubmitInformation ~ assessmentDays", assessmentDays)
     const assessmenthours = Math.floor((assessmentDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 53 ~ SubmitInformation ~ assessmenthours", assessmenthours)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 53 ~ SubmitInformation ~ assessmenthours", assessmenthours)
     const assessmentminutes = Math.floor((assessmentDate % (1000 * 60 * 60)) / (1000 * 60));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 55 ~ SubmitInformation ~ assessmentminutes", assessmentminutes)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 55 ~ SubmitInformation ~ assessmentminutes", assessmentminutes)
   
   
   
@@ -181,7 +181,7 @@ export const SubmitInformation = ({ evt, group }) => {
                   Add Submission
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <AddSubmission eventId={evt._id} setsubId={setsubId} />
+                  <AddSubmission eventtype={evt.type} eventName={evt.title} eventId={evt._id} setsubId={setsubId} />
                 </Typography>
               </Box>
             </Modal>
