@@ -130,7 +130,28 @@ const submssionController ={
          success: false
      }); 
     }
-}   
+}, 
+getPanalMemberSub:async(req,res)=>{
+    try {
+        const groups = await Groups.find({'panelMember.user_id':req.user.id});
+        const eventType="document"
+        let submissions=[]
+        for (const g of groups) {
+            const submssion =await Submssion.find({'groupID':g._id ,"eventType":"presentation"});
+            if(submssion){
+                submissions.push(submssion)
+             }
+         }
+        res.status(200).json(
+         submissions
+        )
+    } catch (error) {
+     res.status(500).json({ 
+         msg: error.message ,
+         success: false
+     }); 
+    }
+}  
 
 }
     module.exports = submssionController;
