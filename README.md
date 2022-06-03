@@ -92,6 +92,9 @@
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-coSupervisorDetails.png" alt="Co Supervisor Details" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-DownloadTemplates.png" alt="Download Templates" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-groupChat.png" alt="Group Chat" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-dashboard-finalStep.png" alt="Student Dashboard final step" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-AddSubmission.png" alt="Add Submissions" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-updateSubmission.png" alt="Update Submissions" width="500" height="300">
  
 </div>
 
@@ -99,6 +102,7 @@
 
 <div align="center">
 <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Supervisor-getGroupRequests.png" alt="Get Group Requests" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-updateSubmission.png" alt="Update Submissions" width="500" height="300">
 </div>
 
 <h3>Co Supervisor</h3>
