@@ -110,6 +110,8 @@
 <h3>Panal Member</h3>
 
 <div align="center">
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/panalMember-Dashboard.png" alt="Panal Member DashBord" width="500" height="300">
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/panalMember-EvaluvationSubmission.png" alt="Panal Member Evaluvate Submissions" width="500" height="300">
 <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/panalMember-TopicEvaluwation.png" alt="Topic Evaluvation" width="500" height="300">
 </div>
 
