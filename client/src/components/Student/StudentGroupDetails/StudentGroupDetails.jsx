@@ -4,7 +4,7 @@ import './groupDetails.scss'
 const StudentGroupDetails = ({groupData}) => {
   return (
       <>
-      <div className='GDtopic'>{groupData.groupName.toUpperCase()} GROUP DETAILS</div>
+      <div className='GDtopic Dash'>{groupData.groupName.toUpperCase()} <div className="Dash"> <h1>Group DETAILS</h1></div></div>
         <div>Your Group level is {groupData.level}</div>
         <div className='steps'>
             <span className="line-1"></span>
