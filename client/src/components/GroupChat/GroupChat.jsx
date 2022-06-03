@@ -11,7 +11,7 @@ const GroupChat = ({group}) => {
     console.log(group);
   return (
     <>
-    <h1>Group Chat</h1>
+    <h1 className="grpn">Group Chat</h1>
     <Chat userData={user} />
     </>
   )
