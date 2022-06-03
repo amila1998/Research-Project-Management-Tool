@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext';
+import Chat from './pages/Chat'
+import './GroupChat.scss'
+
 
 const GroupChat = ({group}) => {
+
+  const { user, isCoSupervisor, isPanelMember, isSupervisor } = useContext(AuthContext);
+
     console.log(group);
   return (
-    <div>GroupChat</div>
+    <>
+    <h1 className="grpn">Group Chat</h1>
+    <Chat userData={user} />
+    </>
   )
 }
 
