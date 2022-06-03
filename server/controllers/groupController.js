@@ -151,6 +151,25 @@ const groupController ={
         'panelMember.name': user.name,
         'panelMember.user_id': user._id,
       })
+
+      // send email
+     const subject="ADDED A PANAL MEMBER";
+     const text=`You have now a Panal member under userID ${user._id} and  Name: ${user.name}`;
+     
+     const groupDetails = await Groups.findById(gid)
+     if(groupDetails){
+       for(const m of groupDetails.members){
+         const userDetails = await User.findById(m.user_id);
+         if(userDetails){
+           const to = userDetails.email;
+           sendMail.sendEmailtoGroupStudents(to,text,subject);
+         }
+         
+       }
+     }
+     
+     
+
       res.status(200).json({ msg: "Panal member Added !" });
     } catch (error) {
       res.status(500).json({ msg: error.message });
