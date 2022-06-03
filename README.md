@@ -64,13 +64,27 @@
 
 <div align="center">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/LoginPage.gif" alt="login" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/forgetPassword.png" alt="Forgot Password" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-register.png" alt="Student Registration" width="500" height="">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/staff-register.png" alt="Staff Registeration" width="500" height="">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/resetPassword.png" alt="Reset Password" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/AccountActivatePage.png" alt="Account Activate" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/studentProfile.png" alt="profile De" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/updateProfile.png" alt="Profile update" width="500" height="300">
+
  
 </div>
 
 <h3>Student</h3>
 
 <div align="center">
-
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-groupDetails.png" alt="Group Details" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-topicDetails.png" alt="Topic Details" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-supervisorDetails.png" alt="Supervisor Details" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-supervisorDetails(buttonClick).png" alt="Supervisor Details (buttonClick)" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-coSupervisorDetails.png" alt="Co Supervisor Details" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-DownloadTemplates.png" alt="Download Templates" width="500" height="300">
+ 
 </div>
 
 <h3>Supervisor</h3>
@@ -91,10 +105,33 @@
 
 </div>
 
- <h3>Admin</h3>
+ <h3>Admin</h3> 
+<div align="center">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-dashboard.png" alt="Admin Dashboard" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-userManagement.png" alt="Admin User Management" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-submissionTypemanagement.png" alt="Admin Submission Type Management" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-addNewSubmission.png" alt="Admin Submission Type Management Add new Submission" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-TemplateManagement.png" alt="Admin Submission Template Management" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-markingShemaManagement.png" alt="Admin Submission Template Management" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-groupManagement(beforeThePanalMemberAdding).png" alt="Admin Group Management (beforeThePanalMemberAdding)" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-groupmanagement(afterThePanalMemeberAdding).png" alt="Admin Groupmanagement(afterThePanalMemeberAdding)" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-TopicEvaluvationPanalManagement.png" alt="Admin Topic Evaluvation Panal Management" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-AddNewPanalMemberToTheTopicEvaluvationPanal.png" alt="Admin Add New Panal Member To The Topic Evaluvation Panal" width="500" height="300">
+  
+</div>
+
+
+ <h3>Others</h3>
  
 <div align="center">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/contactUs.png" alt="Contact Us" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/about.png" alt="About Us" width="500" height="300">
+</div>
+
+<h3>Database</h3>
  
+<div align="center">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/DB1.png" alt="DB" width="500" height="300">
 </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>

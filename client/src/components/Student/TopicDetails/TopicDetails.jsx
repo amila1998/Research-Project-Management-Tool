@@ -92,7 +92,8 @@ const TopicDetails = ({topic,group}) => {
     return (
       <>
       {topic.panalMemberAcception===true&&<img src={approved} className='statusimg'/>}
-      <h1>Topic Details</h1>
+      <div className="Dash">   <h1>Topic Details</h1></div>
+    
       <br/>
       <div className='display'>
         <div className='row1'>

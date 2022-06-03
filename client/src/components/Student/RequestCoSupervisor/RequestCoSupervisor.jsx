@@ -82,7 +82,8 @@ const RequestCoSupervisor = ({topic,group}) => {
     
   return (
     <div> <ToastContainer/>
-    <h1>REQUEST CO SUPERVISOR</h1>
+    <div className="Dash">     <h1>REQUEST CO SUPERVISOR</h1></div>
+  
     <div className='cardBody'>
       {coSupervisors.map(item=>
         <div key={item._id}>
