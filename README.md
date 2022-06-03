@@ -101,16 +101,20 @@
 <h3>Supervisor</h3>
 
 <div align="center">
-  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-SubmissionEvaluation.png" alt="Supervisor Dashbord" width="500" height="300">
-  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-dashbord.png" alt="Supervisor Dashbord" width="500" height="300">
-<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Supervisor-getGroupRequests.png" alt="Get Group Requests" width="500" height="300">
  
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-dashbord.png" alt="Supervisor Dashbord" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-SubmissionEvaluation.png" alt="Submission Evaluvation" width="500" height="300">
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Supervisor-getGroupRequests.png" alt="Get Group Requests" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Group_Chat_Supervisor.png" alt="Group Chat" width="500" height="300">
 </div>
 
 <h3>Co Supervisor</h3>
 
 <div align="center">
-<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/coSupervisor-GroupRequests.png" alt="Get Group Requests" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/coSupervisor-Dashboard.png" alt="Co Supervisor Dashboard" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/cosupervisor-submissionevaluation.png" alt="Co Supervisor Submission Evaluvation" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/coSupervisor-GroupRequests.png" alt="Get Group Requests" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Group_Chat_Co-Supervisor.png" alt="Group Chat" width="500" height="300">
 </div>
 
 <h3>Panal Member</h3>
