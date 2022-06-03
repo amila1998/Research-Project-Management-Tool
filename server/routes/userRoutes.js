@@ -4,6 +4,9 @@ const userController = require("../controllers/userController");
 const auth = require("../middlewares/auth");
 const admin = require("../middlewares/admin");
 const verifyToken = require("../middlewares/verifyToken");
+const supervisor = require("../middlewares/supervisor");
+
+const coSupervisor = require("../middlewares/coSupervisor");
 
 // route.post("/register-student", userController.register);
 // route.post("/register-admin", userController.register);
@@ -35,6 +38,10 @@ route.get("/api/admin/getallUsers",auth,admin, userController.getAllUsers);
 route.patch("/api/admin/verifyUsers/:id",auth,admin, userController.verify);
 route.delete("/api/admin/deleteUser/:id",auth,admin, userController.delete);
 route.get("/api/auth/allgroupusers",auth,userController.getGroupUsers);
+route.get("/api/auth/allsupervisorgroupusers", auth, supervisor, userController.getallsupervisorgroupusers);
+route.get("/api/auth/allcosupervisorgroupusers", auth, coSupervisor, userController.getallcosupervisorgroupusers);
+
+
 
 route.get('/api/users/getuserDetails/:id',auth,userController.getuserDedails);
 
