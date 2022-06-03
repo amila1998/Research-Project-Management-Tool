@@ -107,7 +107,7 @@
 </div>
 
 <h3>Panal Member</h3>
-
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/panalMember-TopicEvaluwation.png" alt="Topic Evaluvation" width="500" height="300">
 <div align="center">
 
 </div>
@@ -120,7 +120,7 @@
    <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-addNewSubmission.png" alt="Admin Submission Type Management Add new Submission" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-TemplateManagement.png" alt="Admin Submission Template Management" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-markingShemaManagement.png" alt="Admin Submission Template Management" width="500" height="300">
-   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-groupManagement(beforeThePanalMemberAdding).png" alt="Admin Group Management (beforeThePanalMemberAdding)" width="500" height="300">
+   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-groupManagement.png" alt="Admin Group Management (beforeThePanalMemberAdding)" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-groupmanagement(afterThePanalMemeberAdding).png" alt="Admin Groupmanagement(afterThePanalMemeberAdding)" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-TopicEvaluvationPanalManagement.png" alt="Admin Topic Evaluvation Panal Management" width="500" height="300">
    <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/admin-AddNewPanalMemberToTheTopicEvaluvationPanal.png" alt="Admin Add New Panal Member To The Topic Evaluvation Panal" width="500" height="300">
