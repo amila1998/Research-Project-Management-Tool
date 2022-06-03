@@ -78,10 +78,17 @@
 <h3>Student</h3>
 
 <div align="center">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-DashbordStep1.png" alt="Student Dashboard step 1" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-groupRegisteration.png" alt="Group Registration" width="500" height="300">
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-groupDetails.png" alt="Group Details" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-topicRegistration.png" alt="Topic Registration" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-topicDetails.png" alt="Topic Details" width="500" height="300">
- <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-supervisorDetails.png" alt="Supervisor Details" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-RequestSupervisor.png" alt="Request Supervisor" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-If supervisor rejected group request.png" alt="Request Supervisor Reject" width="500" height="300">
+ <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-supervisorDetailsAfterAccept.png" alt="Supervisor Details" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-supervisorDetails(buttonClick).png" alt="Supervisor Details (buttonClick)" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-Request-Co-Supervisor.png" alt="Request Co Supervisor" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-AfterRejectTheRequest.png" alt="Co Supervisor Reject" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-coSupervisorDetails.png" alt="Co Supervisor Details" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-DownloadTemplates.png" alt="Download Templates" width="500" height="300">
  
@@ -90,13 +97,13 @@
 <h3>Supervisor</h3>
 
 <div align="center">
-
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Supervisor-getGroupRequests.png" alt="Get Group Requests" width="500" height="300">
 </div>
 
 <h3>Co Supervisor</h3>
 
 <div align="center">
-
+<img src="zREAD_ME_DOCUMENTS/IMAGES/previews/coSupervisor-GroupRequests.png" alt="Get Group Requests" width="500" height="300">
 </div>
 
 <h3>Panal Member</h3>
