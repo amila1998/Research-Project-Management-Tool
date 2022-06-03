@@ -2,6 +2,22 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { CSUploadedOne } from './CSUploadedOne';
 
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+
+const bull = { 
+    // position: 'absolute',
+    // top: '50%',
+    // left: '50%',
+    // transform: 'translate(-50%, -50%)',
+    width: "75%",
+    height: "auto",
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    // overflow: 'scroll',
+    boxShadow: 24,
+    p: 4,}
+  ;
 
 
 export const CSUploadedSubmission = () => {
@@ -25,7 +41,7 @@ export const CSUploadedSubmission = () => {
   }, [])
 
   return (
-    <div>CSUploadedSubmission
+    <div>
 
 {allMyGroups.map((i)=>
         <div key={i._id}>
@@ -34,7 +50,11 @@ export const CSUploadedSubmission = () => {
          
         <div key={s._id}>
           {/* {s.groupID} */}
-          <CSUploadedOne subId={s._id}/>
+             <Card sx={bull}>
+               <CardActions>
+                  <CSUploadedOne subId={s._id} />
+               </CardActions>
+             </Card>
         </div> 
          
          )}
