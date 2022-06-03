@@ -251,12 +251,12 @@ const StudentDashboard = () => {
                         <div className={requestCoSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===4?"REQUEST CO-SUPERVISOR":"GROUP CO-SUPERVISOR DETAILS"}</div>
                     </div>:<></>
                      }
-                    {user.student?.haveAGroup&&
+                    {user.student?.haveAGroup&&myGroup?.level>=1||myGroup?.level===-1?
                     <div onClick={handleRequestSupervisor} className={requestSupervisor ? 'nav1Select' : 'nav1'}>
                         <div className={requestSupervisor ? "navIconSelect" : "navIcon"}><MdTopic /></div>
                         <div className={requestSupervisor ? 'navTextSelect' : 'navText'}>{myGroup?.level===1?"REQUEST SUPERVISOR":"GROUP SUPERVISOR DETAILS"}</div>
                     </div>
-                     }
+                     :<></>}
                     {user.student?.haveAGroup&&
                     <div onClick={handleTopicRegistration} className={topicRegistration ? 'nav1Select' : 'nav1'}>
                         <div className={topicRegistration ? "navIconSelect" : "navIcon"}><MdTopic /></div>

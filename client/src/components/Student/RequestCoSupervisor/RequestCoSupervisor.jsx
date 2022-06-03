@@ -94,8 +94,9 @@ const RequestCoSupervisor = ({topic,group}) => {
           <p className="card-text">{item.staff?.description}</p>
           <div className='row'>
           <div className='col'>
-            <button className='btn btn-outline-warning' onClick={handleOpen}>VIEW</button>
+            <button key={item._id} className='btn btn-outline-warning' onClick={handleOpen}>VIEW</button>
             <Modal
+            
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"

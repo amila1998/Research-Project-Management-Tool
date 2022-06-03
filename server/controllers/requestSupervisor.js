@@ -91,7 +91,8 @@ const requestSupervisorController={
                                             if (oss.user_id === s._id) {
                                                 back = true;
                                                 break;
-                                            } else {
+                                            }
+                                            if (oss.user_id != s._id) {
                                                 relatedSupervisors.push(s);
                                                 back = true;
                                                 break;
@@ -123,7 +124,8 @@ const requestSupervisorController={
                                                         //console.log('hiiiiiiiii');
                                                         back = true;
                                                         break;
-                                                    } else {
+                                                    } 
+                                                    if (oss.user_id != s._id){
                                                         relatedSupervisors.push(s);
                                                         back = true;
                                                         break;
