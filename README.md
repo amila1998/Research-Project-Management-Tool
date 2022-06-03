@@ -101,8 +101,10 @@
 <h3>Supervisor</h3>
 
 <div align="center">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-SubmissionEvaluation.png" alt="Supervisor Dashbord" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/supervisor-dashbord.png" alt="Supervisor Dashbord" width="500" height="300">
 <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Supervisor-getGroupRequests.png" alt="Get Group Requests" width="500" height="300">
-  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-updateSubmission.png" alt="Update Submissions" width="500" height="300">
+ 
 </div>
 
 <h3>Co Supervisor</h3>
