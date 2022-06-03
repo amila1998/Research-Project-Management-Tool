@@ -2,6 +2,7 @@ const User = require('../models/userModel')
 const Topic = require('../models/topicsModel')
 const MyRejectedSupervisors = require('../models/myRejectedSupervisorsModel')
 const Group = require('../models/groupsModel')
+const sendMail = require("../helpers/sendMail");
 
 const requestSupervisorController={
     sendARequest:async(req,res)=>{
@@ -28,6 +29,11 @@ const requestSupervisorController={
             }
             
             //TO DO: Send a mail to supervisor
+
+             //TO DO: Send a mail to supervisor
+             const to = supervisor.email;
+             sendMail.sendEmailtoSupervisorReq(to,group_id)
+
             res.status(200).json({
                 msg: "Request Successfull !",
                 success: true
@@ -114,7 +120,7 @@ const requestSupervisorController={
                                                         break;
                                                     }
                                                     if (oss.user_id === s._id) {
-                                                        console.log('hiiiiiiiii');
+                                                        //console.log('hiiiiiiiii');
                                                         back = true;
                                                         break;
                                                     } else {
@@ -285,6 +291,23 @@ const requestSupervisorController={
                 'supervisor.isAccept':supervisorResponse,
                 'level':level
             })
+
+            //send mail
+            const subject="ADDED A PANAL MEMBER";
+            const text=`requested Supervisor ${supervisorResponse===false?"Rejected":"Accepted"}`;
+            
+            const groupDetails = await Group.findById(group_id)
+            if(groupDetails){
+              for(const m of groupDetails.members){
+                const userDetails = await User.findById(m.user_id);
+                if(userDetails){
+                  const to = userDetails.email;
+                  sendMail.sendEmailtoGroupStudents(to,text,subject);
+                }
+                
+              }
+            }
+
              res.status(200).json({msg: 'Your Response is Successfully Send !'});
         } catch (error) {
             res.status(500).json({

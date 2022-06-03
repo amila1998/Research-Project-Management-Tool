@@ -1,5 +1,6 @@
 const TopicEvPanel =require('../models/topicEvaluationPanelManagementModel')
 const User =require('../models/userModel')
+const sendMail = require("../helpers/sendMail");
 
 
 const topicEvaluationPanelController ={
@@ -20,6 +21,11 @@ const topicEvaluationPanelController ={
                 user_id
             })
             await tEvaPanMem.save();
+
+            //send Email
+            const to = exituser.email;
+            sendMail.sendEmailtoPanalMemforAddEve(to);
+
             return res.status(200).json({ msg: "Successfully Added !!" });
 
         } catch (error) {

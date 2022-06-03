@@ -413,7 +413,7 @@ const sendEmailtoCoSupervisorReq = (to,group_id) => {
   });
 };
 
-const sendEmailtoPanalMemforAddEve = (to,group_id) => {
+const sendEmailtoPanalMemforAddEve = (to) => {
   oauth2client.setCredentials({
     refresh_token: G_REFRESH_TOKEN,
   });
