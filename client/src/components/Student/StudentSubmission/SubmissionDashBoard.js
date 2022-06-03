@@ -4,6 +4,26 @@ import axios from "axios";
 import { SubmitInformation } from './SubmitInformation';
 import { Hidden } from '@mui/material';
 axios.defaults.withCredentials = true;
+
+
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+
+const bull = { 
+    // position: 'absolute',
+    // top: '50%',
+    // left: '50%',
+    // transform: 'translate(-50%, -50%)',
+    width: "75%",
+    height: "auto",
+    bgcolor: 'background.paper',
+    border: '1px solid #000',
+    // overflow: 'scroll',
+    boxShadow: 24,
+    p: 4,}
+  ;
+
+
 const SubmissionDashBoard =  ({myGroup}) => {
     // const result = await event.get(`/`);
     // console.log('result')
@@ -27,8 +47,19 @@ useEffect(()=>{
     {events.map((evt)=>(
         // <a href="#"><h3>{evt.title}</h3></a>
         <>
-        <SubmitInformation evt={evt} group={myGroup}/>
         
+        <center>
+            <Card sx={bull}>
+                <center>
+                <CardActions>
+
+                <SubmitInformation evt={evt} group={myGroup}/>
+                
+                </CardActions>
+                </center>
+            </Card>
+        </center>
+            <br/>
         </>
     ))}
   
