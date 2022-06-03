@@ -23,7 +23,8 @@ const DownloadTemplates = () => {
     
   return (
     <div>
-        <h1>DOWNLOAD TEMPLATES</h1>
+        <div className="Dash"> <h1>DOWNLOAD TEMPLATES</h1></div>
+       
         {templates.map(i=>
             <div key={i._id}><a className='downLink' href={i.url}><div className='downloadTemp' >{i.filename}</div></a></div>
             )}

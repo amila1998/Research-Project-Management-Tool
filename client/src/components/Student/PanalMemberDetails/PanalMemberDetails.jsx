@@ -23,7 +23,8 @@ console.log("🚀 ~ file: PanalMemberDetails.jsx ~ line 4 ~ PanalMemberDetails ~
     
   return (
     <div> 
-        <h1>GROUP PANAL MEMBER</h1>
+      <div className="Dash">   <h1>GROUP PANAL MEMBER</h1></div>
+      
         <div className='row1 profile_avatar'>
     <div className='col1 profile_avatar-wrapper'><img src={userDetails?.logo}/></div> 
   </div>

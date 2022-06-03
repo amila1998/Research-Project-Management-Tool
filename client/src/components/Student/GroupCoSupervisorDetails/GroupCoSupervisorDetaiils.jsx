@@ -87,6 +87,7 @@ const GroupCoSupervisorDetaiils = ({topic,group}) => {
 
       return (
         <div>
+          <div className="Dash"> <h1>CO SUPERVISOR DETAILS</h1></div>
           {group.coSupervisor.isAccept?<><button className='btn btn-outline-success statusbtn' onClick={handleOpen}><img src={approved} className='statusimg'/> {group.coSupervisor.name} </button></>:
           <>{group.level===5?<><div className='warnStep'>Wait for the Co Supervisor Response.</div></>:<><RequestCoSupervisor topic={topic} group={group}/></>}</>}
           
