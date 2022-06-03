@@ -16,6 +16,9 @@ import Profile from "../../components/Profile/Profile";
 import Requests from "../../components/Staff/Supervisor/Requests/Requests";
 import SupervisorDashBoardComp from '../../components/Staff/Supervisor/DashBoard/SupervisorDashBoardComp';
 
+import SupervisorGroupChat from '../../components/Staff/Supervisor/GroupChat/SupervisorGroupChat'
+import { BsFillChatDotsFill } from "react-icons/bs";
+
 
 const SupervisorDashBoard = () => {
   
@@ -26,6 +29,7 @@ const SupervisorDashBoard = () => {
     const [groups, setGroups] = useState(false);
     const [groupsrequests, setGroupRequests]=useState(false);
     const [groupsSubmissions, setGroupSubmissions]=useState(false);
+    const [supervisorGroupchat, setSupervisorGroupchat] = useState(false);
 
   
     const history = useNavigate()
@@ -35,6 +39,7 @@ const SupervisorDashBoard = () => {
       setUpdateProfile(false);
       setGroupRequests(false);
       setGroupSubmissions(false);
+      setSupervisorGroupchat(false);
       window.location.href=('/')
     };
   
@@ -44,6 +49,7 @@ const SupervisorDashBoard = () => {
       setUpdateProfile(false);
       setGroupRequests(false);
       setGroupSubmissions(false);
+      setSupervisorGroupchat(false);
     }
     
     const handleUpdateProfile = () => {
@@ -52,6 +58,7 @@ const SupervisorDashBoard = () => {
       setUpdateProfile(!updateprofile);
       setGroupRequests(false);
       setGroupSubmissions(false);
+      setSupervisorGroupchat(false);
     }
 
     const handleGroupRequets = () => {
@@ -60,6 +67,7 @@ const SupervisorDashBoard = () => {
       setUpdateProfile(false);
       setGroupRequests(true);
       setGroupSubmissions(false);
+      setSupervisorGroupchat(false);
     }
 
     const handleGroupSubmissions = () => {
@@ -68,7 +76,17 @@ const SupervisorDashBoard = () => {
       setUpdateProfile(false);
       setGroupRequests(false);
       setGroupSubmissions(true);
+      setSupervisorGroupchat(false);
     }
+
+  const handleSupervisorGroupchat = () => {
+    setDashboard(false);
+    setProfile(false);
+    setUpdateProfile(false);
+    setGroupRequests(false);
+    setGroupSubmissions(false);
+    setSupervisorGroupchat(true);
+  }
   
 
   
@@ -124,8 +142,14 @@ const SupervisorDashBoard = () => {
             
             </>
           }
-           <hr></hr>
+
+          <div onClick={handleSupervisorGroupchat} className={supervisorGroupchat ? 'nav1Select' : 'nav1'}>
+            <div className={supervisorGroupchat ? "navIconSelect" : "navIcon"}><BsFillChatDotsFill /></div>
+            <div className={supervisorGroupchat ? 'navTextSelect' : 'navText'}>GROUP CHAT</div>
+          </div>
           
+          <hr></hr>
+
           <div onClick={logoutHadleClick} className={'nav1logout'}>
           <div className={"navIconlogout"}><BiLogOutCircle/></div>
           <div className={'navTextlogout'}>LOGOUT</div>
@@ -140,6 +164,8 @@ const SupervisorDashBoard = () => {
           {dashboard&&<SupervisorDashBoardComp/>}
           {profile&&!updateprofile?<Profile/>:profile&&updateprofile&&<ProfileUpdate/>}
           {groupsrequests&&<Requests/>}
+
+          {supervisorGroupchat&&<SupervisorGroupChat/>}
         
            
            </div>
