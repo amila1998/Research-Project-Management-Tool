@@ -91,6 +91,7 @@
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-AfterRejectTheRequest.png" alt="Co Supervisor Reject" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-coSupervisorDetails.png" alt="Co Supervisor Details" width="500" height="300">
  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-DownloadTemplates.png" alt="Download Templates" width="500" height="300">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/student-groupChat.png" alt="Group Chat" width="500" height="300">
  
 </div>
 
