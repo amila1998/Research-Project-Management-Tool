@@ -140,6 +140,12 @@
   <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/DB1.png" alt="DB" width="500" height="300">
 </div>
 
+<h3>Emails</h3>
+ 
+<div align="center">
+  <img src="zREAD_ME_DOCUMENTS/IMAGES/previews/Account Activation Email.png" alt="Account Activation Email" width="500" height="300">
+</div>
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
