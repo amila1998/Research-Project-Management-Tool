@@ -5,6 +5,8 @@ const cookieParser = require("cookie-parser");
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
 
+const socket = require("socket.io");
+
 
 
 
@@ -71,6 +73,10 @@ app.use(markingSchemaRouter);
 const evaluationsRouter = require("./routes/evaluationsRoutes");
 app.use(evaluationsRouter);
 
+const messageRoutes = require("./routes/messages");
+app.use("/api/messages", messageRoutes);
+
+
 
 const startApp = async () => {
     try {
@@ -87,9 +93,32 @@ const startApp = async () => {
       });
   
       // Start Listenting for the server on PORT
-      app.listen(PORT, () =>
+      const server = app.listen(PORT, () =>
         success({ message: `Server started on PORT ${PORT}`, badge: true })
       );
+
+      const io = socket(server, {
+        cors: {
+          origin: "http://localhost:3000",
+          credentials: true,
+        },
+      });
+
+      global.onlineUsers = new Map();
+      io.on("connection", (socket) => {
+        global.chatSocket = socket;
+        socket.on("add-user", (userId) => {
+          onlineUsers.set(userId, socket.id);
+        });
+
+        socket.on("send-msg", (data) => {
+          const sendUserSocket = onlineUsers.get(data.to);
+          if (sendUserSocket) {
+            socket.to(sendUserSocket).emit("msg-recieve", data.msg);
+          }
+        });
+      });
+
     } catch (err) {
       error({
         message: `Unable to connect with Database \n${err}`,

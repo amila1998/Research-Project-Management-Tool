@@ -4,6 +4,7 @@ const validateEmail = require("../helpers/validateEmail");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
+const Group = require("../models/groupsModel")
 
 
 
@@ -407,6 +408,57 @@ const userController = {
       const userID= req.params.id;
       const userDetails = await User.findById(userID);
       res.status(200).json(userDetails);
+    } catch (error) {
+      res.status(500).json({
+        msg: error.message,
+        success: false
+      });
+    }
+  },
+
+  getGroupUsers:async(req,res)=>{
+
+    try {
+
+      let users = [];
+
+      const myGroup = await Group.findOne({'members.user_id':req.user.id});
+      if(!myGroup){
+        return res.status(400).json({
+          msg: "Group Not Found!!!",
+          success: false
+        });
+      }
+
+      for(const m of myGroup.members){
+        const userData = await User.findById(m.user_id).select('-password');
+
+        if(userData){
+          if(userData._id!=req.user.id){
+            users.push(userData);
+
+          }
+        }
+      }
+      if(myGroup.supervisor.user_id){
+        const userData = await User.findById(myGroup.supervisor.user_id).select('-password');
+
+        if (userData) {
+          users.push(userData);
+        }
+      }
+
+      if (myGroup.coSupervisor.user_id) {
+        const userData = await User.findById(myGroup.coSupervisor.user_id).select('-password');
+
+        if (userData) {
+          users.push(userData);
+        }
+      }
+
+      console.log(users);
+      res.status(200).json(users);
+      
     } catch (error) {
       res.status(500).json({
         msg: error.message,

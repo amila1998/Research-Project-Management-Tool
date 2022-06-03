@@ -34,6 +34,7 @@ route.get("/api/auth/signout", userController.signout);
 route.get("/api/admin/getallUsers",auth,admin, userController.getAllUsers);
 route.patch("/api/admin/verifyUsers/:id",auth,admin, userController.verify);
 route.delete("/api/admin/deleteUser/:id",auth,admin, userController.delete);
+route.get("/api/auth/allgroupusers",auth,userController.getGroupUsers);
 
 route.get('/api/users/getuserDetails/:id',auth,userController.getuserDedails);
 
