@@ -148,11 +148,11 @@ export const SubmitInformation = ({ evt, group }) => {
 
   return (
     <div>
-      
-<h5>
-
-      {evt.title}
-</h5>
+      <center>
+        <h5>
+          {evt.title}
+        </h5>
+      </center>
       
       {submited === null ? <>
         {isOpen && <>
