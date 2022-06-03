@@ -10,5 +10,5 @@ route.get('/api/submssion/getAll',submssionController.getAll);
 route.get('/api/submssion/getOne/:id',submssionController.getOne);
 route.get('/api/submssion/getSupervisorsSub',auth,supervisor,submssionController.getSupervisorsSub);
 route.get('/api/submssion/getSubmitted/:groupId/:eventId',submssionController.getSubmitted);
-route.put('/api/submssion/updateSubmssion/:id',auth,submssionController.updateSubmssion);
+route.put('/api/submssion/updateSubmssion/:id',submssionController.updateSubmssion);
 module.exports = route;
