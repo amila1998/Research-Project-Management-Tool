@@ -2,6 +2,8 @@ const User = require('../models/userModel')
 const Topic = require('../models/topicsModel')
 const MyRejectedCoSupervisors = require('../models/myRejectedCoSupervisorsModel')
 const Group = require('../models/groupsModel')
+const sendMail = require("../helpers/sendMail");
+
 
 const requestCoSupervisorController={
     sendARequest:async(req,res)=>{
@@ -28,6 +30,9 @@ const requestCoSupervisorController={
             }
             
             //TO DO: Send a mail to supervisor
+            const to = coSupervisor.email;
+            sendMail.sendEmailtoCoSupervisorReq(to,group_id)
+
             res.status(200).json({
                 msg: "Request Successfull !",
                 success: true
@@ -231,6 +236,9 @@ const requestCoSupervisorController={
                     // }
                 }
 
+                 // send email
+ 
+
                 return res.status(200).json(relatedCoSupervisors);
 
             }
@@ -286,6 +294,23 @@ const requestCoSupervisorController={
                 'coSupervisor.isAccept':cosupervisorResponse,
                 'level':level
             })
+
+            //send mail
+            const subject="ADDED A PANAL MEMBER";
+            const text=`requested Co supervisor ${cosupervisorResponse===false?"Rejected":"Accepted"}`;
+            
+            const groupDetails = await Group.findById(group_id)
+            if(groupDetails){
+              for(const m of groupDetails.members){
+                const userDetails = await User.findById(m.user_id);
+                if(userDetails){
+                  const to = userDetails.email;
+                  sendMail.sendEmailtoGroupStudents(to,text,subject);
+                }
+                
+              }
+            }
+
              res.status(200).json({msg: 'Your Response is Successfully Send !'});
         } catch (error) {
             res.status(500).json({
