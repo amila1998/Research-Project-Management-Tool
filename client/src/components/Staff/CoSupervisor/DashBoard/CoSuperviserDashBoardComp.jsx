@@ -1,8 +1,12 @@
 import React from 'react'
+import { CSUploadedSubmission } from '../CoSupervisorViewSubmission/CSUploadedSubmission'
 
 const CoSuperviserDashBoardComp = () => {
   return (
-    <div className="Dash"> Co Supervisor DashBoard</div>
+    <div>
+         <div className="Dash"> Co Supervisor DashBoard</div>
+         <CSUploadedSubmission/>
+    </div>
   )
 }
 

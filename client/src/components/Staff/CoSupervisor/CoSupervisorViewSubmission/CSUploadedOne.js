@@ -53,15 +53,15 @@ const style = {
     p: 4,
 };
 
-const UploadedOne = ({ subId }) => {
-    // console.log("🚀 ~ file: Uploadedone.js ~ line 4 ~ UploadedOne ~ subId", subId)
+
+export const CSUploadedOne = ({subId}) => {
+console.log("🚀 ~ file: CSUploadedOne.js ~ line 25 ~ CSUploadedOne ~ subId", subId)
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [isOpen, setisOpen] = useState(false);
     const [submissionId, setSubmissionId] = useState([]);
-    // console.log("🚀 ~ file: Uploadedone.js ~ line 26 ~ UploadedOne ~ submissionId", submissionId.groupName)
-
+    console.log("🚀 ~ file: CSUploadedOne.js ~ line 30 ~ CSUploadedOne ~ submissionId", submissionId)
     const openbuttonhadal = () => {
         setisOpen(!isOpen)
     }
@@ -81,9 +81,10 @@ const UploadedOne = ({ subId }) => {
     }, [])
 
 
-    return (
-        <div>
-            {submissionId.groupName}
+
+  return (
+    <div>
+          {submissionId.groupName}
             <br />
             {submissionId.eventName}
 
@@ -117,7 +118,10 @@ const UploadedOne = ({ subId }) => {
             <br/>
             <BootstrapButton onClick={openbuttonhadal}>{isOpen ? 'close' : 'open Submission'}</BootstrapButton>
         </div>
-    )
-}
 
-export default UploadedOne
+
+
+
+   
+  )
+}
