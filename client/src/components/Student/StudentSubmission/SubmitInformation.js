@@ -5,6 +5,27 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { AddSubmission } from './AddSubmission';
 import axios from 'axios';
+import { UpdateSubmission } from './UpdateSubmission';
+
+
+
+
+// import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import ListItemText from "@mui/material/ListItemText";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+// import Typography from "@mui/material/Typography";
+import CloseIcon from "@mui/icons-material/Close";
+import Slide from "@mui/material/Slide";
+import Avatar from '@mui/material/Avatar';
+import { styled } from "@mui/material";
+
+
 
 const style = {
   position: 'absolute',
@@ -17,6 +38,33 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+const BootstrapButton = styled(Button)({
+  boxShadow: "none",
+  textTransform: "none",
+  fontSize: 16,
+  padding: "6px 12px",
+  border: "1px solid",
+  lineHeight: 1.5,
+  color: "#000000",
+  borderColor: "#ff6a06",
+  fontFamily: [
+    "-apple-system",
+    "BlinkMacSystemFont",
+    '"Segoe UI"',
+    "Roboto",
+    '"Helvetica Neue"',
+    "Arial",
+    "sans-serif",
+    '"Apple Color Emoji"',
+    '"Segoe UI Emoji"',
+    '"Segoe UI Symbol"',
+  ].join(","),
+  "&:hover": {
+    backgroundColor: "#ff6a06",
+    borderColor: "#ff6a06",
+    boxShadow: "none",
+  },
+});
 export const SubmitInformation = ({ evt, group }) => {
   // console.log("🚀 ~ file: SubmitInformation.js ~ line 21 ~ SubmitInformation ~ group", group)
   // console.log("🚀 ~ file: SubmitInformation.js ~ line 20 ~ SubmitInformation ~ evt", evt)
@@ -28,6 +76,7 @@ export const SubmitInformation = ({ evt, group }) => {
   const [SubmitId, setSubmitId] = React.useState([]);
   const [isOpen, setisOpen] = React.useState(false);
   const [submited, setSubmited] = React.useState();
+  // console.log("🚀 ~ file: SubmitInformation.js ~ line 32 ~ SubmitInformation ~ submited", submited?._id)
 
 
 
@@ -49,11 +98,11 @@ export const SubmitInformation = ({ evt, group }) => {
     let assessmentDate=countDownDate-submissionData;
     
     const assessmentDays = Math.floor(assessmentDate / (1000 * 60 * 60 * 24));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 51 ~ SubmitInformation ~ assessmentDays", assessmentDays)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 51 ~ SubmitInformation ~ assessmentDays", assessmentDays)
     const assessmenthours = Math.floor((assessmentDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 53 ~ SubmitInformation ~ assessmenthours", assessmenthours)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 53 ~ SubmitInformation ~ assessmenthours", assessmenthours)
     const assessmentminutes = Math.floor((assessmentDate % (1000 * 60 * 60)) / (1000 * 60));
-    console.log("🚀 ~ file: SubmitInformation.js ~ line 55 ~ SubmitInformation ~ assessmentminutes", assessmentminutes)
+    // console.log("🚀 ~ file: SubmitInformation.js ~ line 55 ~ SubmitInformation ~ assessmentminutes", assessmentminutes)
   
   
   
@@ -100,8 +149,11 @@ export const SubmitInformation = ({ evt, group }) => {
   return (
     <div>
       
+<h5>
 
       {evt.title}
+</h5>
+      
       {submited === null ? <>
         {isOpen && <>
 
@@ -181,13 +233,13 @@ export const SubmitInformation = ({ evt, group }) => {
                   Add Submission
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <AddSubmission eventId={evt._id} setsubId={setsubId} />
+                  <AddSubmission eventtype={evt.type} eventName={evt.title} eventId={evt._id} setsubId={setsubId} />
                 </Typography>
               </Box>
-            </Modal>
+            </Modal> 
           </div>
         </>}
-        &nbsp;&nbsp;<button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        &nbsp;&nbsp;<BootstrapButton onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</BootstrapButton>
         <br/>
       </> : <>
       {/* <h4>updated submission</h4> */}
@@ -253,7 +305,7 @@ export const SubmitInformation = ({ evt, group }) => {
                   Update Submission
                 </Typography>
                 <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  <AddSubmission eventId={evt._id} />
+                <UpdateSubmission  subId={submited?._id} />
                 </Typography>
               </Box>
             </Modal>
@@ -261,7 +313,7 @@ export const SubmitInformation = ({ evt, group }) => {
           
         </>}
         
-        &nbsp;&nbsp;<button onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</button>
+        &nbsp;&nbsp;<BootstrapButton onClick={openbuttonhadal}>{isOpen ? 'Hide' : 'open'}</BootstrapButton>
         <br/>
       </>
 

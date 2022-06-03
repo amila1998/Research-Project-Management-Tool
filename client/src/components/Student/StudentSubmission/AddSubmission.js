@@ -4,13 +4,57 @@ import { ToastContainer, toast } from "react-toastify";
 import {useDropzone} from 'react-dropzone'
 import "./addSubmission.scss"
 import axios from "axios";
-export const AddSubmission = ({eventId,setsubId}) => {
+
+
+
+import { styled } from "@mui/material";
+import Button from '@mui/material/Button';
+
+const BootstrapButton = styled(Button)({
+    boxShadow: "none",
+    textTransform: "none",
+    fontSize: 16,
+    padding: "6px 12px",
+    border: "1px solid",
+    lineHeight: 1.5,
+    color: "#000000",
+    borderColor: "#ff6a06",
+    fontFamily: [
+      "-apple-system",
+      "BlinkMacSystemFont",
+      '"Segoe UI"',
+      "Roboto",
+      '"Helvetica Neue"',
+      "Arial",
+      "sans-serif",
+      '"Apple Color Emoji"',
+      '"Segoe UI Emoji"',
+      '"Segoe UI Symbol"',
+    ].join(","),
+    "&:hover": {
+      backgroundColor: "#ff6a06",
+      borderColor: "#ff6a06",
+      boxShadow: "none",
+    },
+  });
+
+
+
+
+
+
+
+export const AddSubmission = ({eventtype,eventName,eventId,setsubId}) => {
+console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventtype", eventtype)
 // console.log("🚀 ~ file: AddSubmission.js ~ line 8 ~ AddSubmission ~ eventId", eventId)
     const {dispatch, user } = useContext(AuthContext);
     const [fileName, setFileName]=useState("");
     const [file, setFile] = useState(false);
     const [fileURL, setfileURL] = useState('');
     const[groupId,setGroupId]=useState([]);
+    console.log("🚀 ~ file: AddSubmission.js ~ line 15 ~ AddSubmission ~ groupId", groupId)
+   
+
     const[isSubmitted,setisSubmitted]=useState(true)
     const [data,setData]=useState({
         comments:''
@@ -95,7 +139,7 @@ const handleChange = (e) => {
    const addSubmition=async(e)=>{
     // e.preventDefault();
     try {
-        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId,comments:data.comments,url:fileURL,eventId:eventId,isSubmitted:isSubmitted});
+        const res = await axios.post("/api/submssion/add",{studentId:user.username,groupID:groupId._id,groupName:groupId.groupName,eventId:eventId,eventName:eventName,eventType:eventtype,comments:data.comments,url:fileURL,isSubmitted:isSubmitted});
         toast.success(res.data.msg ,{
           position: "top-right",
           autoClose: 5000,
@@ -158,7 +202,7 @@ const handleChange = (e) => {
                       fileURL ? <><a href={fileURL}>Uploaded File</a></> : <></>
                   }
               </div>
-              <button onClick={addSubmition} class="btn btn-primary">Submit</button>
+              <BootstrapButton onClick={addSubmition}>Submit</BootstrapButton>
           </form>
 
 

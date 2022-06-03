@@ -8,6 +8,7 @@ const SubmissionDashBoard =  ({myGroup}) => {
     // const result = await event.get(`/`);
     // console.log('result')
     const[events,setevents]=useState([]);
+    console.log("🚀 ~ file: SubmissionDashBoard.js ~ line 11 ~ SubmissionDashBoard ~ events", events)
     
 useEffect(()=>{
     const getEvent= async()=>{

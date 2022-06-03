@@ -82,7 +82,8 @@ const RequestCoSupervisor = ({topic,group}) => {
     
   return (
     <div> <ToastContainer/>
-    <h1>REQUEST CO SUPERVISOR</h1>
+    <div className="Dash">     <h1>REQUEST CO SUPERVISOR</h1></div>
+  
     <div className='cardBody'>
       {coSupervisors.map(item=>
         <div key={item._id}>
@@ -93,8 +94,9 @@ const RequestCoSupervisor = ({topic,group}) => {
           <p className="card-text">{item.staff?.description}</p>
           <div className='row'>
           <div className='col'>
-            <button className='btn btn-outline-warning' onClick={handleOpen}>VIEW</button>
+            <button key={item._id} className='btn btn-outline-warning' onClick={handleOpen}>VIEW</button>
             <Modal
+            
               open={open}
               onClose={handleClose}
               aria-labelledby="modal-modal-title"
