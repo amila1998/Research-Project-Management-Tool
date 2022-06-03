@@ -52,13 +52,13 @@ const submssionController ={
     },
     updateSubmssion:async(req,res)=>{
         try {
-            const {studentId,url,comments,groupID} = req.body;
+            const {studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType} = req.body;
             if (!studentId||!url||!comments||!groupID) {
                 return res.status(400).json({ message: "Please fill in all fields." });
             }
 
             await Submssion.findByIdAndUpdate({_id:req.params.id},{
-                studentId,url,comments,groupID,eventId
+                studentId,url,comments,groupID,eventId,isSubmitted,groupName,eventName,eventType
             })
             res.status(200).json({ 
                 msg:"Update Successfull !",
