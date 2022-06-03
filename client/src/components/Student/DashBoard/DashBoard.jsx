@@ -9,6 +9,7 @@ const DashBoard = ({group}) => {
   
   return (
     <div><div className="Dash">Welcome To Student DashBoard</div>
+            {!group&&<><div  className='nextStep'>Next Step:  Make a group</div></>}
             {group?.level===0&&<><div  className='nextStep'>Next Step:  Register Your Topic under the Topic Registraion</div></>}
             {group?.level===1&&<><div className='nextStep'>Next Step: Request a Supervisor</div></>}
             {group?.level===2&&<><div className='warnStep'>Wait for the Supervisor Response.</div></>}

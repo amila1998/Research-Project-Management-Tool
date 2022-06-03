@@ -14,7 +14,7 @@ const TopicManagement = () => {
   const [callback,setCallBack]=useState(true);
 
   for(const t of topics){
-    if (t.panalMemberAcception===null) {
+    if (t?.panalMemberAcception===null) {
       tobeAcceptTopics.push(t)
     }
   }

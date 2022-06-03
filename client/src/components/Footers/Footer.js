@@ -36,7 +36,7 @@ export default function Footer() {
 					<hr />
 					<div className="row justify-content-around">
 						<div className="footer-col">
-							<h5 className="h5class">Copyright 222 © SLIIT-AF. All Rights Reserved.</h5>
+							<h5 className="h5class">Copyright 2022 © SLIIT-AF. All Rights Reserved.</h5>
 						</div>
 
 
