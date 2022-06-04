@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import EvaluateSubmission from '../../../Admin/MarkingSchemaManagement/EvaluateSubmission';
+import EvaluateSubmissionPanel from '../../../Admin/MarkingSchemaManagement/EvaluateSubmissionPanel';
 import axios from 'axios';
 
 import { styled } from "@mui/material";
@@ -19,23 +19,23 @@ const BootstrapButton = styled(Button)({
     color: "#000000",
     borderColor: "#ff6a06",
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
-      "Roboto",
-      '"Helvetica Neue"',
-      "Arial",
-      "sans-serif",
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
     ].join(","),
     "&:hover": {
-      backgroundColor: "#ff6a06",
-      borderColor: "#ff6a06",
-      boxShadow: "none",
+        backgroundColor: "#ff6a06",
+        borderColor: "#ff6a06",
+        boxShadow: "none",
     },
-  });
+});
 
 
 
@@ -54,14 +54,14 @@ const style = {
 };
 
 
-export const PMUploadedOne = ({subId}) => {
+export const PMUploadedOne = ({ subId }) => {
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const [isOpen, setisOpen] = useState(false);
     const [submissionId, setSubmissionId] = useState([]);
     // console.log("🚀 ~ file: PMUploadedOne.js ~ line 63 ~ PMUploadedOne ~ submissionId", submissionId)
-    
+
 
     const openbuttonhadal = () => {
         setisOpen(!isOpen)
@@ -82,8 +82,8 @@ export const PMUploadedOne = ({subId}) => {
     }, [])
 
 
-  return (
-    <div>
+    return (
+        <div>
             {submissionId.groupName}
             <br />
             {submissionId.eventName}
@@ -106,7 +106,10 @@ export const PMUploadedOne = ({subId}) => {
                                 Evaluate Submission
                             </Typography>
                             <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                <EvaluateSubmission groupID={submissionId.groupID} eventId={submissionId.eventId} />
+
+
+                                <EvaluateSubmissionPanel groupID={submissionId.groupID} eventId={submissionId.eventId} />
+
 
                             </Typography>
                         </Box>
@@ -115,8 +118,8 @@ export const PMUploadedOne = ({subId}) => {
                     </Modal>
                 </div>
             </>}
-            <br/>
+            <br />
             <BootstrapButton onClick={openbuttonhadal}>{isOpen ? 'close' : 'open Submission'}</BootstrapButton>
         </div>
-  )
+    )
 }
