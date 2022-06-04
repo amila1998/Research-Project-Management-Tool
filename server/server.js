@@ -60,8 +60,8 @@ app.use(supervisorRoutes);
 const cosupervisorRoutes = require("./routes/cosupervisorRoutes");
 app.use(cosupervisorRoutes);
 
-// const eventRoute = require("./routes/submissionTypeRoutes")
-// app.use("/api/events", eventRoute)
+const eventRoute = require("./routes/submissionTypeRoutes")
+app.use("/api/events", eventRoute)
 
 const myRejectedSupervisorsRoutes =require("./routes/myRejectedSupervisorsRoutes")
 app.use(myRejectedSupervisorsRoutes);
@@ -72,8 +72,8 @@ app.use(myRejectedCoSupervisorsRoutes);
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
 
-// const markingSchemaRouter = require("./routes/markingSchemaRoutes");
-// app.use(markingSchemaRouter);
+const markingSchemaRouter = require("./routes/markingSchemaRoutes");
+app.use(markingSchemaRouter);
 
 const evaluationsRouter = require("./routes/evaluationsRoutes");
 app.use(evaluationsRouter);
