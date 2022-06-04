@@ -33,5 +33,7 @@ const SubmissionTypeSchema = new mongoose.Schema({
     describe: { type: String},
 })
 
-
-module.exports = mongoose.model("Event", SubmissionTypeSchema)
+const Event = model("Event", SubmissionTypeSchema);
+    
+module.exports = Event;
+//module.exports = mongoose.model("Event", SubmissionTypeSchema)
