@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser");
 const path =require('path');
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
-
+require("dotenv").config();
 const socket = require("socket.io");
 
 
@@ -86,7 +86,7 @@ app.get('*', (req, res) =>
 const startApp = async () => {
     try {
       // Connection With DB
-      await connect(DB, {
+      await connect(process.env.MONGODB_URL, {
         useNewUrlParser:true,
         useUnifiedTopology:true,
         //useFindAndModify: true,
@@ -98,8 +98,8 @@ const startApp = async () => {
       });
   
       // Start Listenting for the server on PORT
-      const server = app.listen(PORT, () =>
-        success({ message: `Server started on PORT ${PORT}`, badge: true })
+      const server = app.listen(process.env.APP_PORT||8000, () =>
+        success({ message: `Server started on PORT ${server}`, badge: true })
       );
 
       const io = socket(server, {
