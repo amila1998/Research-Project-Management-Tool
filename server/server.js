@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-
+import path from 'path';
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
 
@@ -24,6 +24,11 @@ app.use(cors({
 app.use(express.json());
 express.urlencoded({ extended: true });
 app.use(cookieParser());
+
+app.use(express.static(path.join(__dirname, '/client/build')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client/build/index.html'))
+);
 
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
@@ -55,8 +60,8 @@ app.use(supervisorRoutes);
 const cosupervisorRoutes = require("./routes/cosupervisorRoutes");
 app.use(cosupervisorRoutes);
 
-const eventRoute = require("./routes/submissionTypeRoutes")
-app.use("/api/events", eventRoute)
+// const eventRoute = require("./routes/submissionTypeRoutes")
+// app.use("/api/events", eventRoute)
 
 const myRejectedSupervisorsRoutes =require("./routes/myRejectedSupervisorsRoutes")
 app.use(myRejectedSupervisorsRoutes);
@@ -67,8 +72,8 @@ app.use(myRejectedCoSupervisorsRoutes);
 const topicsRouter = require("./routes/topicsRoutes");
 app.use(topicsRouter);
 
-const markingSchemaRouter = require("./routes/markingSchemaRoutes");
-app.use(markingSchemaRouter);
+// const markingSchemaRouter = require("./routes/markingSchemaRoutes");
+// app.use(markingSchemaRouter);
 
 const evaluationsRouter = require("./routes/evaluationsRoutes");
 app.use(evaluationsRouter);
