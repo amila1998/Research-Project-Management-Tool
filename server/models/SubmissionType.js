@@ -1,8 +1,8 @@
 const moment = require("moment");
-const { Schema, model } = require("mongoose");
+const mongoose = require("mongoose");
 
 
-const SubmissionTypeSchema = new Schema({
+const SubmissionTypeSchema = new mongoose.Schema({
     title: {type: String, required: [true, "Please write a title for your event"]},
     type:{
         type: String,
@@ -33,7 +33,5 @@ const SubmissionTypeSchema = new Schema({
     describe: { type: String},
 })
 
-const Event = model("Event", SubmissionTypeSchema);
-    
-module.exports = Event;
-//module.exports = mongoose.model("Event", SubmissionTypeSchema)
+
+module.exports = mongoose.model("Event", SubmissionTypeSchema)
