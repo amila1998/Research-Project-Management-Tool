@@ -1,8 +1,8 @@
 const moment = require("moment");
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 
-const SubmissionTypeSchema = new mongoose.Schema({
+const SubmissionTypeSchema = new Schema({
     title: {type: String, required: [true, "Please write a title for your event"]},
     type:{
         type: String,
