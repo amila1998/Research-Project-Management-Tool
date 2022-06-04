@@ -1,0 +1,41 @@
+{
+  "name": "Research-Project-Management-Tool",
+  "version": "1.0.0",
+  "description": "<div id=\"top\"></div>",
+  "main": "server.js",
+  "scripts": {
+    "build": "cd client && npm install && npm run build",
+    "start": "nodemon --watch server --exec node --experimental-modules server/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amila1998/Research-Project-Management-Tool.git"
+  },
+  "keywords": [],
+  "author": "2022S1_REG_31",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amila1998/Research-Project-Management-Tool/issues"
+  },
+  "homepage": "https://github.com/amila1998/Research-Project-Management-Tool#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.28.1",
+    "concurrently": "^7.0.0",
+    "consola": "^2.15.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "googleapis": "^92.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.3",
+    "mongoose": "^6.1.7",
+    "multer": "^1.4.4",
+    "nodemailer": "^6.7.2",
+    "nodemon": "^2.0.16",
+    "socket.io": "^4.5.1",
+    "validator": "^13.7.0"
+  },
+  "engines": {"node":"14.18.1", "npm": "6.14.15"}
+}
