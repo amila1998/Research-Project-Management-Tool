@@ -1,10 +1,10 @@
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-const path =require('path');
+
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
-require("dotenv").config();
+
 const socket = require("socket.io");
 
 
@@ -77,16 +77,11 @@ const messageRoutes = require("./routes/messages");
 app.use("/api/messages", messageRoutes);
 
 
-app.use(express.static(path.join(__dirname, '/client/build')));
-app.get('*', (req, res) =>
-  res.sendFile(path.join(__dirname, '/client/build/index.html'))
-);
-
 
 const startApp = async () => {
     try {
       // Connection With DB
-      await connect(process.env.MONGODB_URL, {
+      await connect(DB, {
         useNewUrlParser:true,
         useUnifiedTopology:true,
         //useFindAndModify: true,
@@ -98,8 +93,8 @@ const startApp = async () => {
       });
   
       // Start Listenting for the server on PORT
-      const server = app.listen(process.env.APP_PORT||8000, () =>
-        success({ message: `Server started on PORT ${server}`, badge: true })
+      const server = app.listen(PORT, () =>
+        success({ message: `Server started on PORT ${PORT}`, badge: true })
       );
 
       const io = socket(server, {
