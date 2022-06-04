@@ -14,13 +14,13 @@ module.exports = {
         path: path.join(__dirname, '/dist'),
         filename: 'bundle.js',
         assetModuleFilename: "assets/img/[hash][ext][query]",
-        //publicPath: '/',
+        publicPath: '/',
     },
 
     plugins: [
         new HTMLWebpackPlugin({
             template: './src/index.html',
-            //favicon:"./src/assets/img/logo.ico",
+            favicon:"./src/assets/img/logo.ico",
         }),
         new MiniCssExtractPlugin(),
     ],
