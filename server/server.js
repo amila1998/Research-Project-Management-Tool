@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-import path from 'path';
+const path =require('path');
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
 
