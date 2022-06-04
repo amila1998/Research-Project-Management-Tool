@@ -1,7 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const cookieParser = require("cookie-parser");
-
+const path =require('path');
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
 
