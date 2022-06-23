@@ -27,10 +27,6 @@ app.use(express.json());
 express.urlencoded({ extended: true });
 app.use(cookieParser());
 
-// app.use(express.static(path.join(__dirname, '/client/build')));
-// app.get('*', (req, res) =>
-//   res.sendFile(path.join(__dirname, '/client/build/index.html'))
-// );
 
 const userRoutes = require("./routes/userRoutes");
 app.use(userRoutes);
@@ -89,9 +85,9 @@ app.get('*', (req, res) =>
 );
 
 
-// app.get('/', (req, res) => {
-//   res.send('Server is ready');
-// });
+app.get('/', (req, res) => {
+  res.send('Server is ready');
+});
 
 
 const startApp = async () => {
