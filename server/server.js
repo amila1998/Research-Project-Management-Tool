@@ -11,7 +11,9 @@ const socket = require("socket.io");
 
 
 // Bring in the app constants
-const { DB, PORT,ORIGING_URL } = require("./config");
+const { DB,ORIGING_URL } = require("./config");
+
+const PORT = process.env.PORT || 8000;
 
 // Initialize the application
 const app = express();
@@ -42,7 +44,7 @@ app.use(uploadRoutes);
 const templateUploadRoutes = require("./routes/templateUploadRouter");
 app.use(templateUploadRoutes);
 
-const StudentSubmssionRoutes = require("./routes/StudentSubmssionRoutes");
+const StudentSubmssionRoutes = require("./routes/studentSubmssionRoutes");
 app.use(StudentSubmssionRoutes);
 
 const templateRoutes = require("./routes/templateRouter");
@@ -81,6 +83,13 @@ app.use(evaluationsRouter);
 const messageRoutes = require("./routes/messages");
 app.use("/api/messages", messageRoutes);
 
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'))
+);
+// app.get('/', (req, res) => {
+//   res.send('Server is ready');
+// });
 
 
 const startApp = async () => {

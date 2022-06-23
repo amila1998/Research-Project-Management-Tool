@@ -90,7 +90,8 @@ module.exports = {
           disableDotRule: true
       },
       proxy: {
-        '/api': 'http://localhost:8000',
+        // '/api': 'http://localhost:8000',
+        '/api': 'https://rpmt-2022s1-reg-31-backend.herokuapp.com',
           changeOrigin:true,
             
      },

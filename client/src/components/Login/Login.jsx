@@ -48,7 +48,7 @@ const Login = () => {
 
     try {
       setisLoading(true);
-      const res = await axios.post("/api/auth/signing", { email, password });
+      const res = await axios.post("https://rpmt-2022s1-reg-31-backend.herokuapp.com/api/auth/signing", { email, password });
       localStorage.setItem("_appSignging", true);
       dispatch({ type: "SIGNING" });
       setisLoading(false);

@@ -39,7 +39,7 @@ function App() {
         try {
           setLoading(true);
           dispatch({ type: "SIGNING" });
-          const res = await axios.get("/api/auth/user", {
+          const res = await axios.get("https://rpmt-2022s1-reg-31-backend.herokuapp.com/api/auth/user", {
             withCredentials: true
           });
           dispatch({ type: "GET_USER", payload: res.data });
@@ -59,7 +59,7 @@ function App() {
           console.log(error);
           setLoading(false);
           try {
-            await axios.get("/api/auth/signout")
+            await axios.get("https://rpmt-2022s1-reg-31-backend.herokuapp.com/api/auth/signout")
             localStorage.removeItem("_appSignging")
             sessionStorage.clear();
             dispatch({ type: "SIGNOUT" })
@@ -79,7 +79,7 @@ function App() {
       }
       if (!fRender) {
         const refreshToken = async () => {
-          await axios.post("/api/auth/refresh", {
+          await axios.post("https://rpmt-2022s1-reg-31-backend.herokuapp.com/api/auth/refresh", {
             withCredentials: true
           }).catch(err => console.log(err))
         }
