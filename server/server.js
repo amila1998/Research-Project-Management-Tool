@@ -79,10 +79,10 @@ app.use(evaluationsRouter);
 const messageRoutes = require("./routes/messages");
 app.use("/api/messages", messageRoutes);
 
-// app.use(express.static(path.join(__dirname, '/client/dist')));
-// app.get('*', (req, res) =>
-//   res.sendFile(path.join(__dirname, '/client/dist/index.html'))
-// );
+app.use(express.static(path.join(__dirname, '/client/dist')));
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'))
+);
 
 
 app.get('/', (req, res) => {
